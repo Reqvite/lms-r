@@ -17,5 +17,5 @@
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
-  "include": ["src"]
+  "include": ["src", "react-app-env.d.ts"]
 }

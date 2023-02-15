@@ -1,17 +1,22 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { register } from "redux/auth/operations";
+import { login, register } from "redux/auth/operations";
 
-import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "redux/store";
-import { AnyAction } from "@reduxjs/toolkit";
+import { AppDispatch } from "redux/store";
+
 import styled from "styled-components";
+import { Pages } from "types/pages";
 
-type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
+interface AuthFormProps {
+  page: number;
+  description: string;
+  title: string;
+}
 
-const AuthForm: FC = () => {
+const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
   const dispatch: AppDispatch = useDispatch();
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+
+  const handleRegister = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
     const credentials = {
@@ -23,22 +28,35 @@ const AuthForm: FC = () => {
     form.reset();
   };
 
+  const handleLogin = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget as HTMLFormElement;
+    const credentials = {
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      password: (form.elements.namedItem("password") as HTMLInputElement).value,
+    };
+    dispatch(login(credentials));
+    form.reset();
+  };
+
   return (
     <Container>
-      <Header>Login</Header>
-      <Description>Don’t have an account? Signup now!</Description>
+      <Header>{title}</Header>
+      <Description>{description}</Description>
       <Box>
-        <Form onSubmit={handleSubmit}>
-          <Label htmlFor="fullname">
-            Fullname
-            <Input
-              type="text"
-              id="fullname"
-              name="fullname"
-              placeholder="Your fullname"
-              required
-            />
-          </Label>
+        <Form onSubmit={page === Pages.LOGIN ? handleLogin : handleRegister}>
+          {page === Pages.REGISTER && (
+            <Label htmlFor="fullname">
+              Fullname
+              <Input
+                type="text"
+                id="fullname"
+                name="fullname"
+                placeholder="Your fullname"
+                required
+              />
+            </Label>
+          )}
           <Label htmlFor="email">
             Email
             <Input
@@ -72,6 +90,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: ${(p) => p.theme.colors.profileItemsBg};
 `;
 
 const Header = styled.h2`
@@ -81,10 +100,12 @@ const Header = styled.h2`
   line-height: 1.2;
 `;
 const Description = styled.p`
+  margin-top: ${(p) => p.theme.space[2]}px;
   font-size: 16px;
   line-height: 1.25;
 `;
 const Box = styled.div`
+  margin-top: ${(p) => p.theme.space[2]}px;
   width: 620px;
   padding: 44px;
   background-color: rgba(214, 214, 214, 0.44);
