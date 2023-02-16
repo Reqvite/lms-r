@@ -1,11 +1,10 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { login, register } from "redux/auth/operations";
-
 import { AppDispatch } from "redux/store";
-
 import styled from "styled-components";
-import { Pages } from "types/pages";
+import { Pages } from "types/types";
 
 interface AuthFormProps {
   page: number;
@@ -42,7 +41,12 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
   return (
     <Container>
       <Header>{title}</Header>
-      <Description>{description}</Description>
+      <Description
+        as={NavLink}
+        to={page === Pages.LOGIN ? "/register" : "/login"}
+      >
+        {description}
+      </Description>
       <Box>
         <Form onSubmit={page === Pages.LOGIN ? handleLogin : handleRegister}>
           {page === Pages.REGISTER && (
@@ -85,28 +89,30 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
 };
 
 const Container = styled.div`
-  height: 100vh;
-  display: flex;
+  ${(p) => p.theme.flexCentered}
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: ${(p) => p.theme.colors.profileItemsBg};
+  padding: 10px;
+  height: 100vh;
+  background-color: ${(p) => p.theme.colors.lightBackground};
 `;
 
 const Header = styled.h2`
   text-align: center;
   font-weight: 500;
-  font-size: 32px;
+  font-size: ${(p) => p.theme.fontSizes[4]}px;
   line-height: 1.2;
 `;
 const Description = styled.p`
   margin-top: ${(p) => p.theme.space[2]}px;
-  font-size: 16px;
+  font-size: ${(p) => p.theme.fontSizes[2]}px;
   line-height: 1.25;
+  text-align: center;
 `;
 const Box = styled.div`
   margin-top: ${(p) => p.theme.space[2]}px;
-  width: 620px;
+  width: 100%;
+  max-width: 650px;
+  min-width: 250px;
   padding: 44px;
   background-color: rgba(214, 214, 214, 0.44);
   backdrop-filter: blur(2px);
@@ -120,7 +126,7 @@ const Label = styled.label`
   margin-top: 5px;
   display: flex;
   flex-direction: column;
-  font-size: 24px;
+  font-size: ${(p) => p.theme.fontSizes[3]}px;
   line-height: 1.2;
 `;
 
@@ -128,16 +134,12 @@ const Input = styled.input`
   margin-top: 5px;
   border-radius: 12px;
   padding: 10px 24px;
-  width: 531px;
 `;
 
 const Button = styled.button`
+  ${(p) => p.theme.buttons.mainButton}
   align-self: center;
   margin-top: 10px;
-  padding: 10px;
-  max-width: 200px;
-  border-radius: 12px;
-  cursor: pointer;
 `;
 
 export default AuthForm;

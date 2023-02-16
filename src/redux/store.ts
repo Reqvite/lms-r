@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "./auth/authSlice";
+import { testsReduser } from "./tests/testsSlice";
 
 const authPersistConfig = {
   key: "auth",
@@ -9,11 +10,12 @@ const authPersistConfig = {
   whitelist: ["token"],
 };
 
-export const store = configureStore({
+export const store = configureStore<any, any, any>({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
+    tests: testsReduser,
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: (getDefaultMiddleware: any) =>
     getDefaultMiddleware({ serializableCheck: false }),
 });
 

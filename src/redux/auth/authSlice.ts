@@ -1,17 +1,11 @@
 import { createSlice, ActionReducerMapBuilder } from "@reduxjs/toolkit";
+import { AuthState } from "types/types";
 
-import { login, refreshUser, register } from "./operations";
+import { login, logOut, refreshUser, register } from "./operations";
 
 interface AuthPayload {
   user: { name: null; email: null };
   token: string;
-}
-
-export interface AuthState {
-  user: { name: string | null; email: string | null };
-  token: string | null;
-  isLoggedIn: boolean;
-  isRefreshing: boolean;
 }
 
 const initialState: AuthState = {
@@ -56,6 +50,11 @@ export const authSlice = createSlice({
       })
       .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
+      })
+      .addCase(logOut.fulfilled, (state, action) => {
+        state.user = { name: null, email: null };
+        state.isLoggedIn = false;
+        state.token = null;
       }),
 });
 

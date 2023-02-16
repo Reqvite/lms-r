@@ -18,7 +18,7 @@ export const register: any = createAsyncThunk<{
 }>("auth/register", async (credentials, thunkAPI) => {
   try {
     const resp = await axios.post("api/users/signup", credentials);
-    // setAuthHeader(resp.data.token);
+    setAuthHeader(resp.data.data.token);
     return resp.data;
   } catch (err: any) {
     return thunkAPI.rejectWithValue(err.message);
@@ -28,10 +28,10 @@ export const register: any = createAsyncThunk<{
 export const login: any = createAsyncThunk<{
   email: string;
   password: string;
-}>("auth/login", async (credentials, thunkAPI) => {
+}>("auth/login", async (credentials, thunkAPI: any) => {
   try {
     const resp = await axios.post("api/users/login", credentials);
-    setAuthHeader(resp.data.token);
+    setAuthHeader(resp.data.data.token);
     return resp.data;
   } catch (err: any) {
     return thunkAPI.rejectWithValue(err.message);
@@ -54,3 +54,12 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
+
+export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  try {
+    await axios.post("api/users/logout");
+    clearAuthHeader();
+  } catch (err: any) {
+    return thunkAPI.rejectWithValue(err.message);
+  }
+});

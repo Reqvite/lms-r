@@ -1,6 +1,6 @@
 import AuthForm from "Components/AuthForm/AuthForm";
 
-import { Pages } from "types/pages";
+import { Pages } from "types/types";
 
 const SignupForm = () => {
   return (

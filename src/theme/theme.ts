@@ -30,4 +30,18 @@ export const theme = {
   shadows: {
     profileShadow: "rgb(38, 57, 77) 0px 20px 30px -10px",
   },
+  flexCentered: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttons: {
+    mainButton: {
+      display: "block",
+      border: "2px solid black",
+      padding: "10px 20px",
+      borderRadius: "12px",
+      cursor: "pointer",
+    },
+  },
 };
