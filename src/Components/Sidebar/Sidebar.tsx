@@ -1,3 +1,4 @@
+import ToggleThemeButton from "Components/ToggleThemeButton/ToggleThemeButton";
 import { useAuth } from "hooks";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -19,11 +20,12 @@ const Sidebar = () => {
           height="150"
         />
         <UserName>{user.name}</UserName>
+        <ToggleThemeButton />
       </div>
       <Nav>
         <List>
           <ListItem>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="">Home</NavLink>
           </ListItem>
           <ListItem>
             <NavLink to="testing">Tests</NavLink>
@@ -53,16 +55,18 @@ const Box = styled.div`
   width: 100%;
   max-width: 350px;
   border-radius: 20px;
-  background-color: rgba(214, 214, 214, 0.44);
+  background-color: ${(p) => p.theme.colors.mainBackground};
   padding: ${(p) => p.theme.space[4]}px ${(p) => p.theme.space[3]}px;
 `;
 
 const Img = styled.img`
   width: 100px;
   border-radius: 20px;
+  align-self: center;
 `;
 
 const UserName = styled.p`
+  text-align: center;
   margin-top: ${(p) => p.theme.space[3]}px;
 `;
 const Nav = styled.nav`

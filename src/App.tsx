@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { GlobalStyle } from "Components/GlobalStyle/GlobalStyle";
 import LoginForm from "Pages/LoginFiorm";
 import SignupForm from "Pages/SignupForm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { refreshUser } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
@@ -13,10 +13,17 @@ import { useAuth } from "hooks";
 import Testing from "Components/Testing/Testing";
 import Home from "Components/Home/Home";
 import Guide from "Components/Guide/Guide";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "./theme/theme";
+import { selectTheme } from "redux/theme/selectors";
 
 const App = () => {
   const dispatch: AppDispatch = useDispatch();
   const { isRefreshing } = useAuth();
+
+  const { theme: themeMode }: any = useSelector(selectTheme);
+
+  const theme = themeMode === "light" ? lightTheme : darkTheme;
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -25,7 +32,7 @@ const App = () => {
   return isRefreshing ? (
     <p>Loading...</p>
   ) : (
-    <>
+    <ThemeProvider theme={theme}>
       <Routes>
         <Route
           path="/register"
@@ -58,7 +65,7 @@ const App = () => {
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
       <GlobalStyle />
-    </>
+    </ThemeProvider>
   );
 };
 

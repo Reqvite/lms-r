@@ -1,3 +1,4 @@
+import { useAuth } from "hooks";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
@@ -8,17 +9,23 @@ const Home = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const tests = useSelector(selectUserTests);
+  const { user } = useAuth();
 
   useEffect(() => {
     dispatch(fetchUserTests());
   }, [dispatch]);
+
   return (
     <>
       <h2>Statistic</h2>
-      <p>deff</p>
+      <p>Hello, {user.name}!</p>
+      <p>Your results</p>
       <ul>
-        {tests.map(({ _id, results }: any) => (
-          <li key={_id}>{results[0]}</li>
+        {tests.map(({ _id, mark, testTitle }: any) => (
+          <li key={_id} style={{ display: "flex" }}>
+            {mark}
+            <p>{testTitle}</p>
+          </li>
         ))}
       </ul>
     </>

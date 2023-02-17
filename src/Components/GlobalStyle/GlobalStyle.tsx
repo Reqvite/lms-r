@@ -2,9 +2,9 @@ import { createGlobalStyle } from "styled-components";
 
 import "modern-normalize";
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle<any>`
  body {
-  color: black;
+  color: ${(p) => p.theme.colors.mainTextColor};
   margin: 0;
     font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
