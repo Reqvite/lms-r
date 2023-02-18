@@ -4,6 +4,7 @@ import "modern-normalize";
 
 export const GlobalStyle = createGlobalStyle<any>`
  body {
+  background-color: ${(p) => p.theme.colors.mainBackground};
   color: ${(p) => p.theme.colors.mainTextColor};
   margin: 0;
     font-family: 'Montserrat', sans-serif;

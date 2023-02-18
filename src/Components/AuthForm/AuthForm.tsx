@@ -137,7 +137,7 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  ${(p) => p.theme.buttons.mainButton}
+  ${(p) => p.theme.components.buttons.mainButton}
   align-self: center;
   margin-top: 10px;
 `;

@@ -1,13 +1,13 @@
 export const darkTheme = {
   colors: {
     mainBackground: "rgb(32, 32, 35)",
+    secondaryBgColor: "rgba(240, 240, 240, 0.1)",
+    headerBgColor: "rgba(255, 255, 255, 0.16);",
     mainTextColor: "#ffffff",
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
-  sizes: {
-    BoxWidth: 300,
-  },
+  sizes: {},
   fontWeights: {
     body: 400,
     heading: 700,
@@ -22,6 +22,7 @@ export const darkTheme = {
     caps: "0.2em",
   },
   borders: {
+    baseBorder: "10px",
     profileItemsBorder: "0.5px solid #EBEDEF",
   },
   shadows: {
@@ -32,11 +33,21 @@ export const darkTheme = {
     justifyContent: "center",
     alignItems: "center",
   },
-  buttons: {
-    mainButton: {
-      display: "block",
-      border: "2px solid black",
-      padding: "10px 20px",
+  components: {
+    buttons: {
+      mainButton: {
+        color: "#ffffff",
+        backgroundColor: "rgba(240, 240, 240, 0.1)",
+        height: "50px",
+        display: "block",
+        border: "none",
+        padding: "10px 20px",
+        borderRadius: "12px",
+        cursor: "pointer",
+      },
+    },
+    activeNavLink: {
+      backgroundColor: "rgba(240, 240, 240, 0.1)",
       borderRadius: "12px",
       cursor: "pointer",
     },
@@ -46,13 +57,13 @@ export const darkTheme = {
 export const lightTheme = {
   colors: {
     mainBackground: "rgba(214, 214, 214, 0.44)",
+    secondaryBgColor: "rgba(220, 220, 220, 0.9)",
+    headerBgColor: "rgba(255, 255, 255, 0.5)",
     mainTextColor: "#000000",
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
-  sizes: {
-    BoxWidth: 300,
-  },
+  sizes: {},
   fontWeights: {
     body: 400,
     heading: 700,
@@ -67,6 +78,7 @@ export const lightTheme = {
     caps: "0.2em",
   },
   borders: {
+    baseBorder: "5px",
     profileItemsBorder: "0.5px solid #EBEDEF",
   },
   shadows: {
@@ -77,11 +89,21 @@ export const lightTheme = {
     justifyContent: "center",
     alignItems: "center",
   },
-  buttons: {
-    mainButton: {
-      display: "block",
-      border: "2px solid black",
-      padding: "10px 20px",
+  components: {
+    buttons: {
+      mainButton: {
+        color: "#000000",
+        backgroundColor: "rgba(220, 220, 220, 0.9)",
+        height: "50px",
+        display: "block",
+        border: "none",
+        padding: "10px 20px",
+        borderRadius: "12px",
+        cursor: "pointer",
+      },
+    },
+    activeNavLink: {
+      backgroundColor: "rgba(220, 220, 220, 0.9)",
       borderRadius: "12px",
       cursor: "pointer",
     },
