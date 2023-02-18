@@ -15,7 +15,12 @@ export const fetchUserTests = createAsyncThunk(
 
 export const addTest = createAsyncThunk<
   any,
-  { results: any; testTitle: string; email: string | null; cipher: string }
+  {
+    results: any;
+    testTitle: string;
+    email: string | null;
+    cipher: string;
+  }
 >("tests/addTest", async (test, thunkAPI) => {
   try {
     const resp = await axios.post("api/tests", test);

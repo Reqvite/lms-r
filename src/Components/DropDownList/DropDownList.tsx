@@ -14,28 +14,44 @@ const DropDownTestList = () => {
   const [test, setTest] = useState<any>(null);
   const [testTitle, setTestTitle] = useState<string>("");
   const [results, setResults] = useState<any>([]);
-  const [userMark, setUserMark] = useState("");
+  const [userMark, setUserMark] = useState<any>(null);
+  const [finishTestStatus, setFinishTestStatus] = useState<boolean>(false);
+  const [startTestStatus, setStartTestStatus] = useState<boolean>(false);
 
-  const click = (answer: any) => {
-    setResults((prev: any) => [...prev, answer]);
-  };
-
-  const submitResult = () => {
-    const email = user.email;
-    const cipher = test.cipher;
-    console.log(results, testTitle, email, cipher);
-    dispatch(addTest({ results, testTitle, email, cipher }));
-    dispatch(fetchUserTests());
-    setTest(null);
-    setResults([]);
-    const { mark } = userTests[userTests.length - 1];
-    setUserMark(mark);
-  };
+  useEffect(() => {
+    if (finishTestStatus) {
+      const { mark } = [...userTests].sort(
+        (first: any, second: any) => first.createdAt - second.createdAt
+      )[userTests.length - 1];
+      setUserMark(mark);
+    }
+  }, [userTests, finishTestStatus]);
 
   useEffect(() => {
     const [selectTest] = tests.filter((test) => test.title === testTitle);
     setTest(selectTest);
   }, [testTitle]);
+
+  const handleStartTest = () => {
+    setStartTestStatus(true);
+    setFinishTestStatus(false);
+  };
+
+  const selectAnswer = (answer: any) => {
+    setResults((prev: any) => [...prev, answer]);
+  };
+
+  const submitResult = async () => {
+    const email = user.email;
+    const cipher = test.cipher;
+    console.log(results, testTitle, email, cipher);
+    await dispatch(addTest({ results, testTitle, email, cipher }));
+    await dispatch(fetchUserTests());
+    setResults([]);
+    setTest(null);
+    setFinishTestStatus(true);
+    setStartTestStatus(false);
+  };
 
   const handleChangeTest = (e: any) => {
     setTestTitle(e.target.value);
@@ -52,23 +68,26 @@ const DropDownTestList = () => {
           ))}
         </select>
       </label>
-      <ul>
-        {test?.questions.map(({ id, question, answers }: any) => (
-          <li key={id}>
-            <p>{question}</p>
-            {answers.map((answer: any) => (
-              <button
-                key={answer}
-                onClick={() => click(answers.indexOf(answer) + 1)}
-              >
-                {answer}
-              </button>
-            ))}
-          </li>
-        ))}
-      </ul>
-      <button onClick={submitResult}>Submit</button>
-      <p>Your mark is {userMark}</p>
+      {!startTestStatus && <button onClick={handleStartTest}>Start</button>}
+      {startTestStatus && (
+        <ul>
+          {test?.questions.map(({ id, question, answers }: any) => (
+            <li key={id}>
+              <p>{question}</p>
+              {answers.map((answer: any) => (
+                <button
+                  key={answer}
+                  onClick={() => selectAnswer(answers.indexOf(answer) + 1)}
+                >
+                  {answer}
+                </button>
+              ))}
+            </li>
+          ))}
+        </ul>
+      )}
+      {startTestStatus && <button onClick={submitResult}>Submit</button>}
+      {finishTestStatus && <p>Your mark is {userMark}</p>}
     </div>
   );
 };
