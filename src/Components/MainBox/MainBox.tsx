@@ -6,7 +6,7 @@ const MainBox = ({ children }: any) => {
 
 const Box = styled.div`
   width: 100%;
-  border-radius: 20px;
+  margin-top: 93px;
 `;
 
 export default MainBox;

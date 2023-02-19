@@ -1,36 +1,39 @@
-import ToggleThemeButton from "Components/ToggleThemeButton/ToggleThemeButton";
 import { useAuth } from "hooks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logOut } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import { IoIosLogOut } from "react-icons/io";
+import { selectTheme } from "redux/theme/selectors";
+import ToggleThemeButton from "Components/ToggleThemeButton/ToggleThemeButton";
 
-const Sidebar = (theme: any) => {
+const Header = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
+  const { theme }: any = useSelector(selectTheme);
 
+  const navigation = [
+    { id: 1, title: "Home", path: "" },
+    { id: 2, title: "Tests", path: "testing" },
+    { id: 3, title: "Guide", path: "guide" },
+  ];
   return (
-    <Header as="header">
+    <HeaderBox as="header">
       <Nav>
         <List>
-          <ListItem>
-            <NavListItemLink to="" end>
-              Home
-            </NavListItemLink>
-          </ListItem>
-          <ListItem>
-            <NavListItemLink to="testing">Tests</NavListItemLink>
-          </ListItem>
-          <ListItem>
-            <NavListItemLink to="guide">Guide</NavListItemLink>
-          </ListItem>
-          <ListItem>
-            <NavListItemLink to="classes">Classes</NavListItemLink>
-          </ListItem>
-          <ListItem>
-            <NavListItemLink to="classes">Classes</NavListItemLink>
-          </ListItem>
+          {navigation.map(({ id, title, path }) => (
+            <ListItem
+              key={id}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <NavListItemLink to={path} end>
+                {title}
+              </NavListItemLink>
+            </ListItem>
+          ))}
         </List>
       </Nav>
       <UserBox>
@@ -41,45 +44,51 @@ const Sidebar = (theme: any) => {
           height="50"
         />
         <UserName>{user.name}</UserName>
-        <ToggleThemeButton />
       </UserBox>
-      <NavButton onClick={() => dispatch(logOut())}>Logout</NavButton>
-    </Header>
+      <ToggleThemeButton />
+      <LogoutButton
+        onClick={() => dispatch(logOut())}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <IoIosLogOut size={30} color={theme === "light" ? "black" : "white"} />
+      </LogoutButton>
+    </HeaderBox>
   );
 };
 
-const Header = styled.div`
+const HeaderBox = styled.header`
+  position: fixed;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   width: 100%;
+  height: 93px;
   border-radius: 0 0 5px 5px;
   background-color: ${(p) => p.theme.colors.headerBgColor};
-  padding: ${(p) => p.theme.space[3]}px;
+  backdrop-filter: blur(5px);
+  padding: ${(p) => p.theme.space[2]}px;
 `;
 
 const Nav = styled.nav`
   ${(p) => p.theme.flexCentered}
-  margin-top: ${(p) => p.theme.space[3]}px;
 `;
 
 const List = styled.ul`
   ${(p) => p.theme.flexCentered}
 `;
 
-const ListItem = styled.li`
+const ListItem = styled(motion.li)`
   :not(:first-child) {
     margin-left: ${(p) => p.theme.space[3]}px;
   }
 `;
 
 export const NavListItemLink = styled(NavLink)`
+  font-weight: ${(p) => p.theme.fontWeights.bold};
   padding: ${(p) => p.theme.space[3]}px ${(p) => p.theme.space[3]}px;
   &.active {
     ${(p) => p.theme.components.activeNavLink}
   }
-  /* :hover:not(.active),
-  :focus-visible:not(.active) { 
-  } */
 `;
 
 const UserBox = styled.div`
@@ -98,9 +107,9 @@ const UserName = styled.p`
   margin-top: ${(p) => p.theme.space[2]}px;
 `;
 
-const NavButton = styled.button`
-  ${(p) => p.theme.components.buttons.mainButton}
+const LogoutButton = styled(motion.button)`
+  ${(p) => p.theme.components.buttons.iconButton}
   margin-left: ${(p) => p.theme.space[3]}px;
 `;
 
-export default Sidebar;
+export default Header;
