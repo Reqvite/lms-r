@@ -4,9 +4,9 @@ const MainBox = ({ children }: any) => {
   return <Box>{children}</Box>;
 };
 
-const Box = styled.div`
-  width: 100%;
-  margin-top: 93px;
+const Box = styled.main`
+  margin-top: 80px;
+  padding: ${(p) => p.theme.space[4]}px ${(p) => p.theme.space[3]}px;
 `;
 
 export default MainBox;

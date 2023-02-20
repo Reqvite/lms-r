@@ -5,6 +5,7 @@ import { AppDispatch } from "redux/store";
 import { addTest, fetchUserTests } from "redux/tests/operations";
 import { selectUserTests } from "redux/tests/selectors";
 import { tests } from "data/tests";
+import styled from "styled-components";
 
 const DropDownTestList = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -61,15 +62,13 @@ const DropDownTestList = () => {
 
   return (
     <div>
-      <label>
-        <select value={testTitle} onChange={handleChangeTest}>
-          {tests.map(({ title }) => (
-            <option key={title} value={title}>
-              {title}
-            </option>
-          ))}
-        </select>
-      </label>
+      <DropDownSelect value={testTitle} onChange={handleChangeTest}>
+        {tests.map(({ title }) => (
+          <Option key={title} value={title}>
+            {title}
+          </Option>
+        ))}
+      </DropDownSelect>
       {!startTestStatus && <button onClick={handleStartTest}>Start</button>}
       {startTestStatus && (
         <ul>
@@ -97,4 +96,14 @@ const DropDownTestList = () => {
   );
 };
 
+const DropDownSelect = styled.select`
+  font-size: 16px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+const Option = styled.option`
+  font-size: 16px;
+`;
 export default DropDownTestList;

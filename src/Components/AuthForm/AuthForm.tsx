@@ -1,9 +1,11 @@
+import MainButton from "Components/MainButton/MainButton";
+import { motion } from "framer-motion";
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { login, register } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Pages } from "types/types";
 
 interface AuthFormProps {
@@ -14,6 +16,7 @@ interface AuthFormProps {
 
 const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
   const dispatch: AppDispatch = useDispatch();
+  const theme: any = useTheme();
 
   const handleRegister = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,6 +61,8 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
                 name="fullname"
                 placeholder="Your fullname"
                 required
+                whileHover={{ borderColor: theme.colors.accentColor }}
+                whileFocus={{ outlineColor: theme.colors.accentColor }}
               />
             </Label>
           )}
@@ -69,6 +74,8 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
               name="email"
               placeholder="Your email"
               required
+              whileHover={{ borderColor: theme.colors.accentColor }}
+              whileFocus={{ outlineColor: theme.colors.accentColor }}
             />
           </Label>
           <Label htmlFor="password">
@@ -79,9 +86,11 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
               name="password"
               placeholder="Your password"
               required
+              whileHover={{ borderColor: theme.colors.accentColor }}
+              whileFocus={{ outlineColor: theme.colors.accentColor }}
             />
           </Label>
-          <Button type="submit">Submit</Button>
+          <MainButton />
         </Form>
       </Box>
     </Container>
@@ -91,21 +100,19 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
 const Container = styled.div`
   ${(p) => p.theme.flexCentered}
   flex-direction: column;
-  padding: 10px;
   height: 100vh;
-  background-color: ${(p) => p.theme.colors.lightBackground};
+  background-color: ${(p) => p.theme.colors.mainBackground};
 `;
 
 const Header = styled.h2`
   text-align: center;
-  font-weight: 500;
   font-size: ${(p) => p.theme.fontSizes[4]}px;
-  line-height: 1.2;
+  line-height: ${(p) => p.theme.lineHeights.heading};
 `;
 const Description = styled.p`
   margin-top: ${(p) => p.theme.space[2]}px;
   font-size: ${(p) => p.theme.fontSizes[2]}px;
-  line-height: 1.25;
+  line-height: ${(p) => p.theme.lineHeights.body};
   text-align: center;
 `;
 const Box = styled.div`
@@ -114,7 +121,7 @@ const Box = styled.div`
   max-width: 650px;
   min-width: 250px;
   padding: 44px;
-  background-color: rgba(214, 214, 214, 0.44);
+  background-color: ${(p) => p.theme.colors.secondaryBgColor};
   backdrop-filter: blur(2px);
   border-radius: 12px;
 `;
@@ -130,16 +137,10 @@ const Label = styled.label`
   line-height: 1.2;
 `;
 
-const Input = styled.input`
+const Input = styled(motion.input)`
   margin-top: 5px;
   border-radius: 12px;
   padding: 10px 24px;
-`;
-
-const Button = styled.button`
-  ${(p) => p.theme.components.buttons.mainButton}
-  align-self: center;
-  margin-top: 10px;
 `;
 
 export default AuthForm;

@@ -3,10 +3,11 @@ const Guide = () => {
     <>
       <h2>Guide</h2>
       <iframe
+        style={{ overflow: "hidden" }}
         sandbox="allow-same-origin allow-scripts"
-        src="https://reqvite.github.io/test/docs/intro"
+        src="https://jodlei.github.io/notes-LMS-docosaurus/"
         width="100%"
-        height="100%"
+        height="1000px"
       />
     </>
   );

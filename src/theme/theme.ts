@@ -4,6 +4,7 @@ export const darkTheme = {
     secondaryBgColor: "rgba(240, 240, 240, 0.1)",
     headerBgColor: "rgba(32, 32, 35, 0.9);",
     mainTextColor: "#ffffff",
+    accentColor: "#ffffff",
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
@@ -38,6 +39,7 @@ export const darkTheme = {
       mainButton: {
         color: "#ffffff",
         backgroundColor: "rgba(240, 240, 240, 0.5)",
+        fontWeight: "700",
         height: "50px",
         display: "block",
         border: "none",
@@ -46,7 +48,7 @@ export const darkTheme = {
         cursor: "pointer",
       },
       secondaryButton: {
-        color: "#000000",
+        color: "#ffffff",
         backgroundColor: "rgba(240, 240, 240, 0.5)",
         fontWeight: "700",
         height: "50px",
@@ -82,6 +84,7 @@ export const lightTheme = {
     secondaryBgColor: "rgba(240, 240, 240, 0.9)",
     headerBgColor: "rgba(255, 255, 255, 0.7)",
     mainTextColor: "#000000",
+    accentColor: "#9090c296",
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
@@ -116,6 +119,7 @@ export const lightTheme = {
       mainButton: {
         color: "#000000",
         backgroundColor: "rgba(220, 220, 220, 0.9)",
+        fontWeight: "700",
         height: "50px",
         display: "block",
         border: "none",

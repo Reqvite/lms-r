@@ -59,6 +59,7 @@ const Header = () => {
 
 const HeaderBox = styled.header`
   position: fixed;
+  top: 0;
   display: flex;
   align-items: center;
   width: 100%;
@@ -66,7 +67,7 @@ const HeaderBox = styled.header`
   border-radius: 0 0 5px 5px;
   background-color: ${(p) => p.theme.colors.headerBgColor};
   backdrop-filter: blur(5px);
-  padding: ${(p) => p.theme.space[2]}px;
+  padding: ${(p) => p.theme.space[3]}px;
 `;
 
 const Nav = styled.nav`

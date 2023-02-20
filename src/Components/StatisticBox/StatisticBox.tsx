@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { fetchAllTests, fetchUserTests } from "redux/tests/operations";
 import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
+import Loader from "Components/Loader/Loader";
 
 const StatisticBox = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -24,7 +25,6 @@ const StatisticBox = () => {
   const handleResultButton = () => {
     setAllList(!allList);
   };
-
   const getDate = (createdAt: string): string => {
     const date = new Date(createdAt);
     return `${date.getHours()}:${date.getMinutes()} : ${date.getDate()}/${
@@ -40,26 +40,35 @@ const StatisticBox = () => {
           {allList ? "Усі" : "Ваші"}
         </ResultsButton>
       </HeaderBox>
-      {tests.length === 0 && <Error>Ви ще не здали жодного тесту.</Error>}
-      <StatisticList>
-        {!isLoading &&
-          [...tests].map(
-            ({ _id, mark, testTitle, createdAt, fullname }: any) => (
-              <StatisticListItem key={_id}>
-                {allList && <ListText>{fullname}</ListText>}
-                <ListText>Назва тесту: {testTitle}</ListText>
-                <ListText>Оцінка: {mark}</ListText>
-                <ListText>{getDate(createdAt)}</ListText>
-              </StatisticListItem>
-            )
+      {!isLoading ? (
+        <>
+          {tests.length === 0 ? (
+            <Error>Ви ще не здали жодного тесту.</Error>
+          ) : (
+            <StatisticList>
+              {[...tests].map(
+                ({ _id, mark, testTitle, createdAt, fullname }: any) => (
+                  <StatisticListItem key={_id}>
+                    {allList && <ListText>{fullname}</ListText>}
+                    <ListText>Назва тесту: {testTitle}</ListText>
+                    <ListText>Оцінка: {mark}</ListText>
+                    <ListText>{getDate(createdAt)}</ListText>
+                  </StatisticListItem>
+                )
+              )}
+            </StatisticList>
           )}
-      </StatisticList>
+        </>
+      ) : (
+        <Loader height="200px" />
+      )}
     </Box>
   );
 };
 
 const HeaderBox = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
 `;
 const StatisticListHeader = styled.p`
@@ -75,6 +84,7 @@ const ResultsButton = styled.button`
 const Box = styled.div`
   width: 100%;
   max-width: 800px;
+  min-height: 300px;
   padding: ${(p) => p.theme.space[4]}px;
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
   border-radius: ${(p) => p.theme.borders.baseBorder};
@@ -84,7 +94,8 @@ const Box = styled.div`
 `;
 
 const Error = styled.p`
-  text-align: center;
+  ${(p) => p.theme.flexCentered}
+  min-height: 200px;
 `;
 const StatisticList = styled.ul`
   margin-top: ${(p) => p.theme.space[3]}px;

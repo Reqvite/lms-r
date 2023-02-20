@@ -16,6 +16,8 @@ import { useAuth } from "hooks";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./theme/theme";
 import { selectTheme } from "redux/theme/selectors";
+import Loader from "Components/Loader/Loader";
+import Alert from "Components/Alert/Alert";
 
 const App = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -30,7 +32,7 @@ const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <p>Loading...</p>
+    <Loader height={"100vh"} />
   ) : (
     <ThemeProvider theme={theme}>
       <Routes>
@@ -65,6 +67,7 @@ const App = () => {
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
       <GlobalStyle />
+      <Alert />
     </ThemeProvider>
   );
 };

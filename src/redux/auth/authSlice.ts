@@ -1,4 +1,5 @@
 import { createSlice, ActionReducerMapBuilder } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import { AuthState } from "types/types";
 
 import { login, logOut, refreshUser, register } from "./operations";
@@ -29,7 +30,11 @@ export const authSlice = createSlice({
         state.token = token;
         state.isLoggedIn = true;
       })
-      .addCase(register.rejected, (state, action) => {})
+      .addCase(register.rejected, (state, action) => {
+        toast.error(action.payload, {
+          autoClose: 2000,
+        });
+      })
       .addCase(login.pending, (state) => state)
       .addCase(login.fulfilled, (state, action) => {
         console.log(action.payload);
@@ -38,7 +43,11 @@ export const authSlice = createSlice({
         state.token = token;
         state.isLoggedIn = true;
       })
-      .addCase(login.rejected, (state, action) => {})
+      .addCase(login.rejected, (state, action) => {
+        toast.error(action.payload, {
+          autoClose: 2000,
+        });
+      })
       .addCase(refreshUser.pending, (state, action) => {
         state.isRefreshing = true;
       })

@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { authReducer } from "./auth/authSlice";
 import { testsReduser } from "./tests/testsSlice";
 import { themeReducer } from "./theme/themeSlice";
+import { combineReducers } from "redux";
 
 const authPersistConfig = {
   key: "auth",
@@ -15,18 +16,27 @@ const themePersistConfig = {
   storage,
 };
 
-export const store = configureStore<any, any, any>({
-  reducer: {
-    auth: persistReducer(authPersistConfig, authReducer),
-    tests: testsReduser,
-    theme: persistReducer(themePersistConfig, themeReducer),
-  },
-  middleware: (getDefaultMiddleware: any) =>
+const rootReducer = combineReducers({
+  auth: persistReducer(authPersistConfig, authReducer),
+  tests: testsReduser,
+  theme: persistReducer(themePersistConfig, themeReducer),
+});
+
+const appReducer = (state: any, action: any) => {
+  if (action.type === "auth/logout/fulfilled") {
+    state = undefined;
+  }
+  return rootReducer(state, action);
+};
+
+export const store = configureStore({
+  reducer: appReducer,
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export const persistor = persistStore(store);
+
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

@@ -7,28 +7,28 @@ const Home = () => {
 
   return (
     <>
-      <div>
+      <Box>
         <UserName>Привіт, {user.name}!</UserName>
-      </div>
+      </Box>
       <StatisticBox />
     </>
   );
 };
 
-const UserName = styled.p`
-  display: flex;
-  justify-content: center;
-  margin-top: ${(p) => p.theme.space[3]}px;
+const Box = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: ${(p) => p.theme.space[3]}px;
   width: 100%;
   max-width: 350px;
+  background-color: ${(p) => p.theme.colors.secondaryBgColor};
+  border-radius: ${(p) => p.theme.borders.baseBorder};
+`;
+
+const UserName = styled.p`
   font-size: ${(p) => p.theme.fontSizes[3]}px;
   line-height: ${(p) => p.theme.lineHeights.heading};
   font-weight: ${(p) => p.theme.fontWeights.bold};
-  background-color: ${(p) => p.theme.colors.secondaryBgColor};
-  border-radius: ${(p) => p.theme.borders.baseBorder};
   text-align: center;
 `;
 
