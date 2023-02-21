@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { addTest, fetchUserTests } from "redux/tests/operations";
 import { selectUserTests } from "redux/tests/selectors";
-import { courses, tests } from "data/tests";
+import { courses } from "data/tests";
 import styled, { useTheme } from "styled-components";
 import Dropdown from "Components/DropDown/DropDown";
 import { motion } from "framer-motion";

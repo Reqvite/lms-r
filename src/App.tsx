@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { GlobalStyle } from "Components/GlobalStyle/GlobalStyle";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { refreshUser } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
 import LoginForm from "Pages/LoginFiorm";
