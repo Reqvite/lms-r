@@ -51,7 +51,7 @@ const StatisticBox = () => {
                   <StatisticListItem key={_id}>
                     {allList && <ListText>{fullname}</ListText>}
                     <ListText>Назва тесту: {testTitle}</ListText>
-                    <ListText>Оцінка: {mark}</ListText>
+                    <ListText>Оцінка: {mark.total}</ListText>
                     <ListText>{getDate(createdAt)}</ListText>
                   </StatisticListItem>
                 )

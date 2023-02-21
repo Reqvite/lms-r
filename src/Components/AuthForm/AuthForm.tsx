@@ -90,7 +90,7 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
               whileFocus={{ outlineColor: theme.colors.accentColor }}
             />
           </Label>
-          <MainButton />
+          <MainButton title={page === Pages.LOGIN ? "Login" : "Sign up"} />
         </Form>
       </Box>
     </Container>

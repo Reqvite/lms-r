@@ -1,4 +1,4 @@
-import DropDownList from "Components/DropDownList/DropDownList";
+import TestBox from "Components/TestBox/TestBox";
 import styled from "styled-components";
 
 const Testing = () => {
@@ -7,7 +7,7 @@ const Testing = () => {
       <Box>
         <UserName>Виберіть тест</UserName>
       </Box>
-      <DropDownList />
+      <TestBox />
     </>
   );
 };

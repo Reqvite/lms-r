@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-const MainButton = () => {
+const MainButton = ({ title }: any) => {
   return (
     <Button
       type="submit"
@@ -10,7 +10,7 @@ const MainButton = () => {
       }}
       whileTap={{ scale: 0.95 }}
     >
-      Submit
+      {title}
     </Button>
   );
 };

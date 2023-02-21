@@ -4,7 +4,9 @@ export const darkTheme = {
     secondaryBgColor: "rgba(240, 240, 240, 0.1)",
     headerBgColor: "rgba(32, 32, 35, 0.9);",
     mainTextColor: "#ffffff",
-    accentColor: "#ffffff",
+    accentColor: "#9090c296",
+    notActive: "rgba(187, 3, 49, 0.5)",
+    active: "rgba(44, 160, 49, 0.8)",
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
@@ -23,8 +25,8 @@ export const darkTheme = {
     caps: "0.2em",
   },
   borders: {
-    baseBorder: "10px",
-    profileItemsBorder: "0.5px solid #EBEDEF",
+    baseBorder: "5px",
+    dropDownBorder: "1px solid #cccccc;",
   },
   shadows: {
     profileShadow: "rgb(38, 57, 77) 0px 20px 30px -10px",
@@ -85,6 +87,8 @@ export const lightTheme = {
     headerBgColor: "rgba(255, 255, 255, 0.7)",
     mainTextColor: "#000000",
     accentColor: "#9090c296",
+    notActive: "rgba(187, 3, 49, 0.5)",
+    active: "rgba(44, 160, 49, 0.8)",
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
@@ -104,7 +108,7 @@ export const lightTheme = {
   },
   borders: {
     baseBorder: "5px",
-    profileItemsBorder: "0.5px solid #EBEDEF",
+    dropDownBorder: "1px solid rgb(38, 57, 77);",
   },
   shadows: {
     profileShadow: "rgb(38, 57, 77) 0px 20px 30px -10px",
