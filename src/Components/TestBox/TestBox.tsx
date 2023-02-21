@@ -8,6 +8,8 @@ import { tests } from "data/tests";
 import styled, { useTheme } from "styled-components";
 import Dropdown from "Components/DropDown/DropDown";
 import { motion } from "framer-motion";
+import Question from "./Question/Question";
+import Timer from "Components/Timer/Timer";
 
 const TestBox = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -72,9 +74,15 @@ const TestBox = () => {
     }
   };
 
-  function handleData(dataFromChild: any) {
+  const handleData = (dataFromChild: string) => {
     setTestCipher(dataFromChild);
-  }
+  };
+
+  const getTime = (time: string) => {
+    if (+time - 1 === 0) {
+      handleFinishTest();
+    }
+  };
 
   return (
     <Box>
@@ -103,43 +111,27 @@ const TestBox = () => {
         )}
       </ChoseTestBox>
       {startTestStatus && (
-        <ul>
-          {test?.questions.map(
-            ({ id, question, answers }: any, questionIndex: number) =>
-              questionIndex === currentQuestionIndex && (
-                <ListItem key={id}>
-                  <p>{question}</p>
-                  <AnswersBox>
-                    {answers.map((answer: string, answerIndex: number) => (
-                      <AnswerButton
-                        key={answerIndex}
-                        onClick={() =>
-                          selectAnswer(questionIndex, answerIndex + 1)
-                        }
-                        disabled={answeredQuestions.has(questionIndex)}
-                        style={{
-                          backgroundColor: answeredQuestions.has(questionIndex)
-                            ? theme.colors.notActive
-                            : theme.colors.active,
-                        }}
-                        animate={{
-                          backgroundColor: answeredQuestions.has(questionIndex)
-                            ? theme.colors.notActive
-                            : theme.colors.active,
-                        }}
-                        whileHover={{
-                          scale: 1.02,
-                        }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        {answer}
-                      </AnswerButton>
-                    ))}
-                  </AnswersBox>
-                </ListItem>
-              )
-          )}
-        </ul>
+        <>
+          <Timer seconds={test.questions.length * 5} onData={getTime} />
+          <List>
+            {test?.questions.map(
+              ({ id, question, answers }: any, questionIndex: number) =>
+                questionIndex === currentQuestionIndex && (
+                  <Question
+                    key={id}
+                    id={id}
+                    question={question}
+                    answers={answers}
+                    questionIndex={questionIndex}
+                    selectAnswer={selectAnswer}
+                    answeredQuestions={answeredQuestions}
+                    theme={theme}
+                    testLength={test.questions.length}
+                  />
+                )
+            )}
+          </List>
+        </>
       )}
       {startTestStatus &&
         currentQuestionIndex === test.questions.length - 1 && (
@@ -178,6 +170,9 @@ const ChoseTestBox = styled.div`
   ${(p) => p.theme.flexCentered}
 `;
 
+const List = styled.ul`
+  margin-top: ${(p) => p.theme.space[3]}px;
+`;
 const MarkText = styled.p`
   margin-top: ${(p) => p.theme.space[3]}px;
   text-align: center;
@@ -185,22 +180,6 @@ const MarkText = styled.p`
 const StartTestButton = styled(motion.button)`
   ${(p) => p.theme.components.buttons.secondaryButton}
   margin-left: ${(p) => p.theme.space[3]}px;
-`;
-
-const ListItem = styled.li`
-  :not(:first-child) {
-    margin-top: ${(p) => p.theme.space[3]}px;
-  }
-`;
-const AnswersBox = styled.div`
-  ${(p) => p.theme.flexCentered}
-`;
-const AnswerButton = styled(motion.button)`
-  ${(p) => p.theme.components.buttons.secondaryButton}
-  margin-top: ${(p) => p.theme.space[3]}px;
-  :not(:first-child) {
-    margin-left: ${(p) => p.theme.space[3]}px;
-  }
 `;
 
 const FinishTestButton = styled(motion.button)`

@@ -1,6 +1,8 @@
 import { tests } from "data/tests";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { selectUserFinishedTests } from "redux/tests/selectors";
+import styled, { useTheme } from "styled-components";
 
 const Icon = () => {
   return (
@@ -13,6 +15,9 @@ const Icon = () => {
 const Dropdown = ({ onData, placeHolder }: any) => {
   const [showMenu, setShowMenu] = useState(false);
   const [selectValue, setSelectValue] = useState<any>(null);
+  const theme: any = useTheme();
+
+  const finishedTests = useSelector(selectUserFinishedTests);
 
   useEffect(() => {
     const handler = () => setShowMenu(false);
@@ -40,15 +45,40 @@ const Dropdown = ({ onData, placeHolder }: any) => {
     onData(cipher);
   };
 
+  const renderList = (index: number, title: string, cipher: string) => {
+    if (
+      index === 0 ||
+      finishedTests.includes(cipher) ||
+      +cipher === +finishedTests[finishedTests.length - 1] + 1
+    ) {
+      onItemClick(cipher, title);
+    }
+  };
+
+  const hadleColor = (cipher: string, index: number) => {
+    let color = theme.colors.notActive;
+    if (
+      index === 0 ||
+      finishedTests.includes(cipher) ||
+      +cipher === +finishedTests[finishedTests.length - 1] + 1
+    ) {
+      color = theme.colors.active;
+    }
+    return color;
+  };
+
   return (
     <DropDownContainer>
       <DropDownInput onClick={handleInputClick}>
         {showMenu && (
           <DropDownMenu>
-            {tests.map(({ title, cipher }) => (
+            {tests.map(({ title, cipher }, index: number) => (
               <DropDownItem
-                key={title}
-                onClick={() => onItemClick(cipher, title)}
+                key={cipher}
+                onClick={() => renderList(index, title, cipher)}
+                style={{
+                  backgroundColor: hadleColor(cipher, index),
+                }}
               >
                 {title}
               </DropDownItem>

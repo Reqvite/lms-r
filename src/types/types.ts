@@ -14,6 +14,7 @@ export interface AuthState {
 
 export interface TestsState {
   items: any;
+  finishedTests: any;
   isLoading: boolean;
   error: any;
 }

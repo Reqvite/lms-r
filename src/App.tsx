@@ -18,6 +18,7 @@ import { darkTheme, lightTheme } from "./theme/theme";
 import { selectTheme } from "redux/theme/selectors";
 import Loader from "Components/Loader/Loader";
 import Alert from "Components/Alert/Alert";
+import Courses from "Pages/Courses";
 
 const App = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -61,6 +62,7 @@ const App = () => {
           }
         >
           <Route index element={<Home />} />
+          <Route path="courses" element={<Courses />}></Route>
           <Route path="testing" element={<Testing />} />
           <Route path="guide" element={<Guide />} />
         </Route>

@@ -1,3 +1,4 @@
+import Timer from "Components/Timer/Timer";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
@@ -9,6 +10,7 @@ interface QuestionProps {
   selectAnswer: (questionIndex: number, answerIndex: number) => void;
   answeredQuestions: Set<number>;
   theme: any;
+  testLength: string;
 }
 
 const Question = ({
@@ -19,15 +21,23 @@ const Question = ({
   selectAnswer,
   answeredQuestions,
   theme,
+  testLength,
 }: QuestionProps) => {
   return (
     <ListItem key={id}>
-      <p>{question}</p>
+      <TextBox>
+        <p>{question}</p>
+        <div>
+          <p>
+            {questionIndex + 1}/{testLength}
+          </p>
+        </div>
+      </TextBox>
       <AnswersBox>
         {answers.map((answer, answerIndex) => (
           <AnswerButton
             key={answerIndex}
-            onClick={() => selectAnswer(questionIndex, answerIndex)}
+            onClick={() => selectAnswer(questionIndex, answerIndex + 1)}
             disabled={answeredQuestions.has(questionIndex)}
             style={{
               backgroundColor: answeredQuestions.has(questionIndex)
@@ -52,6 +62,11 @@ const Question = ({
   );
 };
 
+const TextBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 const ListItem = styled.li`
   :not(:first-child) {
     margin-top: ${(p) => p.theme.space[3]}px;
@@ -67,3 +82,5 @@ const AnswerButton = styled(motion.button)`
     margin-left: ${(p) => p.theme.space[3]}px;
   }
 `;
+
+export default Question;
