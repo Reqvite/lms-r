@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { addTest, fetchUserTests } from "redux/tests/operations";
 import { selectUserTests } from "redux/tests/selectors";
-import { tests } from "data/tests";
+import { courses, tests } from "data/tests";
 import styled, { useTheme } from "styled-components";
 import Dropdown from "Components/DropDown/DropDown";
 import { motion } from "framer-motion";
 import Question from "./Question/Question";
 import Timer from "Components/Timer/Timer";
+import { useParams } from "react-router-dom";
 
 const TestBox = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -24,6 +25,9 @@ const TestBox = () => {
   const [startTestStatus, setStartTestStatus] = useState<boolean>(false);
   const [answeredQuestions, setAnsweredQuestions] = useState(new Set<number>());
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<any>(0);
+  const [course, setCourse] = useState<any>(null);
+
+  const { courseID } = useParams();
 
   const theme: any = useTheme();
 
@@ -35,9 +39,15 @@ const TestBox = () => {
   }, [userTests, finishTestStatus]);
 
   useEffect(() => {
-    const [selectTest] = tests.filter((test) => test.cipher === testCipher);
+    const course = courses.filter(
+      (course: any) => String(course.id) === courseID
+    );
+    setCourse(course);
+    const [selectTest] = course[0].tests.filter(
+      (test) => test.cipher === testCipher
+    );
     setTest(selectTest);
-  }, [testCipher]);
+  }, [testCipher, courseID]);
 
   const handleStartTest = () => {
     setStartTestStatus(true);
@@ -89,7 +99,7 @@ const TestBox = () => {
       <ChoseTestBox>
         {!startTestStatus && (
           <>
-            <Dropdown placeHolder="Тести" onData={handleData} />
+            <Dropdown placeHolder="Тести" onData={handleData} course={course} />
             {!startTestStatus && (
               <StartTestButton
                 onClick={handleStartTest}

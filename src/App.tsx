@@ -1,15 +1,13 @@
 import { useEffect } from "react";
 import { GlobalStyle } from "Components/GlobalStyle/GlobalStyle";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { refreshUser } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
 import LoginForm from "Pages/LoginFiorm";
 import SignupForm from "Pages/SignupForm";
 import Dashboard from "Pages/Dashboard";
 import Home from "Pages/Home";
-import Testing from "Pages/Testing";
-import Guide from "Pages/Guide";
 import { RestrictedRoute } from "Components/RestrictedRoute/RestrictedRoute";
 import { PrivateRoute } from "Components/PrivateRoute/PrivateRoute";
 import { useAuth } from "hooks";
@@ -19,6 +17,7 @@ import { selectTheme } from "redux/theme/selectors";
 import Loader from "Components/Loader/Loader";
 import Alert from "Components/Alert/Alert";
 import Courses from "Pages/Courses";
+import Course from "Pages/Course";
 
 const App = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -62,9 +61,9 @@ const App = () => {
           }
         >
           <Route index element={<Home />} />
-          <Route path="courses" element={<Courses />}></Route>
-          <Route path="testing" element={<Testing />} />
-          <Route path="guide" element={<Guide />} />
+          <Route path="courses" element={<Courses />}>
+            <Route path=":courseID/*" element={<Course />} />
+          </Route>
         </Route>
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>

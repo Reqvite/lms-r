@@ -1,4 +1,3 @@
-import Timer from "Components/Timer/Timer";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 

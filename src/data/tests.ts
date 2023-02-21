@@ -178,11 +178,11 @@ export const courses = [
   },
   {
     id: 2,
-    title: "Bblblblbllblb",
+    title: "курс 2",
     tests: [
       {
-        title: "FirstTest",
-        cipher: "1001",
+        title: "dsddd",
+        cipher: "1004",
         questions: [
           {
             id: 1,
@@ -210,8 +210,8 @@ export const courses = [
         ],
       },
       {
-        title: "SecondtTest",
-        cipher: "1002",
+        title: "fdfsdffds",
+        cipher: "1005",
         questions: [
           {
             id: 1,
@@ -238,8 +238,8 @@ export const courses = [
         ],
       },
       {
-        title: "ThirdTest",
-        cipher: "1003",
+        title: "Tfdfsdfs",
+        cipher: "1006",
         questions: [
           {
             id: 1,
@@ -268,7 +268,7 @@ export const courses = [
   },
   {
     id: 3,
-    title: "Avavavaavav",
+    title: "курс 3",
     tests: [
       {
         title: "FirstTest",

@@ -1,4 +1,3 @@
-import { tests } from "data/tests";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUserFinishedTests } from "redux/tests/selectors";
@@ -12,7 +11,7 @@ const Icon = () => {
   );
 };
 
-const Dropdown = ({ onData, placeHolder }: any) => {
+const Dropdown = ({ onData, placeHolder, course }: any) => {
   const [showMenu, setShowMenu] = useState(false);
   const [selectValue, setSelectValue] = useState<any>(null);
   const theme: any = useTheme();
@@ -72,7 +71,7 @@ const Dropdown = ({ onData, placeHolder }: any) => {
       <DropDownInput onClick={handleInputClick}>
         {showMenu && (
           <DropDownMenu>
-            {tests.map(({ title, cipher }, index: number) => (
+            {course[0].tests.map(({ title, cipher }: any, index: number) => (
               <DropDownItem
                 key={cipher}
                 onClick={() => renderList(index, title, cipher)}

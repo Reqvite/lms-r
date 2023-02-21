@@ -15,9 +15,9 @@ const Header = () => {
   const { theme }: any = useSelector(selectTheme);
 
   const navigation = [
-    { id: 1, title: "Home", path: "" },
-    { id: 2, title: "Tests", path: "testing" },
-    { id: 3, title: "Guide", path: "guide" },
+    { id: 1, title: "Домашня сторінка", path: "" },
+    // { id: 2, title: "Tests", path: "testing" },
+    // { id: 3, title: "Guide", path: "guide" },
     { id: 4, title: "Курси", path: "courses" },
   ];
   return (
