@@ -1,6 +1,11 @@
+import { FC } from "react";
 import styled from "styled-components";
 
-const MainBox = ({ children }: any) => {
+interface MainBoxProps {
+  children: React.ReactNode;
+}
+
+const MainBox: FC<MainBoxProps> = ({ children }) => {
   return <Box>{children}</Box>;
 };
 

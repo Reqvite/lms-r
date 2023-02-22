@@ -1,24 +1,23 @@
+import { FC } from "react";
 import { useAuth } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logOut } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
-import styled from "styled-components";
 import { motion } from "framer-motion";
 import { IoIosLogOut } from "react-icons/io";
 import { selectTheme } from "redux/theme/selectors";
+import styled from "styled-components";
 import ToggleThemeButton from "Components/ToggleThemeButton/ToggleThemeButton";
 
-const Header = () => {
+const Header: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
   const { theme }: any = useSelector(selectTheme);
 
   const navigation = [
     { id: 1, title: "Домашня сторінка", path: "" },
-    // { id: 2, title: "Tests", path: "testing" },
-    // { id: 3, title: "Guide", path: "guide" },
-    { id: 4, title: "Курси", path: "courses" },
+    { id: 2, title: "Курси", path: "courses" },
   ];
   return (
     <HeaderBox as="header">

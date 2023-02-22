@@ -1,7 +1,12 @@
+import { FC } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-const MainButton = ({ title }: any) => {
+interface MainButtonProps {
+  title: string;
+}
+
+const MainButton: FC<MainButtonProps> = ({ title }) => {
   return (
     <Button
       type="submit"

@@ -1,13 +1,14 @@
+import { FC } from "react";
 import { useState } from "react";
-import styled from "styled-components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { fetchAllTests, fetchUserTests } from "redux/tests/operations";
 import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
 import Loader from "Components/Loader/Loader";
+import styled from "styled-components";
 
-const StatisticBox = () => {
+const StatisticBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const [allList, setAllList] = useState<boolean>(false);
 
@@ -22,7 +23,7 @@ const StatisticBox = () => {
     }
   }, [dispatch, allList]);
 
-  const handleResultButton = () => {
+  const handleResultButton = (): void => {
     setAllList(!allList);
   };
   const getDate = (createdAt: string): string => {

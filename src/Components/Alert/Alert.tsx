@@ -1,6 +1,7 @@
+import { FC } from "react";
 import { ToastContainer } from "react-toastify";
 
-export const Alert = () => {
+export const Alert: FC = () => {
   return (
     <>
       <ToastContainer

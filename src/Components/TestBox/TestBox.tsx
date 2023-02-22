@@ -1,18 +1,19 @@
+import { FC } from "react";
 import { useAuth } from "hooks";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { addTest, fetchUserTests } from "redux/tests/operations";
 import { selectUserTests } from "redux/tests/selectors";
+import { motion } from "framer-motion";
+import { useParams } from "react-router-dom";
 import { courses } from "data/tests";
 import styled, { useTheme } from "styled-components";
-import Dropdown from "Components/DropDown/DropDown";
-import { motion } from "framer-motion";
-import Question from "./Question/Question";
 import Timer from "Components/Timer/Timer";
-import { useParams } from "react-router-dom";
+import Dropdown from "Components/DropDown/DropDown";
+import Question from "./Question/Question";
 
-const TestBox = () => {
+const TestBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
   const userTests = useSelector(selectUserTests);
@@ -24,7 +25,7 @@ const TestBox = () => {
   const [finishTestStatus, setFinishTestStatus] = useState<boolean>(false);
   const [startTestStatus, setStartTestStatus] = useState<boolean>(false);
   const [answeredQuestions, setAnsweredQuestions] = useState(new Set<number>());
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<any>(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [course, setCourse] = useState<any>(null);
 
   const { courseID } = useParams();
@@ -49,7 +50,7 @@ const TestBox = () => {
     setTest(selectTest);
   }, [testCipher, courseID]);
 
-  const handleStartTest = () => {
+  const handleStartTest = (): void => {
     setStartTestStatus(true);
     setFinishTestStatus(false);
   };
@@ -73,7 +74,7 @@ const TestBox = () => {
     setCurrentQuestionIndex(0);
   };
 
-  const selectAnswer = (questionIndex: number, answer: any) => {
+  const selectAnswer = (questionIndex: number, answer: number): void => {
     setResults((prev: any) => [...prev, answer]);
     setAnsweredQuestions((prev) => new Set(prev).add(questionIndex));
     if (currentQuestionIndex === test.questions.length - 1) {
@@ -84,11 +85,11 @@ const TestBox = () => {
     }
   };
 
-  const handleData = (dataFromChild: string) => {
+  const handleData = (dataFromChild: string): void => {
     setTestCipher(dataFromChild);
   };
 
-  const getTime = (time: string) => {
+  const getTime = (time: number): void => {
     if (+time - 1 === 0) {
       handleFinishTest();
     }

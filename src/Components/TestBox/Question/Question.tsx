@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
@@ -12,7 +13,7 @@ interface QuestionProps {
   testLength: string;
 }
 
-const Question = ({
+const Question: FC<QuestionProps> = ({
   id,
   question,
   answers,
@@ -21,7 +22,7 @@ const Question = ({
   answeredQuestions,
   theme,
   testLength,
-}: QuestionProps) => {
+}) => {
   return (
     <ListItem key={id}>
       <TextBox>

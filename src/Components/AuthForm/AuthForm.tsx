@@ -1,4 +1,3 @@
-import MainButton from "Components/MainButton/MainButton";
 import { motion } from "framer-motion";
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
@@ -7,6 +6,7 @@ import { login, register } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
 import styled, { useTheme } from "styled-components";
 import { Pages } from "types/types";
+import MainButton from "Components/MainButton/MainButton";
 
 interface AuthFormProps {
   page: number;
@@ -54,12 +54,12 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
         <Form onSubmit={page === Pages.LOGIN ? handleLogin : handleRegister}>
           {page === Pages.REGISTER && (
             <Label htmlFor="fullname">
-              Fullname
+              Ваше повне ім'я
               <Input
                 type="text"
                 id="fullname"
                 name="fullname"
-                placeholder="Your fullname"
+                placeholder="Александ Александров"
                 required
                 whileHover={{ borderColor: theme.colors.accentColor }}
                 whileFocus={{ outlineColor: theme.colors.accentColor }}
@@ -67,24 +67,24 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
             </Label>
           )}
           <Label htmlFor="email">
-            Email
+            Електронна пошта
             <Input
               type="email"
               id="email"
               name="email"
-              placeholder="Your email"
+              placeholder="alexandr@gmail.com"
               required
               whileHover={{ borderColor: theme.colors.accentColor }}
               whileFocus={{ outlineColor: theme.colors.accentColor }}
             />
           </Label>
           <Label htmlFor="password">
-            Password
+            Пароль
             <Input
               type="password"
               id="password"
               name="password"
-              placeholder="Your password"
+              placeholder="Ваш пароль, 6 символів мінімум"
               required
               whileHover={{ borderColor: theme.colors.accentColor }}
               whileFocus={{ outlineColor: theme.colors.accentColor }}

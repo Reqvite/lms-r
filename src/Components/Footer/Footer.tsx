@@ -1,6 +1,7 @@
+import { FC } from "react";
 import styled from "styled-components";
 
-const Footer = () => {
+const Footer: FC = () => {
   return (
     <FooterBox>
       <FooterText>Footer</FooterText>
@@ -16,6 +17,8 @@ const FooterBox = styled.footer`
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
 `;
 
-const FooterText = styled.p``;
+const FooterText = styled.p`
+  font-weight: ${(p) => p.theme.fontWeights.bold};
+`;
 
 export default Footer;

@@ -1,7 +1,13 @@
+import { FC } from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const Timer = ({ seconds, onData }: any) => {
+interface TimerProps {
+  seconds: number;
+  onData: (time: number) => void;
+}
+
+const Timer: FC<TimerProps> = ({ seconds, onData }) => {
   const [timeLeft, setTimeLeft] = useState(seconds);
 
   useEffect(() => {
@@ -19,7 +25,7 @@ const Timer = ({ seconds, onData }: any) => {
     };
   }, [timeLeft, onData]);
 
-  const formatTime = (time: any) => {
+  const formatTime = (time: number): string => {
     const minutes = Math.floor(time / 60)
       .toString()
       .padStart(2, "0");
@@ -27,7 +33,7 @@ const Timer = ({ seconds, onData }: any) => {
     return `${minutes}:${seconds}`;
   };
 
-  const progress = (1 - timeLeft / seconds) * 283;
+  const progress: number = (1 - timeLeft / seconds) * 283;
 
   const circleStyle = {
     strokeDashoffset: progress,

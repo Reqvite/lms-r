@@ -1,4 +1,6 @@
-const Guide = () => {
+import { FC } from "react";
+
+const Guide: FC = () => {
   return (
     <>
       <h2>Guide</h2>

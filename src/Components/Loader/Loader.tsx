@@ -1,14 +1,16 @@
+import { FC } from "react";
 import { RotatingLines } from "react-loader-spinner";
-import { useSelector } from "react-redux";
-import { selectTheme } from "redux/theme/selectors";
 import styled from "styled-components";
 
-const Loader = ({ height }: any) => {
-  const { theme: themeMode }: any = useSelector(selectTheme);
+interface LoadProps {
+  height?: string;
+}
+
+const Loader: FC<LoadProps> = ({ height }) => {
   return (
     <Box style={{ minHeight: `${height}` }}>
       <RotatingLines
-        strokeColor={themeMode === "light" ? "grey" : "white"}
+        strokeColor={"#9090c2"}
         strokeWidth="5"
         animationDuration="0.75"
         width="30"

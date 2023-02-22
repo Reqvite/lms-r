@@ -1,7 +1,8 @@
+import { FC } from "react";
 import TestBox from "Components/TestBox/TestBox";
 import styled from "styled-components";
 
-const Testing = () => {
+const Testing: FC = () => {
   return (
     <>
       <Box>

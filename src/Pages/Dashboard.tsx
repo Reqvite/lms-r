@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "Components/Header/Header";
@@ -6,7 +7,7 @@ import styled from "styled-components";
 import MainBox from "Components/MainBox/MainBox";
 import Footer from "Components/Footer/Footer";
 
-const Dashboard = () => {
+const Dashboard: FC = () => {
   return (
     <>
       <Container>

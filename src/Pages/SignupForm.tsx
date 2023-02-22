@@ -1,8 +1,9 @@
+import { FC } from "react";
 import AuthForm from "Components/AuthForm/AuthForm";
 
 import { Pages } from "types/types";
 
-const SignupForm = () => {
+const SignupForm: FC = () => {
   return (
     <AuthForm
       title="Sign up"
