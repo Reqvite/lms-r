@@ -22,15 +22,15 @@ const rootReducer = combineReducers({
   theme: persistReducer(themePersistConfig, themeReducer),
 });
 
-const appReducer = (state: any, action: any) => {
-  if (action.type === "auth/logout/fulfilled") {
-    state = undefined;
-  }
-  return rootReducer(state, action);
-};
+// const appReducer = (state: any, action: any) => {
+//   if (action.type === "auth/logout/fulfilled") {
+//     return rootReducer(undefined, action);
+//   }
+//   return rootReducer(state, action);
+// };
 
 export const store = configureStore({
-  reducer: appReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
 });
