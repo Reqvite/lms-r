@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://lms-api-eu.onrender.com";
+axios.defaults.baseURL = "http://localhost:3000";
 //localhost:3000
+//lms-api-eu.onrender.com
 
 const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -50,6 +51,17 @@ export const refreshUser = createAsyncThunk(
     try {
       const resp = await axios.get("api/users/current");
       return resp.data;
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue(err.response.data.message);
+    }
+  }
+);
+
+export const userAccess = createAsyncThunk(
+  "auth/access",
+  async (_, thunkAPI: any) => {
+    try {
+      await axios.get("api/users/admin");
     } catch (err: any) {
       return thunkAPI.rejectWithValue(err.response.data.message);
     }

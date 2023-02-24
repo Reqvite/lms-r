@@ -18,14 +18,16 @@ import Loader from "Components/Loader/Loader";
 import Alert from "Components/Alert/Alert";
 import Courses from "Pages/Courses";
 import Course from "Pages/Course";
+import AdminPanel from "Pages/AdminPanel";
 
 const App = () => {
   const dispatch: AppDispatch = useDispatch();
   const { isRefreshing } = useAuth();
-
   const { theme: themeMode }: any = useSelector(selectTheme);
-
   const theme = themeMode === "light" ? lightTheme : darkTheme;
+
+  // const location = useLocation();
+  // console.log(location);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -64,6 +66,7 @@ const App = () => {
           <Route path="courses" element={<Courses />}>
             <Route path=":courseID/*" element={<Course />} />
           </Route>
+          <Route path="admin-panel" element={<AdminPanel />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>

@@ -18,22 +18,26 @@ const Header: FC = () => {
   const navigation = [
     { id: 1, title: "Домашня сторінка", path: "" },
     { id: 2, title: "Курси", path: "courses" },
+    { id: 3, title: "Панель Адміністратора", path: "admin-panel" },
   ];
+
   return (
     <HeaderBox as="header">
       <Nav>
         <List>
-          {navigation.map(({ id, title, path }) => (
-            <ListItem
-              key={id}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <NavListItemLink to={path} end>
-                {title}
-              </NavListItemLink>
-            </ListItem>
-          ))}
+          {navigation.map(({ id, title, path }) =>
+            id === 3 && user.role !== "admin" && !user.hasAccess ? null : (
+              <ListItem
+                key={id}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <NavListItemLink to={path} end>
+                  {title}
+                </NavListItemLink>
+              </ListItem>
+            )
+          )}
         </List>
       </Nav>
       <UserBox>
@@ -85,8 +89,9 @@ const ListItem = styled(motion.li)`
 `;
 
 export const NavListItemLink = styled(NavLink)`
-  font-weight: ${(p) => p.theme.fontWeights.bold};
+  display: block;
   padding: ${(p) => p.theme.space[3]}px ${(p) => p.theme.space[3]}px;
+  font-weight: ${(p) => p.theme.fontWeights.bold};
   &.active {
     ${(p) => p.theme.components.activeNavLink}
   }

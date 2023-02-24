@@ -6,10 +6,17 @@ export enum Pages {
 }
 
 export interface AuthState {
-  user: { name: string | null; email: string | null };
+  user: {
+    name: string | null;
+    email: string | null;
+    role: string | null;
+    hasAccess?: boolean;
+  };
   token: string | null;
   isLoggedIn: boolean;
   isRefreshing: boolean;
+  isLoading: boolean;
+  error: any;
 }
 
 export interface TestsState {
