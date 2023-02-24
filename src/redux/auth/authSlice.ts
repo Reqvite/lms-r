@@ -71,7 +71,6 @@ export const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(userAccess.fulfilled, (state, action) => {
-        console.log(action);
         state.user.hasAccess = true;
         state.isLoading = false;
       })
