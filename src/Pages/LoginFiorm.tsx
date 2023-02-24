@@ -6,9 +6,10 @@ import { Pages } from "types/types";
 const LoginForm: FC = () => {
   return (
     <AuthForm
-      title="Login"
-      description="Don&#39;t have an account? Sign Up now!"
+      title="Вхід"
+      description="Зареєструйся зараз!"
       page={Pages.LOGIN}
+      text={"Немає аккаунту?"}
     />
   );
 };
