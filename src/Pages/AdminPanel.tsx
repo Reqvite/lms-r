@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userAccess } from "redux/auth/operations";
 import { selectIsLoading } from "redux/auth/selectors";
 import { AppDispatch } from "redux/store";
-import { fetchAllTests } from "redux/tests/operations";
+import { fetchAllUsersData } from "redux/tests/operations";
 import { selectUserTests } from "redux/tests/selectors";
 import styled from "styled-components";
 
@@ -18,7 +18,7 @@ const AdminPanel = () => {
 
   useEffect(() => {
     dispatch(userAccess());
-    if (user.role === "admin" && user.hasAccess) dispatch(fetchAllTests());
+    if (user.role === "admin" && user.hasAccess) dispatch(fetchAllUsersData());
   }, [dispatch, user]);
 
   const getDate = (createdAt: string): string => {
@@ -44,9 +44,10 @@ const AdminPanel = () => {
           ) : (
             <StatisticList>
               {[...tests].map(
-                ({ _id, mark, testTitle, createdAt, fullname }: any) => (
+                ({ _id, mark, testTitle, createdAt, fullname, email }: any) => (
                   <StatisticListItem key={_id}>
                     <ListText>{fullname}</ListText>
+                    <ListText>{email}</ListText>
                     <ListText>Назва тесту: {testTitle}</ListText>
                     <ListText>Оцінка: {mark.total}</ListText>
                     <ListText>{getDate(createdAt)}</ListText>

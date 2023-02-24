@@ -16,7 +16,7 @@ const Guide: FC = () => {
 
 const Wrap = styled.div`
   padding-bottom: 56px;
-  height: 100%;
+  height: 100vh;
 `;
 const Iframe = styled.iframe`
   width: 100%;

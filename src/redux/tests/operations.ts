@@ -25,6 +25,18 @@ export const fetchUserTests = createAsyncThunk(
   }
 );
 
+export const fetchAllUsersData = createAsyncThunk(
+  "tests/fetchAllUsersData",
+  async (_, thunkAPI) => {
+    try {
+      const resp = await axios.get("api/tests/full-data");
+      return resp.data;
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  }
+);
+
 export const addTest = createAsyncThunk<
   any,
   {

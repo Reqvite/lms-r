@@ -10,10 +10,8 @@ const MainBox: FC<MainBoxProps> = ({ children }) => {
 };
 
 const Box = styled.main`
-  height: 100%;
   margin-top: 80px;
   padding: ${(p) => p.theme.space[4]}px ${(p) => p.theme.space[3]}px;
-  overflow: hidden;
 `;
 
 export default MainBox;
