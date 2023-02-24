@@ -12,9 +12,10 @@ interface AuthFormProps {
   page: number;
   description: string;
   title: string;
+  text: string;
 }
 
-const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
+const AuthForm: FC<AuthFormProps> = ({ page, description, text, title }) => {
   const dispatch: AppDispatch = useDispatch();
   const theme: any = useTheme();
 
@@ -44,12 +45,16 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
   return (
     <Container>
       <Header>{title}</Header>
-      <Description
-        as={NavLink}
-        to={page === Pages.LOGIN ? "/register" : "/login"}
-      >
-        {description}
-      </Description>
+      <Wrap>
+        <AdditionalDescription>{text}</AdditionalDescription>
+        <Description
+          as={NavLink}
+          to={page === Pages.LOGIN ? "/register" : "/login"}
+        >
+          {description}
+        </Description>
+      </Wrap>
+
       <Box>
         <Form onSubmit={page === Pages.LOGIN ? handleLogin : handleRegister}>
           {page === Pages.REGISTER && (
@@ -90,7 +95,7 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, title }) => {
               whileFocus={{ outlineColor: theme.colors.accentColor }}
             />
           </Label>
-          <MainButton title={page === Pages.LOGIN ? "Login" : "Sign up"} />
+          <MainButton title={page === Pages.LOGIN ? "Вхід" : "Реєстрація"} />
         </Form>
       </Box>
     </Container>
@@ -104,6 +109,11 @@ const Container = styled.div`
   background-color: ${(p) => p.theme.colors.mainBackground};
 `;
 
+const Wrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Header = styled.h2`
   text-align: center;
   font-size: ${(p) => p.theme.fontSizes[4]}px;
@@ -111,10 +121,20 @@ const Header = styled.h2`
 `;
 const Description = styled.p`
   margin-top: ${(p) => p.theme.space[2]}px;
+  margin-left: ${(p) => p.theme.space[2]}px;
+  font-size: ${(p) => p.theme.fontSizes[3]}px;
+  line-height: ${(p) => p.theme.lineHeights.body};
+  text-align: center;
+  color: ${(p) => p.theme.colors.accentColor};
+`;
+
+const AdditionalDescription = styled.p`
+  margin-top: ${(p) => p.theme.space[2]}px;
   font-size: ${(p) => p.theme.fontSizes[2]}px;
   line-height: ${(p) => p.theme.lineHeights.body};
   text-align: center;
 `;
+
 const Box = styled.div`
   margin-top: ${(p) => p.theme.space[2]}px;
   width: 100%;

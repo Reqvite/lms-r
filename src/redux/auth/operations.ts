@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://lms-api-wh9c.onrender.com/";
+axios.defaults.baseURL = "https://lms-api-eu.onrender.com";
 //localhost:3000
 
 const setAuthHeader = (token: string) => {
