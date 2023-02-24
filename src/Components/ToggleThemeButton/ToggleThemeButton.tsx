@@ -13,8 +13,18 @@ const ToggleThemeButton: FC = () => {
   const { theme }: any = useSelector(selectTheme);
 
   const handleTheme = (): void => {
-    dispatch(toggleTheme(theme === "light" ? "dark" : "light"));
+    const value = theme === "light" ? "dark" : "light";
+    dispatch(toggleTheme(value));
+
+    // const iframe = document.getElementById("theory") as HTMLIFrameElement;
+    // if (iframe.contentWindow) {
+    //   iframe.contentWindow.postMessage(
+    //     { value },
+    //     "https://jodlei.github.io/notes-LMS-docosaurus/intro"
+    //   );
+    // }
   };
+
   return (
     <AnimatePresence mode="wait" initial={false}>
       <Button

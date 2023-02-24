@@ -6,9 +6,10 @@ import { Pages } from "types/types";
 const SignupForm: FC = () => {
   return (
     <AuthForm
-      title="Sign up"
-      description="Already have an account? Login now!"
+      title="Реєстрація"
+      description="Увійдіть!"
       page={Pages.REGISTER}
+      text={"Вже є аккаунт?"}
     />
   );
 };
