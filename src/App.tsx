@@ -26,9 +26,6 @@ const App = () => {
   const { theme: themeMode }: any = useSelector(selectTheme);
   const theme = themeMode === "light" ? lightTheme : darkTheme;
 
-  // const location = useLocation();
-  // console.log(location);
-
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
@@ -43,7 +40,7 @@ const App = () => {
           element={
             <RestrictedRoute
               component={<SignupForm />}
-              redirectTo="/dashboard"
+              redirectTo="dashboard"
             />
           }
         />
