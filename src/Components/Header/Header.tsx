@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useAuth } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { logOut } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
 import { motion } from "framer-motion";
@@ -15,13 +15,15 @@ const Header: FC = () => {
   const { user } = useAuth();
   const { theme }: any = useSelector(selectTheme);
 
+  const location = useLocation();
   const navigation = [
     { id: 1, title: "Домашня сторінка", path: "" },
     { id: 2, title: "Курси", path: "courses" },
     { id: 3, title: "Панель Адміністратора", path: "admin-panel" },
   ];
 
-  return (
+  return location.pathname.length >= 20 &&
+    location.pathname.includes("courses") ? null : (
     <HeaderBox as="header">
       <Nav>
         <List>

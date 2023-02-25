@@ -1,8 +1,12 @@
 import { FC } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const Footer: FC = () => {
-  return (
+  const location = useLocation();
+
+  return location.pathname.length >= 20 &&
+    location.pathname.includes("guide") ? null : (
     <FooterBox>
       <FooterText>Footer</FooterText>
     </FooterBox>

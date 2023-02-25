@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 interface MainBoxProps {
@@ -6,7 +7,20 @@ interface MainBoxProps {
 }
 
 const MainBox: FC<MainBoxProps> = ({ children }) => {
-  return <Box>{children}</Box>;
+  const location = useLocation();
+
+  const dynamicStyles =
+    location.pathname.length >= 20 && location.pathname.includes("courses");
+  return (
+    <Box
+      style={{
+        marginTop: dynamicStyles ? 0 : "80px",
+        paddingTop: dynamicStyles ? "16px" : "32px",
+      }}
+    >
+      {children}
+    </Box>
+  );
 };
 
 const Box = styled.main`
