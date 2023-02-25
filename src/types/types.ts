@@ -29,4 +29,5 @@ export interface TestsState {
 export interface RestrictedRouteProps {
   component: ReactElement;
   redirectTo?: string;
+  isAllowed?: boolean;
 }

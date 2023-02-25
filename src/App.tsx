@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { GlobalStyle } from "Components/GlobalStyle/GlobalStyle";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { refreshUser } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
 import LoginForm from "Pages/LoginFiorm";
@@ -22,9 +22,13 @@ import AdminPanel from "Pages/AdminPanel";
 
 const App = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { isRefreshing } = useAuth();
+  const { isRefreshing, isLoggedIn, user } = useAuth();
   const { theme: themeMode }: any = useSelector(selectTheme);
   const theme = themeMode === "light" ? lightTheme : darkTheme;
+
+  const location = useLocation();
+  const shouldRedirect = !isRefreshing && !isLoggedIn;
+  const path = shouldRedirect ? "/login" : location.pathname;
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -56,14 +60,27 @@ const App = () => {
         <Route
           path="/dashboard"
           element={
-            <PrivateRoute component={<Dashboard />} redirectTo="/login" />
+            <PrivateRoute
+              component={<Dashboard />}
+              redirectTo={path}
+              isAllowed={shouldRedirect}
+            />
           }
         >
           <Route index element={<Home />} />
           <Route path="courses" element={<Courses />}>
             <Route path=":courseID/*" element={<Course />} />
           </Route>
-          <Route path="admin-panel" element={<AdminPanel />} />
+          <Route
+            path="admin-panel"
+            element={
+              <PrivateRoute
+                component={<AdminPanel />}
+                redirectTo="/dashboard"
+                isAllowed={user.role !== "admin" && !user.hasAccess}
+              />
+            }
+          />
         </Route>
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>

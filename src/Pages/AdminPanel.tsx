@@ -18,10 +18,6 @@ const AdminPanel = () => {
     }
   }, [dispatch, user]);
 
-  // if (user.role !== "admin" || !user.hasAccess) {
-  //   return <Navigate to="/dashboard" />;
-  // }
-
   return isLoading ? (
     <Loader height="100vh" />
   ) : user.role !== "admin" || !user.hasAccess ? (
