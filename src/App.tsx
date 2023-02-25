@@ -85,7 +85,7 @@ const App = () => {
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
       <GlobalStyle />
-      <Alert />
+      <Alert theme={themeMode} />
     </ThemeProvider>
   );
 };

@@ -54,7 +54,7 @@ const Header: FC = () => {
       <ToggleThemeButton />
       <LogoutButton
         onClick={() => dispatch(logOut())}
-        whileHover={{ scale: 1.02 }}
+        whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
         <IoIosLogOut size={30} color={theme === "light" ? "black" : "white"} />
