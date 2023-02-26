@@ -150,7 +150,7 @@ const Form = styled.form`
   flex-direction: column;
 `;
 const Label = styled.label`
-  margin-top: 5px;
+  margin-top: ${(p) => p.theme.space[2]}px;
   display: flex;
   flex-direction: column;
   font-size: ${(p) => p.theme.fontSizes[3]}px;
@@ -158,7 +158,7 @@ const Label = styled.label`
 `;
 
 const Input = styled(motion.input)`
-  margin-top: 5px;
+  margin-top: ${(p) => p.theme.space[2]}px;
   border-radius: 12px;
   padding: 10px 24px;
 `;

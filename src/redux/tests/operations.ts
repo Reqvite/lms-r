@@ -25,17 +25,25 @@ export const fetchUserTests = createAsyncThunk(
   }
 );
 
-export const fetchAllUsersData = createAsyncThunk(
-  "tests/fetchAllUsersData",
-  async (_, thunkAPI) => {
-    try {
-      const resp = await axios.get("api/tests/full-data");
-      return resp.data;
-    } catch (err: any) {
-      return thunkAPI.rejectWithValue(err.message);
-    }
+export const fetchAllUsersData = createAsyncThunk<
+  any,
+  {
+    email?: string;
+    limit?: string;
   }
-);
+>("tests/fetchAllUsersData", async ({ email, limit }, thunkAPI) => {
+  try {
+    const resp = await axios.get("api/tests/full-data", {
+      params: {
+        email,
+        limit,
+      },
+    });
+    return resp.data;
+  } catch (err: any) {
+    return thunkAPI.rejectWithValue(err.message);
+  }
+});
 
 export const addTest = createAsyncThunk<
   any,

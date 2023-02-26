@@ -33,9 +33,7 @@ export const authSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(register.rejected, (state, action) => {
-        toast.error(action.payload, {
-          autoClose: 2000,
-        });
+        toast.error(action.payload);
       })
       .addCase(login.pending, (state) => state)
       .addCase(login.fulfilled, (state, action) => {
@@ -46,9 +44,7 @@ export const authSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(login.rejected, (state, action) => {
-        toast.error(action.payload, {
-          autoClose: 2000,
-        });
+        toast.error(action.payload);
       })
       .addCase(refreshUser.pending, (state, action) => {
         state.isRefreshing = true;

@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userAccess } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
-import { fetchAllUsersData } from "redux/tests/operations";
 
 const AdminPanel = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -13,9 +12,6 @@ const AdminPanel = () => {
 
   useEffect(() => {
     dispatch(userAccess());
-    if (user.role === "admin" && user.hasAccess) {
-      dispatch(fetchAllUsersData());
-    }
   }, [dispatch, user]);
 
   return isLoading ? (

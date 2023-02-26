@@ -1,11 +1,27 @@
+import { useEffect, useState } from "react";
 import Loader from "Components/Loader/Loader";
-import { useSelector } from "react-redux";
+import { useAuth } from "hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "redux/store";
+import { fetchAllUsersData } from "redux/tests/operations";
 import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 const AdminStatisticBox = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const { user } = useAuth();
+  const [status, setStatus] = useState(false);
   const tests = useSelector(selectUserTests);
   const testLoading = useSelector(selectIsLoading);
+
+  useEffect(() => {
+    if (!testLoading && tests.length === 0 && status) {
+      toast.error("Даних за цим запитом не знайдено", {
+        autoClose: 3000,
+      });
+    }
+  }, [testLoading, tests, status]);
 
   const getDate = (createdAt: string): string => {
     const date = new Date(createdAt);
@@ -14,16 +30,52 @@ const AdminStatisticBox = () => {
     }/${date.getFullYear()}`;
   };
 
+  const handleParams = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget as HTMLFormElement;
+    const params = {
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      limit: (form.elements.namedItem("limit") as HTMLInputElement).value,
+    };
+    if (user.role === "admin" && user.hasAccess) {
+      dispatch(fetchAllUsersData(params));
+      setStatus(true);
+    }
+    form.reset();
+  };
+
   return (
     <Box>
       <HeaderBox>
-        <StatisticListHeader>Результати</StatisticListHeader>
+        <StatisticListHeader>
+          Введіть дані для розширеного пошуку або натисніть кнопку, щоб
+          відобразити всі результати
+        </StatisticListHeader>
+        <FormBox onSubmit={handleParams}>
+          <InputBox>
+            <Label htmlFor="email">
+              <Input
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Пошта або повне Ім'я"
+              />
+            </Label>
+            <Label htmlFor="limit">
+              <Input
+                type="number"
+                id="limit"
+                name="limit"
+                placeholder="Ліміт"
+              />
+            </Label>
+          </InputBox>
+          <Button>Пошук</Button>
+        </FormBox>
       </HeaderBox>
       {!testLoading ? (
         <>
-          {tests.length === 0 ? (
-            <Error>Тестів ще немає</Error>
-          ) : (
+          {status && (
             <StatisticList>
               {[...tests].map(
                 ({ _id, mark, testTitle, createdAt, fullname, email }: any) => (
@@ -56,11 +108,38 @@ const StatisticListHeader = styled.p`
   line-height: ${(p) => p.theme.lineHeights.body};
   font-weight: ${(p) => p.theme.fontWeights.bold};
 `;
+const FormBox = styled.form`
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+const InputBox = styled.div``;
+
+const Label = styled.label`
+  :not(:first-child) {
+    margin-top: ${(p) => p.theme.space[2]}px;
+  }
+
+  display: flex;
+  flex-direction: column;
+`;
+const Input = styled.input`
+  border-radius: 12px;
+  padding: 10px 24px;
+`;
+
+const Button = styled.button`
+  margin-left: ${(p) => p.theme.space[3]}px;
+  ${(p) => p.theme.components.buttons.secondaryButton}
+`;
 
 const Box = styled.div`
   width: 100%;
   max-width: 800px;
-  min-height: 300px;
+  max-height: 700px;
+  overflow-y: auto;
   padding: ${(p) => p.theme.space[4]}px;
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
   border-radius: ${(p) => p.theme.borders.baseBorder};
@@ -69,10 +148,6 @@ const Box = styled.div`
   margin-left: auto;
 `;
 
-const Error = styled.p`
-  ${(p) => p.theme.flexCentered}
-  min-height: 200px;
-`;
 const StatisticList = styled.ul`
   margin-top: ${(p) => p.theme.space[3]}px;
 `;
