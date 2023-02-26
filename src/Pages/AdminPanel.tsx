@@ -11,7 +11,9 @@ const AdminPanel = () => {
   const { user, isLoading, error } = useAuth();
 
   useEffect(() => {
-    dispatch(userAccess());
+    if (!user.hasAccess) {
+      dispatch(userAccess());
+    }
   }, [dispatch, user]);
 
   return isLoading ? (
