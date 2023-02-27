@@ -81,6 +81,7 @@ const MobileMenu: FC<any> = () => {
 
 const HeaderBox = styled.header`
   position: fixed;
+  z-index: 1000;
   top: 0;
   width: 100%;
   background-color: ${(p) => p.theme.colors.headerBgColor};

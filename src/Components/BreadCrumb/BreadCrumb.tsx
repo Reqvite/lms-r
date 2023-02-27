@@ -46,7 +46,9 @@ export const Box = styled.div`
 `;
 
 export const BreadCrumbsList = styled.ul`
+  align-self: flex-end;
   display: flex;
+  margin-right: auto;
 `;
 export const BreadCrumbsItem = styled(motion.li)`
   display: flex;
@@ -56,6 +58,10 @@ export const BreadCrumbsItem = styled(motion.li)`
 export const BreadCrumbsLink = styled(NavLink)`
   padding: ${(p) => p.theme.space[3]}px ${(p) => p.theme.space[2]}px;
   font-weight: ${(p) => p.theme.fontWeights.bold};
+
+  @media screen and (max-width: 500px) {
+    font-size: 3vw;
+  }
 `;
 
 export const List = styled.ul`
