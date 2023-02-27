@@ -25,7 +25,10 @@ const AdminStatisticBox = () => {
 
   const getDate = (createdAt: string): string => {
     const date = new Date(createdAt);
-    return `${date.getHours()}:${date.getMinutes()} : ${date.getDate()}/${
+    return `${date.getHours().toString().padStart(2, "0")}:${date
+      .getMinutes()
+      .toString()
+      .padStart(2, "0")} : ${date.getDate()}/${
       date.getMonth() + 1
     }/${date.getFullYear()}`;
   };
@@ -47,10 +50,6 @@ const AdminStatisticBox = () => {
   return (
     <Box>
       <HeaderBox>
-        <StatisticListHeader>
-          Введіть дані для розширеного пошуку або натисніть кнопку, щоб
-          відобразити всі результати
-        </StatisticListHeader>
         <FormBox onSubmit={handleParams}>
           <InputBox>
             <Label htmlFor="email">
@@ -101,13 +100,13 @@ const AdminStatisticBox = () => {
 const HeaderBox = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 `;
-const StatisticListHeader = styled.p`
-  font-size: ${(p) => p.theme.fontSizes[3]}px;
-  line-height: ${(p) => p.theme.lineHeights.body};
-  font-weight: ${(p) => p.theme.fontWeights.bold};
-`;
+// const StatisticListHeader = styled.p`
+//   font-size: ${(p) => p.theme.fontSizes[3]}px;
+//   line-height: ${(p) => p.theme.lineHeights.body};
+//   font-weight: ${(p) => p.theme.fontWeights.bold};
+// `;
 const FormBox = styled.form`
   width: 100%;
   max-width: 400px;
@@ -140,6 +139,7 @@ const Box = styled.div`
   max-width: 800px;
   max-height: 700px;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: ${(p) => p.theme.space[4]}px;
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
   border-radius: ${(p) => p.theme.borders.baseBorder};
@@ -153,8 +153,16 @@ const StatisticList = styled.ul`
 `;
 
 const StatisticListItem = styled.li`
-  flex: 1;
-  display: flex;
+  border: 1px solid #9090c296;
+  border-radius: 5px;
+  @media screen and (min-width: 680px) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  :not(:first-child) {
+    margin-top: ${(p) => p.theme.space[2]}px;
+  }
 `;
 
 export const ListText = styled.p`

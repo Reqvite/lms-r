@@ -17,7 +17,7 @@ const AdminPanel = () => {
   }, [dispatch, user]);
 
   return isLoading ? (
-    <Loader height="100vh" />
+    <Loader height="50vh" />
   ) : user.role !== "admin" || !user.hasAccess ? (
     <p>{error}</p>
   ) : (

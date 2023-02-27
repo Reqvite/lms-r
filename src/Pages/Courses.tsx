@@ -36,13 +36,20 @@ const Courses: FC = () => {
 };
 
 const List = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+  grid-template-columns: auto;
+  @media screen and (min-width: 700px) {
+    grid-template-columns: auto auto;
+  }
+  @media screen and (min-width: 980px) {
+    grid-template-columns: auto auto auto;
+  }
 `;
 const ListItem = styled(motion.li)`
   margin-left: 3px;
-  width: 100%;
-  max-width: 300px;
+  width: 300px;
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
   border-radius: ${(p) => p.theme.borders.baseBorder};
   margin-left: ${(p) => p.theme.space[3]}px;

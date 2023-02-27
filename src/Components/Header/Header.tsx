@@ -88,6 +88,9 @@ const ListItem = styled(motion.li)`
   :not(:first-child) {
     margin-left: ${(p) => p.theme.space[3]}px;
   }
+  :last-child {
+    margin-right: ${(p) => p.theme.space[5]}px;
+  }
 `;
 
 export const NavListItemLink = styled(NavLink)`
@@ -97,6 +100,7 @@ export const NavListItemLink = styled(NavLink)`
   &.active {
     ${(p) => p.theme.components.activeNavLink}
   }
+  white-space: nowrap;
 `;
 
 const UserBox = styled.div`

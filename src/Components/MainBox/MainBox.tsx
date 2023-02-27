@@ -27,6 +27,9 @@ const MainBox: FC<MainBoxProps> = ({ children, showMenu }) => {
 
 const Box = styled.main`
   margin-top: 80px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 32px;
 `;
 
 export default MainBox;

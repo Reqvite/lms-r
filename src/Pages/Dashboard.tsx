@@ -13,7 +13,7 @@ const Dashboard: FC = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 650) {
+      if (window.innerWidth <= 835) {
         setShowMenu(true);
       } else {
         setShowMenu(false);

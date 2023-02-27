@@ -28,7 +28,10 @@ const StatisticBox: FC = () => {
   };
   const getDate = (createdAt: string): string => {
     const date = new Date(createdAt);
-    return `${date.getHours()}:${date.getMinutes()} : ${date.getDate()}/${
+    return `${date.getHours().toString().padStart(2, "0")}:${date
+      .getMinutes()
+      .toString()
+      .padStart(2, "0")} : ${date.getDate()}/${
       date.getMonth() + 1
     }/${date.getFullYear()}`;
   };
@@ -67,21 +70,6 @@ const StatisticBox: FC = () => {
   );
 };
 
-const HeaderBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-const StatisticListHeader = styled.p`
-  font-size: ${(p) => p.theme.fontSizes[3]}px;
-  line-height: ${(p) => p.theme.lineHeights.body};
-  font-weight: ${(p) => p.theme.fontWeights.bold};
-`;
-
-const ResultsButton = styled.button`
-  ${(p) => p.theme.components.buttons.secondaryButton}
-`;
-
 const Box = styled.div`
   width: 100%;
   max-width: 800px;
@@ -94,6 +82,22 @@ const Box = styled.div`
   margin-left: auto;
 `;
 
+const HeaderBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const StatisticListHeader = styled.p`
+  margin-right: ${(p) => p.theme.space[2]}px;
+  font-size: ${(p) => p.theme.fontSizes[3]}px;
+  line-height: ${(p) => p.theme.lineHeights.body};
+  font-weight: ${(p) => p.theme.fontWeights.bold};
+`;
+
+const ResultsButton = styled.button`
+  ${(p) => p.theme.components.buttons.secondaryButton}
+`;
+
 const Error = styled.p`
   ${(p) => p.theme.flexCentered}
   min-height: 200px;
@@ -103,8 +107,16 @@ const StatisticList = styled.ul`
 `;
 
 const StatisticListItem = styled.li`
-  flex: 1;
-  display: flex;
+  border: 1px solid #9090c296;
+  border-radius: 5px;
+  @media screen and (min-width: 550px) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  :not(:first-child) {
+    margin-top: ${(p) => p.theme.space[2]}px;
+  }
 `;
 
 export const ListText = styled.p`
