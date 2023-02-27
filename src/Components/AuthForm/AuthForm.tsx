@@ -64,7 +64,7 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, text, title }) => {
                 type="text"
                 id="fullname"
                 name="fullname"
-                placeholder="Александ Александров"
+                placeholder="Олександр Олександров"
                 required
                 whileHover={{ borderColor: theme.colors.accentColor }}
                 whileFocus={{ outlineColor: theme.colors.accentColor }}
@@ -77,7 +77,7 @@ const AuthForm: FC<AuthFormProps> = ({ page, description, text, title }) => {
               type="email"
               id="email"
               name="email"
-              placeholder="alexandr@gmail.com"
+              placeholder="olexandr@gmail.com"
               required
               whileHover={{ borderColor: theme.colors.accentColor }}
               whileFocus={{ outlineColor: theme.colors.accentColor }}
@@ -107,6 +107,8 @@ const Container = styled.div`
   flex-direction: column;
   height: 100vh;
   background-color: ${(p) => p.theme.colors.mainBackground};
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const Wrap = styled.div`

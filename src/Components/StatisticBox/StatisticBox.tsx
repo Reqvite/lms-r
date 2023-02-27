@@ -41,7 +41,7 @@ const StatisticBox: FC = () => {
       <HeaderBox>
         <StatisticListHeader>Результати</StatisticListHeader>
         <ResultsButton onClick={handleResultButton}>
-          {allList ? "Усі" : "Ваші"}
+          {allList ? "Ваші" : "Усі"}
         </ResultsButton>
       </HeaderBox>
       {!isLoading ? (
@@ -50,12 +50,18 @@ const StatisticBox: FC = () => {
             <Error>Ви ще не здали жодного тесту.</Error>
           ) : (
             <StatisticList>
+              <StatisticListItem>
+                {allList && <ListText>Ім'я</ListText>}
+                <ListText>Назва тесту</ListText>
+                <ListText>Оцінка</ListText>
+                <ListText>Дата</ListText>
+              </StatisticListItem>
               {[...tests].map(
                 ({ _id, mark, testTitle, createdAt, fullname }: any) => (
                   <StatisticListItem key={_id}>
                     {allList && <ListText>{fullname}</ListText>}
-                    <ListText>Назва тесту: {testTitle}</ListText>
-                    <ListText>Оцінка: {mark.total}</ListText>
+                    <ListText>{testTitle}</ListText>
+                    <ListText>{mark.total}</ListText>
                     <ListText>{getDate(createdAt)}</ListText>
                   </StatisticListItem>
                 )
@@ -107,7 +113,9 @@ const StatisticList = styled.ul`
 `;
 
 const StatisticListItem = styled.li`
-  border: 1px solid #9090c296;
+  :not(:first-child) {
+    border: 1px solid #9090c296;
+  }
   border-radius: 5px;
   @media screen and (min-width: 550px) {
     flex: 1;

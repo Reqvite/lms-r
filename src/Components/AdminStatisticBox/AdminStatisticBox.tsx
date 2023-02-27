@@ -102,11 +102,6 @@ const HeaderBox = styled.div`
   align-items: center;
   justify-content: center;
 `;
-// const StatisticListHeader = styled.p`
-//   font-size: ${(p) => p.theme.fontSizes[3]}px;
-//   line-height: ${(p) => p.theme.lineHeights.body};
-//   font-weight: ${(p) => p.theme.fontWeights.bold};
-// `;
 const FormBox = styled.form`
   width: 100%;
   max-width: 400px;
