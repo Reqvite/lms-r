@@ -125,6 +125,8 @@ const Label = styled.label`
   flex-direction: column;
 `;
 const Input = styled.input`
+  width: 100%;
+  max-width: 250px;
   border-radius: 12px;
   padding: 10px 24px;
 `;
