@@ -1,5 +1,5 @@
 import { stack as Menu } from "react-burger-menu";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useAuth } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -12,10 +12,11 @@ import ToggleThemeButton from "Components/ToggleThemeButton/ToggleThemeButton";
 import { selectTheme } from "redux/theme/selectors";
 import { darkMenu, lightMenu } from "theme/theme";
 
-const MobileMenu: FC = () => {
+const MobileMenu: FC<any> = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
   const { theme }: any = useSelector(selectTheme);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const navigation = [
     { id: 1, title: "Домашня сторінка", path: "" },
@@ -23,50 +24,68 @@ const MobileMenu: FC = () => {
     { id: 3, title: "Панель Адміністратора", path: "admin-panel" },
   ];
 
+  const isMenuOpen = ({ isOpen }: { isOpen: boolean }) => {
+    setIsOpen(isOpen);
+  };
+
   return (
-    <Menu styles={theme === "light" ? lightMenu : darkMenu} right>
-      <Nav>
-        <UserBox>
-          <Img
-            src="https://freepngimg.com/thumb/google/66726-customer-account-google-service-button-search-logo.png"
-            alt="User"
-            width="50"
-            height="50"
-          />
-          <UserName>{user.name}</UserName>
-        </UserBox>
-        <Box>
-          <ToggleThemeButton />
-          <LogoutButton
-            onClick={() => dispatch(logOut())}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <IoIosLogOut
-              size={30}
-              color={theme === "light" ? "black" : "white"}
+    <HeaderBox as="header" style={{ height: isOpen ? "100vh" : "93px" }}>
+      <Menu
+        styles={theme === "light" ? lightMenu : darkMenu}
+        right
+        onStateChange={isMenuOpen}
+      >
+        <Nav>
+          <UserBox>
+            <Img
+              src="https://freepngimg.com/thumb/google/66726-customer-account-google-service-button-search-logo.png"
+              alt="User"
+              width="50"
+              height="50"
             />
-          </LogoutButton>
-        </Box>
-        <List>
-          {navigation.map(({ id, title, path }) =>
-            id === 3 && user.role !== "admin" && !user.hasAccess ? null : (
-              <ListItem
-                key={id}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <NavListItemLink to={path} end>
-                  {title}
-                </NavListItemLink>
-              </ListItem>
-            )
-          )}
-        </List>
-      </Nav>
-    </Menu>
+            <UserName>{user.name}</UserName>
+          </UserBox>
+          <Box>
+            <ToggleThemeButton />
+            <LogoutButton
+              onClick={() => dispatch(logOut())}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <IoIosLogOut
+                size={30}
+                color={theme === "light" ? "black" : "white"}
+              />
+            </LogoutButton>
+          </Box>
+          <List>
+            {navigation.map(({ id, title, path }) =>
+              id === 3 && user.role !== "admin" && !user.hasAccess ? null : (
+                <ListItem
+                  key={id}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <NavListItemLink to={path} end>
+                    {title}
+                  </NavListItemLink>
+                </ListItem>
+              )
+            )}
+          </List>
+        </Nav>
+      </Menu>
+    </HeaderBox>
   );
 };
+
+const HeaderBox = styled.header`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: ${(p) => p.theme.colors.headerBgColor};
+  backdrop-filter: blur(3px);
+`;
 
 const Nav = styled.nav`
   display: flex;

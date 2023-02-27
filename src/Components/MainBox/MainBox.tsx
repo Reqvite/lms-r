@@ -4,9 +4,10 @@ import styled from "styled-components";
 
 interface MainBoxProps {
   children: React.ReactNode;
+  showMenu: boolean;
 }
 
-const MainBox: FC<MainBoxProps> = ({ children }) => {
+const MainBox: FC<MainBoxProps> = ({ children, showMenu }) => {
   const location = useLocation();
 
   const dynamicStyles =
@@ -14,8 +15,8 @@ const MainBox: FC<MainBoxProps> = ({ children }) => {
   return (
     <Box
       style={{
-        marginTop: dynamicStyles ? 0 : "80px",
-        paddingTop: dynamicStyles ? "16px" : "32px",
+        marginTop: dynamicStyles && !showMenu ? 0 : "80px",
+        paddingTop: dynamicStyles && !showMenu ? "16px" : "32px",
       }}
     >
       {children}

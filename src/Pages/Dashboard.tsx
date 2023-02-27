@@ -28,7 +28,7 @@ const Dashboard: FC = () => {
     <>
       <Container>
         {showMenu ? <MobileMenu /> : <Header />}
-        <MainBox>
+        <MainBox showMenu={showMenu}>
           <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
