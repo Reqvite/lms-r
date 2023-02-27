@@ -168,9 +168,9 @@ export const lightMenu = {
   bmBurgerButton: {
     position: "fixed",
     right: "36px",
-    width: "36px",
-    height: "30px",
-    top: "30px",
+    width: "20px",
+    height: "20px",
+    top: "20px",
   },
   bmBurgerBars: {
     background: "#000000",
@@ -212,9 +212,9 @@ export const darkMenu = {
   bmBurgerButton: {
     position: "fixed",
     right: "36px",
-    width: "36px",
-    height: "30px",
-    top: "30px",
+    width: "20px",
+    height: "20px",
+    top: "20px",
   },
   bmBurgerBars: {
     background: "#ffffff",

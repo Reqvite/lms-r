@@ -12,11 +12,12 @@ const MainBox: FC<MainBoxProps> = ({ children, showMenu }) => {
 
   const dynamicStyles =
     location.pathname.length >= 20 && location.pathname.includes("courses");
+  const height = showMenu ? "60px" : "80px";
   return (
     <Box
       style={{
-        marginTop: dynamicStyles && !showMenu ? 0 : "80px",
-        paddingTop: dynamicStyles && !showMenu ? "16px" : "32px",
+        marginTop: dynamicStyles && !showMenu ? 0 : height,
+        paddingTop: showMenu ? "0" : dynamicStyles ? "16px" : "32px",
       }}
     >
       {children}
@@ -26,7 +27,6 @@ const MainBox: FC<MainBoxProps> = ({ children, showMenu }) => {
 
 const Box = styled.main`
   margin-top: 80px;
-  padding: ${(p) => p.theme.space[4]}px ${(p) => p.theme.space[3]}px;
 `;
 
 export default MainBox;

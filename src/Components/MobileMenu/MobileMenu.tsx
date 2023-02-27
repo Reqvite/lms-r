@@ -29,7 +29,7 @@ const MobileMenu: FC<any> = () => {
   };
 
   return (
-    <HeaderBox as="header" style={{ height: isOpen ? "100vh" : "93px" }}>
+    <HeaderBox as="header" style={{ height: isOpen ? "100vh" : "60px" }}>
       <Menu
         styles={theme === "light" ? lightMenu : darkMenu}
         right
