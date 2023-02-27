@@ -31,7 +31,7 @@ const StatisticBox: FC = () => {
     return `${date.getHours().toString().padStart(2, "0")}:${date
       .getMinutes()
       .toString()
-      .padStart(2, "0")} : ${date.getDate()}/${
+      .padStart(2, "0")} - ${date.getDate()}/${
       date.getMonth() + 1
     }/${date.getFullYear()}`;
   };
