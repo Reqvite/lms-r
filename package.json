@@ -17,6 +17,7 @@
     "modern-normalize": "^1.1.0",
     "module-name": "^0.0.1-security",
     "react": "^18.2.0",
+    "react-burger-menu": "^3.0.9",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-id-generator": "^3.0.2",
@@ -55,6 +56,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-burger-menu": "^2.8.3",
     "@types/redux-persist": "^4.3.1",
     "@types/styled-components": "^5.1.26"
   }
