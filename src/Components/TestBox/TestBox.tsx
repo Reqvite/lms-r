@@ -191,11 +191,4 @@ const StartTestButton = styled(motion.button)`
   margin-left: ${(p) => p.theme.space[3]}px;
 `;
 
-const FinishTestButton = styled(motion.button)`
-  ${(p) => p.theme.components.buttons.secondaryButton}
-  margin-top: ${(p) => p.theme.space[3]}px;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
 export default TestBox;
