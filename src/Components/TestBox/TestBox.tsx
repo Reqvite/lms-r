@@ -28,7 +28,7 @@ const TestBox: FC = () => {
   const [startTestStatus, setStartTestStatus] = useState<boolean>(false);
   const [answeredQuestions, setAnsweredQuestions] = useState(new Set<number>());
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const [topic, setTopic] = useState<any>(null);
+  const [topic, setTopic] = useState<string | null>(null);
 
   const { courseID, topicID } = useParams();
 
@@ -82,12 +82,12 @@ const TestBox: FC = () => {
   const selectAnswer = (
     questionIndex: number,
     answerIndex: number,
-    answer: any
-  ): void => {
+    answer: string
+  ) => {
     setResults((prev: any) => [...prev, { idx: answerIndex, answer }]);
     setAnsweredQuestions((prev) => new Set(prev).add(questionIndex));
     if (currentQuestionIndex === test.questions.length - 1) {
-      handleFinishTest();
+      return;
     }
     if (questionIndex === currentQuestionIndex) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -153,6 +153,18 @@ const TestBox: FC = () => {
           </List>
         </>
       )}
+      {startTestStatus &&
+        currentQuestionIndex === test.questions.length - 1 && (
+          <FinishTestButton
+            onClick={handleFinishTest}
+            whileHover={{
+              scale: 1.02,
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Підтвердити
+          </FinishTestButton>
+        )}
       {isLoading && <Loader height="100px" />}
       {finishTestStatus && userMark && (
         <>
@@ -186,6 +198,14 @@ const MarkText = styled.p`
   margin-top: ${(p) => p.theme.space[3]}px;
   text-align: center;
 `;
+
+const FinishTestButton = styled(motion.button)`
+  ${(p) => p.theme.components.buttons.secondaryButton}
+  margin-top: ${(p) => p.theme.space[3]}px;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
 const StartTestButton = styled(motion.button)`
   ${(p) => p.theme.components.buttons.secondaryButton}
   margin-left: ${(p) => p.theme.space[3]}px;
