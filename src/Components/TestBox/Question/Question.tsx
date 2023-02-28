@@ -7,7 +7,11 @@ interface QuestionProps {
   question: string;
   answers: string[];
   questionIndex: number;
-  selectAnswer: (questionIndex: number, answerIndex: number) => void;
+  selectAnswer: (
+    questionIndex: number,
+    answerIndex: number,
+    answer: string
+  ) => void;
   answeredQuestions: Set<number>;
   theme: any;
   testLength: string;
@@ -34,10 +38,10 @@ const Question: FC<QuestionProps> = ({
         </div>
       </TextBox>
       <AnswersBox>
-        {answers.map((answer, answerIndex) => (
+        {answers.map((answer: any, answerIndex): any => (
           <AnswerButton
             key={answerIndex}
-            onClick={() => selectAnswer(questionIndex, answerIndex + 1)}
+            onClick={() => selectAnswer(questionIndex, answerIndex + 1, answer)}
             disabled={answeredQuestions.has(questionIndex)}
             style={{
               backgroundColor: answeredQuestions.has(questionIndex)

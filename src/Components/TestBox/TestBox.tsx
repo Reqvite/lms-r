@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { addTest, fetchUserTests } from "redux/tests/operations";
-import { selectUserTests } from "redux/tests/selectors";
+import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { courses } from "data/tests";
@@ -12,11 +12,13 @@ import styled, { useTheme } from "styled-components";
 import Timer from "Components/Timer/Timer";
 import Dropdown from "Components/DropDown/DropDown";
 import Question from "./Question/Question";
+import Loader from "Components/Loader/Loader";
 
 const TestBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
   const userTests = useSelector(selectUserTests);
+  const isLoading = useSelector(selectIsLoading);
 
   const [test, setTest] = useState<any>(null);
   const [testCipher, setTestCipher] = useState<string | null>(null);
@@ -37,7 +39,7 @@ const TestBox: FC = () => {
       const { mark } = userTests[0];
       setUserMark(mark);
     }
-  }, [userTests, finishTestStatus]);
+  }, [userTests, finishTestStatus, dispatch, isLoading]);
 
   useEffect(() => {
     const [course] = courses.filter(
@@ -51,7 +53,7 @@ const TestBox: FC = () => {
       (test: any) => test.cipher === testCipher
     );
     setTest(selectTest);
-  }, [testCipher, courseID, topicID]);
+  }, [testCipher, courseID, topicID, dispatch]);
 
   const handleStartTest = (): void => {
     setStartTestStatus(true);
@@ -77,11 +79,15 @@ const TestBox: FC = () => {
     setCurrentQuestionIndex(0);
   };
 
-  const selectAnswer = (questionIndex: number, answer: number): void => {
-    setResults((prev: any) => [...prev, answer]);
+  const selectAnswer = (
+    questionIndex: number,
+    answerIndex: number,
+    answer: any
+  ): void => {
+    setResults((prev: any) => [...prev, { idx: answerIndex, answer }]);
     setAnsweredQuestions((prev) => new Set(prev).add(questionIndex));
     if (currentQuestionIndex === test.questions.length - 1) {
-      return;
+      handleFinishTest();
     }
     if (questionIndex === currentQuestionIndex) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -147,18 +153,7 @@ const TestBox: FC = () => {
           </List>
         </>
       )}
-      {startTestStatus &&
-        currentQuestionIndex === test.questions.length - 1 && (
-          <FinishTestButton
-            onClick={handleFinishTest}
-            whileHover={{
-              scale: 1.02,
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Підтвердити
-          </FinishTestButton>
-        )}
+      {isLoading && <Loader height="100px" />}
       {finishTestStatus && userMark && (
         <>
           <MarkText>Ваша оцінка за тест {userMark.total}.</MarkText>
