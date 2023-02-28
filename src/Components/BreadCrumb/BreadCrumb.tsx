@@ -1,11 +1,15 @@
 import { motion } from "framer-motion";
 import { FC } from "react";
-import { AiOutlineRight } from "react-icons/ai";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import BreadCrumbList from "./BreadCrumbItem";
 
-const BreadCrumb: FC = () => {
+const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
   const { pathname } = useLocation();
+
+  const handleData = (dataFromChild: string): void => {
+    onData(dataFromChild);
+  };
 
   const crumbs: string[] = pathname
     .split("/")
@@ -13,22 +17,15 @@ const BreadCrumb: FC = () => {
     .map((crumb) => crumb.charAt(0).toUpperCase() + crumb.slice(1));
 
   return (
-    <Box>
-      <BreadCrumbsList>
-        {crumbs.map((crumb, index) => {
-          const link = `/${crumbs.slice(0, index + 1).join("/")}`;
-          return (
-            <BreadCrumbsItem
-              key={link}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <BreadCrumbsLink to={link.toLowerCase()}>{crumb}</BreadCrumbsLink>
-              {index < crumbs.length - 1 && <AiOutlineRight />}
-            </BreadCrumbsItem>
-          );
-        })}
-      </BreadCrumbsList>
+    <>
+      <Box>
+        <BreadCrumbList
+          crumbs={crumbs}
+          handleData={handleData}
+          topics={topics}
+          selectTopic={selectTopic}
+        />
+      </Box>
       <List>
         <ListItem>
           <NavListItemLink to="guide">Конспект</NavListItemLink>
@@ -37,7 +34,8 @@ const BreadCrumb: FC = () => {
           <NavListItemLink to="testing">Тести</NavListItemLink>
         </ListItem>
       </List>
-    </Box>
+      <Outlet />
+    </>
   );
 };
 
@@ -64,10 +62,11 @@ export const BreadCrumbsLink = styled(NavLink)`
   }
 `;
 
-export const List = styled.ul`
+export const List = styled(motion.ul)`
   display: flex;
   justify-content: center;
   margin-top: ${(p) => p.theme.space[2]}px;
+  margin-bottom: ${(p) => p.theme.space[3]}px;
 `;
 
 export const ListItem = styled.li``;

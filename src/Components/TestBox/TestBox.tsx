@@ -26,9 +26,9 @@ const TestBox: FC = () => {
   const [startTestStatus, setStartTestStatus] = useState<boolean>(false);
   const [answeredQuestions, setAnsweredQuestions] = useState(new Set<number>());
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const [course, setCourse] = useState<any>(null);
+  const [topic, setTopic] = useState<any>(null);
 
-  const { courseID } = useParams();
+  const { courseID, topicID } = useParams();
 
   const theme: any = useTheme();
 
@@ -40,15 +40,18 @@ const TestBox: FC = () => {
   }, [userTests, finishTestStatus]);
 
   useEffect(() => {
-    const course = courses.filter(
+    const [course] = courses.filter(
       (course: any) => String(course.id) === courseID
     );
-    setCourse(course);
-    const [selectTest] = course[0].tests.filter(
-      (test) => test.cipher === testCipher
+    const [topic] = course.topics.filter(
+      (topic: any) => topicID === topic.topicTitle.toLowerCase()
+    );
+    setTopic(topic);
+    const [selectTest] = topic.tests.filter(
+      (test: any) => test.cipher === testCipher
     );
     setTest(selectTest);
-  }, [testCipher, courseID]);
+  }, [testCipher, courseID, topicID]);
 
   const handleStartTest = (): void => {
     setStartTestStatus(true);
@@ -100,7 +103,7 @@ const TestBox: FC = () => {
       <ChoseTestBox>
         {!startTestStatus && (
           <>
-            <Dropdown placeHolder="Тести" onData={handleData} course={course} />
+            <Dropdown placeHolder="Тести" onData={handleData} topic={topic} />
             {!startTestStatus && (
               <StartTestButton
                 onClick={handleStartTest}

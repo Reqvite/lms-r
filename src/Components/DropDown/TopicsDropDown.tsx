@@ -1,14 +1,5 @@
-import { FC } from "react";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectUserFinishedTests } from "redux/tests/selectors";
-import styled, { useTheme } from "styled-components";
-
-interface DropDownProps {
-  placeHolder: string;
-  onData: (dataFromChild: string) => void;
-  topic: any;
-}
+import { FC, useState, useEffect } from "react";
+import styled from "styled-components";
 
 const Icon: FC = () => {
   return (
@@ -18,12 +9,9 @@ const Icon: FC = () => {
   );
 };
 
-const Dropdown: FC<DropDownProps> = ({ onData, placeHolder, topic }) => {
+const TopicsDropDown: FC<any> = ({ onData, placeHolder, topics }) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [selectValue, setSelectValue] = useState<string | null>(null);
-  const theme: any = useTheme();
-
-  const finishedTests = useSelector(selectUserFinishedTests);
 
   useEffect(() => {
     const handler = () => setShowMenu(false);
@@ -46,31 +34,9 @@ const Dropdown: FC<DropDownProps> = ({ onData, placeHolder, topic }) => {
     return placeHolder;
   };
 
-  const onItemClick = (cipher: string, title: string) => {
-    setSelectValue(title);
-    onData(cipher);
-  };
-
-  const renderList = (index: number, title: string, cipher: string): void => {
-    if (
-      index === 0 ||
-      finishedTests.includes(cipher) ||
-      +cipher === +finishedTests[finishedTests.length - 1] + 1
-    ) {
-      onItemClick(cipher, title);
-    }
-  };
-
-  const handleColor = (cipher: string, index: number): string => {
-    let color = theme.colors.notActive;
-    if (
-      index === 0 ||
-      finishedTests.includes(cipher) ||
-      +cipher === +finishedTests[finishedTests.length - 1] + 1
-    ) {
-      color = theme.colors.active;
-    }
-    return color;
+  const onItemClick = (topicTitle: string) => {
+    setSelectValue(topicTitle);
+    onData(topicTitle);
   };
 
   return (
@@ -78,21 +44,15 @@ const Dropdown: FC<DropDownProps> = ({ onData, placeHolder, topic }) => {
       <DropDownInput onClick={handleInputClick}>
         {showMenu && (
           <DropDownMenu>
-            {topic.tests.map(({ title, cipher }: any, index: number) => (
-              <DropDownItem
-                key={cipher}
-                onClick={() => renderList(index, title, cipher)}
-                style={{
-                  backgroundColor: handleColor(cipher, index),
-                }}
-              >
-                {title}
+            {topics.map(({ id, topicTitle }: any) => (
+              <DropDownItem key={id} onClick={() => onItemClick(topicTitle)}>
+                {topicTitle}
               </DropDownItem>
             ))}
           </DropDownMenu>
         )}
-        <div className="dropdown-selected-value">{getDisplay()}</div>
-        <div className="dropdown-tool">
+        <div>{getDisplay()}</div>
+        <div>
           <Icon />
         </div>
       </DropDownInput>
@@ -102,7 +62,8 @@ const Dropdown: FC<DropDownProps> = ({ onData, placeHolder, topic }) => {
 
 const DropDownContainer = styled.div`
   position: relative;
-  width: 200px;
+  z-index: 999;
+  width: 120px;
   text-align: left;
   border: ${(p) => p.theme.borders.dropDownBorder};
   border-radius: ${(p) => p.theme.borders.baseBorder};
@@ -114,6 +75,7 @@ const DropDownInput = styled.div`
   align-items: center;
   justify-content: space-between;
   user-select: none;
+  font-weight: ${(p) => p.theme.fontWeights.bold};
 `;
 
 const DropDownMenu = styled.div`
@@ -132,10 +94,9 @@ const DropDownMenu = styled.div`
 const DropDownItem = styled.div`
   padding: ${(p) => p.theme.space[1]}px;
   cursor: pointer;
-
   :hover {
     background-color: ${(p) => p.theme.colors.accentColor};
   }
 `;
 
-export default Dropdown;
+export default TopicsDropDown;
