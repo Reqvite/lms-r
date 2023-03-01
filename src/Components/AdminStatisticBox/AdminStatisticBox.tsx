@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 const AdminStatisticBox = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState<boolean>(false);
   const tests = useSelector(selectUserTests);
   const testLoading = useSelector(selectIsLoading);
 

@@ -46,7 +46,7 @@ const TestBox: FC = () => {
       (course: any) => String(course.id) === courseID
     );
     const [topic] = course.topics.filter(
-      (topic: any) => topicID === topic.topicTitle.toLowerCase()
+      (topic: any) => Number(topicID) === topic.id
     );
     setTopic(topic);
     const [selectTest] = topic.tests.filter(
@@ -134,7 +134,7 @@ const TestBox: FC = () => {
         <>
           <Timer seconds={test.questions.length * 5} onData={getTime} />
           <List>
-            {test?.questions.map(
+            {test.questions.map(
               ({ id, question, answers }: any, questionIndex: number) =>
                 questionIndex === currentQuestionIndex && (
                   <Question

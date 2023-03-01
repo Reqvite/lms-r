@@ -4,10 +4,11 @@ export const courses: any = [
     title: "Електротехніка",
     topics: [
       {
-        id: 1,
+        id: 11,
         topicTitle: "TOPIC1",
         tests: [
           {
+            id: 1,
             title: "FirstTest",
             cipher: "1001",
             questions: [
@@ -94,7 +95,7 @@ export const courses: any = [
         ],
       },
       {
-        id: 2,
+        id: 12,
         topicTitle: "TOPIC2",
         tests: [
           {
@@ -190,7 +191,7 @@ export const courses: any = [
     title: "Електротехніка 2",
     topics: [
       {
-        id: 1,
+        id: 11,
         topicTitle: "TOPIC1",
         tests: [
           {
@@ -280,7 +281,7 @@ export const courses: any = [
         ],
       },
       {
-        id: 2,
+        id: 12,
         topicTitle: "TOPIC2",
         tests: [
           {

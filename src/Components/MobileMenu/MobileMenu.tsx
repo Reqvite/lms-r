@@ -12,7 +12,7 @@ import ToggleThemeButton from "Components/ToggleThemeButton/ToggleThemeButton";
 import { selectTheme } from "redux/theme/selectors";
 import { darkMenu, lightMenu } from "theme/theme";
 
-const MobileMenu: FC<any> = () => {
+const MobileMenu: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
   const { theme }: any = useSelector(selectTheme);

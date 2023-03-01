@@ -19,6 +19,13 @@ export interface AuthState {
   error: any;
 }
 
+export interface AuthPayload {
+  data: {
+    user: { name: null; email: null; role: null; hasAccess: boolean };
+    token: string;
+  };
+}
+
 export interface TestsState {
   items: any;
   finishedTests: any;

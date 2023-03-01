@@ -9,7 +9,7 @@ import Footer from "Components/Footer/Footer";
 import MobileMenu from "Components/MobileMenu/MobileMenu";
 
 const Dashboard: FC = () => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState<boolean>(false);
 
   useEffect(() => {
     const handleResize = () => {

@@ -1,13 +1,8 @@
 import { createSlice, ActionReducerMapBuilder } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
+import { toast, ToastContent } from "react-toastify";
 import { AuthState } from "types/types";
 
 import { login, logOut, refreshUser, register, userAccess } from "./operations";
-
-interface AuthPayload {
-  user: { name: null; email: null; role: null; hasAccess: boolean };
-  token: string;
-}
 
 const initialState: AuthState = {
   user: { name: null, email: null, role: null, hasAccess: false },
@@ -27,30 +22,30 @@ export const authSlice = createSlice({
       .addCase(register.pending, (state) => state)
       .addCase(register.fulfilled, (state, action) => {
         console.log(action.payload);
-        const { user, token } = action.payload.data as AuthPayload;
+        const { user, token } = action.payload.data;
         state.user = user;
         state.token = token;
         state.isLoggedIn = true;
       })
       .addCase(register.rejected, (state, action) => {
-        toast.error(action.payload);
+        toast.error(action.payload as ToastContent<unknown>);
       })
       .addCase(login.pending, (state) => state)
       .addCase(login.fulfilled, (state, action) => {
         console.log(action.payload);
-        const { user, token } = action.payload.data as AuthPayload;
+        const { user, token } = action.payload.data;
         state.user = user;
         state.token = token;
         state.isLoggedIn = true;
       })
       .addCase(login.rejected, (state, action) => {
-        toast.error(action.payload);
+        toast.error(action.payload as ToastContent<unknown>);
       })
       .addCase(refreshUser.pending, (state, action) => {
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
-        const { user } = action.payload.data as AuthPayload;
+        const { user } = action.payload.data;
         state.user = user;
         state.isLoggedIn = true;
         state.isRefreshing = false;

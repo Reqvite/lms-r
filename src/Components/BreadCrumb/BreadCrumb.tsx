@@ -7,8 +7,8 @@ import BreadCrumbList from "./BreadCrumbItem";
 const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
   const { pathname } = useLocation();
 
-  const handleData = (dataFromChild: string): void => {
-    onData(dataFromChild);
+  const handleData = (topicTitle: string, id: any): void => {
+    onData(topicTitle, id);
   };
 
   const crumbs: string[] = pathname

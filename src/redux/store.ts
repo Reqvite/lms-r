@@ -22,13 +22,6 @@ const rootReducer = combineReducers({
   theme: persistReducer(themePersistConfig, themeReducer),
 });
 
-// const appReducer = (state: any, action: any) => {
-//   if (action.type === "auth/logout/fulfilled") {
-//     return rootReducer(undefined, action);
-//   }
-//   return rootReducer(state, action);
-// };
-
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
@@ -37,6 +30,5 @@ export const store = configureStore({
 
 export const persistor = persistStore(store);
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

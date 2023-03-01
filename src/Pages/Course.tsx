@@ -16,9 +16,9 @@ import styled from "styled-components";
 const Course: FC = () => {
   const { courseID } = useParams();
 
-  const [topics, setTopics] = useState<any>(null);
-  const [selectTopic, setSelectTopic] = useState<any>(null);
-  const [isNavigate, setIsNavigate] = useState(false);
+  const [topics, setTopics] = useState<string | null>(null);
+  const [selectTopic, setSelectTopic] = useState<string | null>(null);
+  const [isNavigate, setIsNavigate] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -30,14 +30,14 @@ const Course: FC = () => {
     setTopics(topics);
     if (!isNavigate) {
       setSelectTopic(topics[0].topicTitle);
-      navigate(`${topics[0].topicTitle.toLowerCase()}`);
+      navigate(`${topics[0].id}`);
       setIsNavigate(true);
     }
   }, [courseID, selectTopic, isNavigate, navigate]);
 
-  const handleData = (topicTitle: string) => {
+  const handleData = (topicTitle: string, id: number) => {
     setSelectTopic(topicTitle);
-    navigate(`${topicTitle.toLowerCase()}`);
+    navigate(`${id}`);
   };
 
   return (

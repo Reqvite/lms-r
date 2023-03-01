@@ -9,7 +9,13 @@ const Icon: FC = () => {
   );
 };
 
-const TopicsDropDown: FC<any> = ({ onData, placeHolder, topics }) => {
+interface DropDownProps {
+  placeHolder: string;
+  onData: (dataFromChild: string, id: number) => void;
+  topics: [];
+}
+
+const TopicsDropDown: FC<DropDownProps> = ({ onData, placeHolder, topics }) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [selectValue, setSelectValue] = useState<string | null>(null);
 
@@ -34,9 +40,9 @@ const TopicsDropDown: FC<any> = ({ onData, placeHolder, topics }) => {
     return placeHolder;
   };
 
-  const onItemClick = (topicTitle: string) => {
+  const onItemClick = (topicTitle: string, id: any) => {
     setSelectValue(topicTitle);
-    onData(topicTitle);
+    onData(topicTitle, id);
   };
 
   return (
@@ -45,7 +51,10 @@ const TopicsDropDown: FC<any> = ({ onData, placeHolder, topics }) => {
         {showMenu && (
           <DropDownMenu>
             {topics.map(({ id, topicTitle }: any) => (
-              <DropDownItem key={id} onClick={() => onItemClick(topicTitle)}>
+              <DropDownItem
+                key={id}
+                onClick={() => onItemClick(topicTitle, id)}
+              >
                 {topicTitle}
               </DropDownItem>
             ))}
