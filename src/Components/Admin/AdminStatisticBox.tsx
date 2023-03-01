@@ -97,6 +97,20 @@ const AdminStatisticBox = () => {
   );
 };
 
+const Box = styled.div`
+  width: 100%;
+  max-width: 800px;
+  max-height: 700px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: ${(p) => p.theme.space[4]}px;
+  background-color: ${(p) => p.theme.colors.secondaryBgColor};
+  border-radius: ${(p) => p.theme.borders.baseBorder};
+  margin-top: ${(p) => p.theme.space[3]}px;
+  margin-right: auto;
+  margin-left: auto;
+`;
+
 const HeaderBox = styled.div`
   display: flex;
   align-items: center;
@@ -129,20 +143,6 @@ const Input = styled.input`
 const Button = styled.button`
   margin-left: ${(p) => p.theme.space[3]}px;
   ${(p) => p.theme.components.buttons.secondaryButton}
-`;
-
-const Box = styled.div`
-  width: 100%;
-  max-width: 800px;
-  max-height: 700px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: ${(p) => p.theme.space[4]}px;
-  background-color: ${(p) => p.theme.colors.secondaryBgColor};
-  border-radius: ${(p) => p.theme.borders.baseBorder};
-  margin-top: ${(p) => p.theme.space[3]}px;
-  margin-right: auto;
-  margin-left: auto;
 `;
 
 const StatisticList = styled.ul`

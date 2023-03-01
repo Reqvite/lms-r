@@ -19,7 +19,6 @@ import Alert from "Components/Alert/Alert";
 import Courses from "Pages/Courses";
 import Course from "Pages/Course";
 import AdminPanel from "Pages/AdminPanel";
-import { fetchUserTests } from "redux/tests/operations";
 
 const App = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -33,7 +32,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(refreshUser());
-    dispatch(fetchUserTests());
   }, [dispatch]);
 
   return isRefreshing ? (

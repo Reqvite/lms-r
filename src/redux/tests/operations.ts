@@ -33,7 +33,7 @@ export const fetchAllUsersData = createAsyncThunk<
   }
 >("tests/fetchAllUsersData", async ({ email, limit }, thunkAPI) => {
   try {
-    const resp = await axios.get("api/tests/full-data", {
+    const resp = await axios.get("api/admin/full-data", {
       params: {
         email,
         limit,

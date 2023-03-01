@@ -1,10 +1,12 @@
-import AdminStatisticBox from "Components/AdminStatisticBox/AdminStatisticBox";
+import AdminStatisticBox from "Components/Admin/AdminStatisticBox";
+import AdminUserControllBox from "Components/Admin/AdminUserControllBox";
 import Loader from "Components/Loader/Loader";
 import { useAuth } from "hooks";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userAccess } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
+import styled from "styled-components";
 
 const AdminPanel = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -21,8 +23,14 @@ const AdminPanel = () => {
   ) : user.role !== "admin" || !user.hasAccess ? (
     <p>{error}</p>
   ) : (
-    <AdminStatisticBox />
+    <Box>
+      <AdminStatisticBox />
+      <AdminUserControllBox />
+    </Box>
   );
 };
 
+const Box = styled.div`
+  display: flex;
+`;
 export default AdminPanel;
