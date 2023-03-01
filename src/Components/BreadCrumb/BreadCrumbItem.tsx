@@ -11,12 +11,13 @@ const BreadCrumbList: FC<any> = ({
   handleData,
   selectTopic,
   topics,
+  path,
 }) => {
   const { courseID, topicID } = useParams();
   return (
     <BreadCrumbsList>
-      {crumbs.map((crumb: any, index: any) => {
-        const link = `/${crumbs.slice(0, index + 1).join("/")}`;
+      {crumbs.map(({ crumb, title }: any, index: any) => {
+        const link = `/${path.slice(0, index + 1).join("/")}`;
         if (topicID === crumb.toLowerCase())
           return (
             <BreadCrumbsItem key={nextId()}>
@@ -41,7 +42,7 @@ const BreadCrumbList: FC<any> = ({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <BreadCrumbsLink to={link.toLowerCase()}>{crumb}</BreadCrumbsLink>
+            <BreadCrumbsLink to={link.toLowerCase()}>{title}</BreadCrumbsLink>
             {index < crumbs.length - 1 && <AiOutlineRight />}
           </BreadCrumbsItem>
         );

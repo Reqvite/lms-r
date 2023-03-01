@@ -11,10 +11,25 @@ const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
     onData(topicTitle, id);
   };
 
-  const crumbs: string[] = pathname
+  const crumbs: any = [];
+  const path = pathname
     .split("/")
     .filter((crumb) => crumb !== "")
     .map((crumb) => crumb.charAt(0).toUpperCase() + crumb.slice(1));
+
+  path.forEach((crumb: string) => {
+    if (crumb === "Dashboard") {
+      crumbs.push({ crumb, title: "Домашня Сторінка" });
+    } else if (crumb === "Courses") {
+      crumbs.push({ crumb, title: "Курси" });
+    } else if (crumb === "Guide") {
+      crumbs.push({ crumb, title: "Конспект" });
+    } else if (crumb === "Testing") {
+      crumbs.push({ crumb, title: "Тести" });
+    } else {
+      crumbs.push({ crumb, title: "none" });
+    }
+  });
 
   return (
     <>
@@ -24,6 +39,7 @@ const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
           handleData={handleData}
           topics={topics}
           selectTopic={selectTopic}
+          path={path}
         />
       </Box>
       <List>
