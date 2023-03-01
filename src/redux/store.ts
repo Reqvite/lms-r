@@ -5,6 +5,7 @@ import { authReducer } from "./auth/authSlice";
 import { testsReduser } from "./tests/testsSlice";
 import { themeReducer } from "./theme/themeSlice";
 import { combineReducers } from "redux";
+import { adminReducer } from "./admin/adminSlice";
 
 const authPersistConfig = {
   key: "auth",
@@ -19,6 +20,7 @@ const themePersistConfig = {
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   tests: testsReduser,
+  admin: adminReducer,
   theme: persistReducer(themePersistConfig, themeReducer),
 });
 

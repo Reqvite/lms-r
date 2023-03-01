@@ -7,8 +7,8 @@ const initialState = {
   isLoading: false,
 };
 
-export const authSlice = createSlice({
-  name: "auth",
+export const adminSlice = createSlice({
+  name: "admin",
   initialState,
   reducers: {},
   extraReducers: (builder: ActionReducerMapBuilder<any>) =>
@@ -26,4 +26,4 @@ export const authSlice = createSlice({
       }),
 });
 
-export const authReducer = authSlice.reducer;
+export const adminReducer = adminSlice.reducer;
