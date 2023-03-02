@@ -72,4 +72,4 @@ const testsSlice = createSlice({
       }),
 });
 
-export const testsReduser = testsSlice.reducer;
+export const testsReducer = testsSlice.reducer;
