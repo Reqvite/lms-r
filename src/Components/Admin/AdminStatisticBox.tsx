@@ -7,6 +7,15 @@ import { fetchAllUsersData } from "redux/tests/operations";
 import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import { getDate } from "helpers/helpers";
+import {
+  Button,
+  FirstText,
+  HeaderBox,
+  ListText,
+  StatisticList,
+  StatisticListItem,
+} from "Components/GlobalStyle/Box.styled";
 
 const AdminStatisticBox = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -16,22 +25,13 @@ const AdminStatisticBox = () => {
   const testLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    if (!testLoading && tests.length === 0 && status) {
+    if (!testLoading && tests?.length === 0 && status) {
       toast.error("Даних за цим запитом не знайдено", {
         autoClose: 3000,
       });
+      setStatus(false);
     }
   }, [testLoading, tests, status]);
-
-  const getDate = (createdAt: string): string => {
-    const date = new Date(createdAt);
-    return `${date.getHours().toString().padStart(2, "0")}:${date
-      .getMinutes()
-      .toString()
-      .padStart(2, "0")} : ${date.getDate()}/${
-      date.getMonth() + 1
-    }/${date.getFullYear()}`;
-  };
 
   const handleParams = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,6 +50,7 @@ const AdminStatisticBox = () => {
   return (
     <Box>
       <HeaderBox>
+        <p>Результати тестів</p>
         <FormBox onSubmit={handleParams}>
           <InputBox>
             <Label htmlFor="email">
@@ -76,13 +77,20 @@ const AdminStatisticBox = () => {
         <>
           {status && (
             <StatisticList>
-              {[...tests].map(
+              <StatisticListItem>
+                <FirstText>Ім'я</FirstText>
+                <FirstText>Пошта</FirstText>
+                <ListText>Назва тесту</ListText>
+                <ListText>Оцінка</ListText>
+                <ListText>Дата</ListText>
+              </StatisticListItem>
+              {tests.map(
                 ({ _id, mark, testTitle, createdAt, fullname, email }: any) => (
                   <StatisticListItem key={_id}>
-                    <ListText>{fullname}</ListText>
-                    <ListText>{email}</ListText>
-                    <ListText>Назва тесту: {testTitle}</ListText>
-                    <ListText>Оцінка: {mark.total}</ListText>
+                    <FirstText>{fullname}</FirstText>
+                    <FirstText>{email}</FirstText>
+                    <ListText>{testTitle}</ListText>
+                    <ListText>{mark.total}</ListText>
                     <ListText>{getDate(createdAt)}</ListText>
                   </StatisticListItem>
                 )
@@ -106,16 +114,12 @@ const Box = styled.div`
   padding: ${(p) => p.theme.space[4]}px;
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
   border-radius: ${(p) => p.theme.borders.baseBorder};
-  margin-top: ${(p) => p.theme.space[3]}px;
-  margin-right: auto;
-  margin-left: auto;
+
+  @media screen and (min-width: 960px) {
+    margin-left: ${(p) => p.theme.space[2]}px;
+  }
 `;
 
-const HeaderBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 const FormBox = styled.form`
   width: 100%;
   max-width: 400px;
@@ -140,33 +144,4 @@ const Input = styled.input`
   padding: 10px 24px;
 `;
 
-const Button = styled.button`
-  margin-left: ${(p) => p.theme.space[3]}px;
-  ${(p) => p.theme.components.buttons.secondaryButton}
-`;
-
-const StatisticList = styled.ul`
-  margin-top: ${(p) => p.theme.space[3]}px;
-`;
-
-const StatisticListItem = styled.li`
-  border: 1px solid #9090c296;
-  border-radius: 5px;
-  @media screen and (min-width: 680px) {
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
-  :not(:first-child) {
-    margin-top: ${(p) => p.theme.space[2]}px;
-  }
-`;
-
-export const ListText = styled.p`
-  flex: 1;
-  margin-left: ${(p) => p.theme.space[3]}px;
-  text-align: center;
-  font-size: ${(p) => p.theme.fontSizes[2]}px;
-  line-height: ${(p) => p.theme.lineHeights.body};
-`;
 export default AdminStatisticBox;

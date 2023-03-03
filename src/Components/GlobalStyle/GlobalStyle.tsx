@@ -11,6 +11,8 @@ export const GlobalStyle = createGlobalStyle<any>`
     font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  transition: color 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -42,5 +44,6 @@ ul {
 a {
   text-decoration: none;
   color: currentColor;
-}   
+}
+
 `;

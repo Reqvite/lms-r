@@ -1,29 +1,84 @@
+import { getDate } from "helpers/helpers";
+import Loader from "Components/Loader/Loader";
 import { useAuth } from "hooks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "redux/admin/operations";
+import { selectIsLoading, selectUsers } from "redux/admin/selectors";
 import { AppDispatch } from "redux/store";
+import {
+  Button,
+  FirstText,
+  HeaderBox,
+  ListText,
+  StatisticList,
+  StatisticListItem,
+} from "Components/GlobalStyle/Box.styled";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const AdminUserControllBox = () => {
   const dispatch: AppDispatch = useDispatch();
+  const [status, setStatus] = useState<boolean>(false);
+  const usersLoading = useSelector(selectIsLoading);
+  const users = useSelector(selectUsers);
   const { user } = useAuth();
 
-  const submit = (e: any) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (!usersLoading && users?.length === 0 && status) {
+      toast.error("Даних за цим запитом не знайдено", {
+        autoClose: 3000,
+      });
+      setStatus(false);
+    }
+  }, [status, users, usersLoading]);
 
+  const submit = () => {
     if (user.role === "admin" && user.hasAccess) {
       dispatch(fetchUsers());
+      setStatus(true);
     }
   };
 
   return (
     <Box>
-      <button onClick={submit}>submit</button>
+      <HeaderBox>
+        <p>Користувачи</p>
+        <Button onClick={submit}>Пошук</Button>
+      </HeaderBox>
+      {!usersLoading ? (
+        <>
+          {status && (
+            <StatisticList>
+              <StatisticListItem>
+                <FirstText>Ім'я</FirstText>
+                <FirstText>Пошта</FirstText>
+                <ListText>Здані тести</ListText>
+                <ListText>Дата</ListText>
+              </StatisticListItem>
+              {users?.map(
+                ({ _id, fullname, email, testResults, createdAt }: any) => (
+                  <StatisticListItem key={_id}>
+                    <FirstText>{fullname}</FirstText>
+                    <FirstText>{email}</FirstText>
+                    <ListText>
+                      {testResults.length !== 0
+                        ? testResults.join(",")
+                        : "Пусто"}
+                    </ListText>
+                    <ListText>{getDate(createdAt)}</ListText>
+                  </StatisticListItem>
+                )
+              )}
+            </StatisticList>
+          )}
+        </>
+      ) : (
+        <Loader height="200px" />
+      )}
     </Box>
   );
 };
-
-export default AdminUserControllBox;
 
 const Box = styled.div`
   width: 100%;
@@ -34,7 +89,6 @@ const Box = styled.div`
   padding: ${(p) => p.theme.space[4]}px;
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
   border-radius: ${(p) => p.theme.borders.baseBorder};
-  margin-top: ${(p) => p.theme.space[3]}px;
-  margin-right: auto;
-  margin-left: auto;
 `;
+
+export default AdminUserControllBox;

@@ -24,13 +24,15 @@ const AdminPanel = () => {
     <p>{error}</p>
   ) : (
     <Box>
-      <AdminStatisticBox />
       <AdminUserControllBox />
+      <AdminStatisticBox />
     </Box>
   );
 };
 
 const Box = styled.div`
-  display: flex;
+  @media screen and (min-width: 960px) {
+    display: flex;
+  }
 `;
 export default AdminPanel;
