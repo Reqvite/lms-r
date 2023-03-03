@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Guide from "./Guide";
 import Testing from "./Testing";
+import Materials from "../Pages/Materials";
 import { courses } from "data/tests";
 import { FC, useEffect, useState } from "react";
 
@@ -56,6 +57,7 @@ const Course: FC = () => {
           <Route path="" element={<Navigate to="guide" replace />} />
           <Route path="testing" element={<Testing />} />
           <Route path="guide" element={<Guide />} />
+          <Route path="materials" element={<Materials />} />
         </Route>
       </Routes>
     </Wrap>

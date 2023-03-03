@@ -81,10 +81,13 @@ export const List = styled.ul`
   margin-top: ${(p) => p.theme.space[2]}px;
 `;
 
-export const ListItem = styled.li``;
+export const ListItem = styled.li`
+  width: 200px;
+`;
 
 export const NavListItemLink = styled(NavLink)`
   display: block;
+  width: 200px;
   font-weight: ${(p) => p.theme.fontWeights.bold};
   padding: ${(p) => p.theme.space[3]}px ${(p) => p.theme.space[3]}px;
   &.active {

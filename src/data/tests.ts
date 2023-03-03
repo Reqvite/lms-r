@@ -1,11 +1,11 @@
 export const courses: any = [
   {
     id: 1,
-    title: "Електротехніка",
+    title: "Основи Електротехніки",
     topics: [
       {
         id: 11,
-        topicTitle: "TOPIC1",
+        topicTitle: "Електричні кола постійного струму",
         tests: [
           {
             id: 1,
@@ -96,7 +96,7 @@ export const courses: any = [
       },
       {
         id: 12,
-        topicTitle: "TOPIC2",
+        topicTitle: "Електричні кола змінного струму",
         tests: [
           {
             title: " topic 2 FirstTest",

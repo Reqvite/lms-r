@@ -72,7 +72,7 @@ const TopicsDropDown: FC<DropDownProps> = ({ onData, placeHolder, topics }) => {
 const DropDownContainer = styled.div`
   position: relative;
   z-index: 999;
-  width: 120px;
+  width: 250px;
   text-align: left;
   border: ${(p) => p.theme.borders.dropDownBorder};
   border-radius: ${(p) => p.theme.borders.baseBorder};
@@ -89,7 +89,7 @@ const DropDownInput = styled.div`
 
 const DropDownMenu = styled.div`
   position: absolute;
-  top: 35px;
+  top: 50px;
   left: 0;
   transform: translateY(4px);
   width: 100%;
