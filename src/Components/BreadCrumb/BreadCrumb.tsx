@@ -17,13 +17,17 @@ const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
     .filter((crumb) => crumb !== "")
     .map((crumb) => crumb.charAt(0).toUpperCase() + crumb.slice(1));
 
-  // console.log(path);
+  const newArr = path
+    .slice(0, 2)
+    .concat("Основи електротехніки", path.slice(3));
 
   path.forEach((crumb: string) => {
     if (crumb === "Dashboard") {
       crumbs.push({ crumb, title: "Домашня Сторінка" });
     } else if (crumb === "Courses") {
       crumbs.push({ crumb, title: "Курси" });
+    } else if (crumb === "1") {
+      crumbs.push({ crumb, title: "Основи електротехніки" });
     } else if (crumb === "Guide") {
       crumbs.push({ crumb, title: "Конспект" });
     } else if (crumb === "Testing") {
@@ -34,7 +38,7 @@ const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
       crumbs.push({ crumb, title: "none" });
     }
   });
-
+  console.log(crumbs);
   return (
     <>
       <Box>

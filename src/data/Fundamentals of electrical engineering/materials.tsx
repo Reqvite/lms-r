@@ -168,12 +168,12 @@ export const materials = [
         materials: [
           {
             id: "Лабораторна робота. Дослідження параметрів одномірної електричної системи",
-            type: "Лабалаторна робота",
+            type: "Лабалаторні роботи",
             url: "https://www.youtube.com/embed/-SR2g7fpwxI",
           },
           {
             id: "Приклад розрахунку складного електричного кола постійного струму",
-            type: "practice",
+            type: "Практичні роботи",
             url: "https://www.youtube.com/embed/Muk4jfM6A0k",
           },
         ],
@@ -184,32 +184,32 @@ export const materials = [
         materials: [
           {
             id: "Способи зображення електричних величин. Аналітичний, графічний, векторний, комплексно-показниковий спосіб",
-            type: "Лекція",
+            type: "Лекції",
             url: "https://www.youtube.com/embed/OnoVrbs5GCQ",
           },
           {
             id: "Способи зображення електричних величин. Алгебраїчно-комплексна форма",
-            type: "Лекція",
+            type: "Лекції",
             url: "https://www.youtube.com/embed/ILtVNYtljt8",
           },
           {
             id: "Ідеальні та реальні елементи в електричних системах",
-            type: "Лекція",
+            type: "Лекції",
             url: "https://www.youtube.com/embed/s0t8eSWd_M4",
           },
           {
             id: "Лабораторно практична робота. Резонанс напруг",
-            type: "Лабалаторна робота",
+            type: "Лабалаторні роботи",
             url: "https://www.youtube.com/embed/lLX6Lu3MDDI",
           },
           {
             id: "Лабораторно-практична робота. Резонанс струмів",
-            type: "Лабалаторна робота",
+            type: "Лабалаторні роботи",
             url: "https://www.youtube.com/embed/ZOLT4Ut2eLs",
           },
           {
             id: "Приклад розв'язання задачі. Змінний струм, просте нерозгалужене коло",
-            type: "practice",
+            type: "Практичні роботи",
             url: "https://www.youtube.com/embed/AUuagqEI4vQ",
           },
         ],
@@ -220,17 +220,17 @@ export const materials = [
         materials: [
           {
             id: "Трифазні системи. Зірка - трикутник",
-            type: "Лекція",
+            type: "Лекції",
             url: "https://www.youtube.com/embed/Jag5hmuAymA",
           },
           {
             id: "Трифазні системи. Зірка-зірка робочий та аварійні режими",
-            type: "Лекція",
+            type: "Лекції",
             url: "https://www.youtube.com/embed/hYIT1dAGxYA",
           },
           {
             id: "Лабораторно-практична робота. Дослідження параметрів тримірної енергетичної системи",
-            type: "Лабалаторна робота",
+            type: "Лабалаторні роботи",
             url: "https://www.youtube.com/embed/tWxwXGx9cOE",
           },
         ],
@@ -246,12 +246,12 @@ export const materials = [
         materials: [
           {
             id: "Явище електромагнітної індукції та його практичне використання",
-            type: "Лекція",
+            type: "Лекції",
             url: "https://www.youtube.com/embed/bVfES-NI83o",
           },
           {
             id: "Приклад розрахунку магнітного кола",
-            type: "practice",
+            type: "Практичні роботи",
             url: "https://www.youtube.com/embed/2vEJx-SocxI",
           },
         ],
@@ -262,7 +262,7 @@ export const materials = [
         materials: [
           {
             id: "Дослідження параметрів трансформатора",
-            type: "Лекція",
+            type: "Лекції",
             url: "https://www.youtube.com/embed/Bq6AceMps7M",
           },
         ],
@@ -273,17 +273,17 @@ export const materials = [
         materials: [
           {
             id: "Машини постійного струму",
-            type: "Лекція",
+            type: "Лекції",
             url: "https://www.youtube.com/embed/E4iplJPn9Z0",
           },
           {
             id: "Пуск електричних машин постійного струму",
-            type: "Лекція",
+            type: "Лекції",
             url: "https://www.youtube.com/embed/fMomgAgoFUA",
           },
           {
             id: "Машини постійного струму. Режим генератора з незалежним збудженням",
-            type: "Лекція",
+            type: "Лекції",
             url: "https://www.youtube.com/embed/OeBpVk7VY0E",
           },
         ],
@@ -294,12 +294,12 @@ export const materials = [
         materials: [
           {
             id: "Пуск асинхронних машин змінного струму",
-            type: "Лекція",
+            type: "Лекції",
             url: "https://www.youtube.com/embed/hDvPAbdE1Jk",
           },
           {
             id: "Лабораторна робота. Асинхронні машини",
-            type: "Лабалаторна робота",
+            type: "Лабалаторні роботи",
             url: "https://www.youtube.com/embed/Ln1R9fPzo40",
           },
         ],

@@ -1,4 +1,4 @@
-import { FC } from "react";
+// import { FC } from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
@@ -7,8 +7,6 @@ import { MaterialsList } from "../Components/MaterialsList/MaterialsList";
 import { materials } from "../data/Fundamentals of electrical engineering/materials";
 
 const Materials = () => {
-  const [course, setCourse] = useState(null);
-  const [topic, setTopic] = useState(null);
   const [lectures, setLectures] = useState(null);
   const [labs, setLabs] = useState(null);
   const [practices, setPractices] = useState(null);
@@ -21,20 +19,19 @@ const Materials = () => {
     const [topic] = course.topics.filter(
       (topic) => Number(topicID) === topic.id
     );
-    setTopic(topic);
 
     const lectures = topic.materials.filter(({ type }) => {
-      return type === "Лекція";
+      return type === "Лекції";
     });
     setLectures(lectures);
 
     const labs = topic.materials.filter(({ type }) => {
-      return type === "Лабалаторна робота";
+      return type === "Лабалаторні роботи";
     });
     setLabs(labs);
 
     const practices = topic.materials.filter(({ type }) => {
-      return type === "practice";
+      return type === "Практичні роботи";
     });
     setPractices(practices);
   }, [topicID, courseID]);

@@ -26,7 +26,7 @@ export const darkTheme = {
     caps: "0.2em",
   },
   borders: {
-    baseBorder: "5px",
+    baseBorder: "12px",
     dropDownBorder: "1px solid #cccccc;",
   },
   shadows: {
@@ -109,7 +109,7 @@ export const lightTheme = {
     caps: "0.2em",
   },
   borders: {
-    baseBorder: "5px",
+    baseBorder: "12px",
     dropDownBorder: "1px solid rgb(38, 57, 77);",
   },
   shadows: {

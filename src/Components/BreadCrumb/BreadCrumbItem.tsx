@@ -18,6 +18,9 @@ const BreadCrumbList: FC<any> = ({
     <BreadCrumbsList>
       {crumbs.map(({ crumb, title }: any, index: any) => {
         const link = `/${path.slice(0, index + 1).join("/")}`;
+
+        console.log(link);
+
         if (topicID === crumb.toLowerCase())
           return (
             <BreadCrumbsItem key={nextId()}>

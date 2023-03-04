@@ -74,6 +74,7 @@ const DropDownContainer = styled.div`
   z-index: 999;
   width: 250px;
   text-align: left;
+
   border: ${(p) => p.theme.borders.dropDownBorder};
   border-radius: ${(p) => p.theme.borders.baseBorder};
 `;
@@ -93,7 +94,7 @@ const DropDownMenu = styled.div`
   left: 0;
   transform: translateY(4px);
   width: 100%;
-  max-height: 150px;
+  max-height: 250px;
   border: ${(p) => p.theme.borders.dropDownBorder};
   border-radius: ${(p) => p.theme.borders.baseBorder};
   background-color: ${(p) => p.theme.colors.mainBackground};
@@ -102,6 +103,9 @@ const DropDownMenu = styled.div`
 
 const DropDownItem = styled.div`
   padding: ${(p) => p.theme.space[1]}px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
   cursor: pointer;
   :hover {
     background-color: ${(p) => p.theme.colors.accentColor};
