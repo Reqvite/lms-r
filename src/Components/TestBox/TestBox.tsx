@@ -9,10 +9,10 @@ import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { courses } from "data/tests";
 import styled, { useTheme } from "styled-components";
-import Timer from "Components/Timer/Timer";
+import Timer from "Components/Timer";
 import Dropdown from "Components/DropDown/DropDown";
 import Question from "./Question/Question";
-import Loader from "Components/Loader/Loader";
+import Loader from "Components/Loader";
 
 const TestBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();

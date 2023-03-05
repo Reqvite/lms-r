@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useAuth } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
@@ -8,12 +8,17 @@ import { motion } from "framer-motion";
 import { IoIosLogOut } from "react-icons/io";
 import { selectTheme } from "redux/theme/selectors";
 import styled from "styled-components";
-import ToggleThemeButton from "Components/ToggleThemeButton/ToggleThemeButton";
+import ToggleThemeButton from "Components/Buttons/ToggleThemeButton";
+import { fetchUserTests } from "redux/tests/operations";
 
 const Header: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
   const { theme }: any = useSelector(selectTheme);
+
+  useEffect(() => {
+    dispatch(fetchUserTests());
+  }, [dispatch]);
 
   const location = useLocation();
   const navigation = [

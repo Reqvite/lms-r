@@ -1,4 +1,4 @@
-import StatisticBox from "Components/StatisticBox/StatisticBox";
+import StatisticBox from "Components/StatisticBox";
 import { useAuth } from "hooks";
 import styled from "styled-components";
 

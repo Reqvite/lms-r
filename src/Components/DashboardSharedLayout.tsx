@@ -1,14 +1,14 @@
 import { FC, useEffect, useState } from "react";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "Components/Header/Header";
-import Loader from "Components/Loader/Loader";
+import Header from "Components/Header";
+import Loader from "Components/Loader";
 import styled from "styled-components";
-import MainBox from "Components/MainBox/MainBox";
-import Footer from "Components/Footer/Footer";
-import MobileMenu from "Components/MobileMenu/MobileMenu";
+import MainBox from "Components/MainBox";
+import Footer from "Components/Footer";
+import MobileMenu from "Components/MobileMenu";
 
-const Dashboard: FC = () => {
+const DashboardSharedLayout: FC = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
   useEffect(() => {
@@ -46,4 +46,4 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-export default Dashboard;
+export default DashboardSharedLayout;

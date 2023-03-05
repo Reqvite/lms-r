@@ -1,26 +1,24 @@
 import { useEffect } from "react";
-import { GlobalStyle } from "Components/GlobalStyle/GlobalStyle";
+import { ThemeProvider } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { refreshUser } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
+import { useAuth } from "hooks";
+import { GlobalStyle } from "Components/GlobalStyle/GlobalStyle";
+import DashboardSharedLayout from "Components/DashboardSharedLayout";
+import RestrictedRoute from "Components/Routes/RestrictedRoute";
+import PrivateRoute from "Components/Routes/PrivateRoute";
+import Loader from "Components/Loader";
+import Alert from "Components/Alert";
+import Home from "Pages/Home";
 import LoginForm from "Pages/LoginFiorm";
 import SignupForm from "Pages/SignupForm";
-import Dashboard from "Pages/Dashboard";
-import Home from "Pages/Home";
-import { RestrictedRoute } from "Components/RestrictedRoute/RestrictedRoute";
-import { PrivateRoute } from "Components/PrivateRoute/PrivateRoute";
-import { useAuth } from "hooks";
-import { ThemeProvider } from "styled-components";
-import { darkTheme, lightTheme } from "./theme/theme";
-import { selectTheme } from "redux/theme/selectors";
-import Loader from "Components/Loader/Loader";
-import Alert from "Components/Alert/Alert";
 import Courses from "Pages/Courses";
 import Course from "Pages/Course";
 import AdminPanel from "Pages/AdminPanel";
-
-import { fetchUserTests } from "redux/tests/operations";
+import { darkTheme, lightTheme } from "./theme/theme";
+import { selectTheme } from "redux/theme/selectors";
 
 const App = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -34,7 +32,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(refreshUser());
-    dispatch(fetchUserTests());
   }, [dispatch]);
 
   return isRefreshing ? (
@@ -64,7 +61,7 @@ const App = () => {
           path="/dashboard"
           element={
             <PrivateRoute
-              component={<Dashboard />}
+              component={<DashboardSharedLayout />}
               redirectTo={path}
               isAllowed={shouldRedirect}
             />

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import AuthForm from "Components/AuthForm/AuthForm";
+import AuthForm from "Components/AuthForm";
 
 import { Pages } from "types/types";
 

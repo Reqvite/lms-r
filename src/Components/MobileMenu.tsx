@@ -8,7 +8,7 @@ import { AppDispatch } from "redux/store";
 import { motion } from "framer-motion";
 import { IoIosLogOut } from "react-icons/io";
 import styled from "styled-components";
-import ToggleThemeButton from "Components/ToggleThemeButton/ToggleThemeButton";
+import ToggleThemeButton from "Components/Buttons/ToggleThemeButton";
 import { selectTheme } from "redux/theme/selectors";
 import { darkMenu, lightMenu } from "theme/theme";
 
