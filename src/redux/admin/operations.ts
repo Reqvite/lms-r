@@ -12,3 +12,18 @@ export const fetchUsers = createAsyncThunk(
     }
   }
 );
+
+export const deleteUser = createAsyncThunk<
+  any,
+  {
+    id: string;
+  }
+>("admin/deleteUsers", async ({ id }, thunkAPI) => {
+  try {
+    const resp = await axios.delete(`api/admin/${id}`);
+
+    return resp.data.data;
+  } catch (err: any) {
+    return thunkAPI.rejectWithValue(err.message);
+  }
+});

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 interface MainButtonProps {
-  title: string;
+  title?: string;
 }
 
 const MainButton: FC<MainButtonProps> = ({ title }) => {

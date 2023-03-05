@@ -16,13 +16,20 @@ import {
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import UserModal from "./Modal/UserModal";
+import { AiFillTool } from "react-icons/ai";
+import { selectTheme } from "redux/theme/selectors";
 
 const AdminUserControllBox = () => {
   const dispatch: AppDispatch = useDispatch();
   const [status, setStatus] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
   const usersLoading = useSelector(selectIsLoading);
   const users = useSelector(selectUsers);
   const { user } = useAuth();
+
+  const { theme }: any = useSelector(selectTheme);
 
   useEffect(() => {
     if (!usersLoading && users?.length === 0 && status) {
@@ -40,43 +47,49 @@ const AdminUserControllBox = () => {
     }
   };
 
+  const toggleModal = (id: string) => {
+    setUserInfo(users.filter((user: any) => user._id === id));
+    setShowModal(!showModal);
+  };
+
   return (
-    <Box>
-      <HeaderBox>
-        <p>Користувачи</p>
-        <Button onClick={submit}>Пошук</Button>
-      </HeaderBox>
-      {!usersLoading ? (
-        <>
-          {status && (
-            <StatisticList>
-              <StatisticListItem>
-                <FirstText>Ім'я</FirstText>
-                <FirstText>Пошта</FirstText>
-                <ListText>Здані тести</ListText>
-                <ListText>Дата</ListText>
-              </StatisticListItem>
-              {users?.map(
-                ({ _id, fullname, email, testResults, createdAt }: any) => (
+    <>
+      <Box>
+        <HeaderBox>
+          <p>Користувачи</p>
+          <Button onClick={submit}>Пошук</Button>
+        </HeaderBox>
+        {!usersLoading ? (
+          <>
+            {status && (
+              <StatisticList>
+                <StatisticListItem>
+                  <FirstText>Ім'я</FirstText>
+                  <FirstText>Пошта</FirstText>
+                  <ListText>Дата реєстрації</ListText>
+                </StatisticListItem>
+                {users?.map(({ _id, fullname, email, createdAt }: any) => (
                   <StatisticListItem key={_id}>
                     <FirstText>{fullname}</FirstText>
                     <FirstText>{email}</FirstText>
-                    <ListText>
-                      {testResults.length !== 0
-                        ? testResults.join(",")
-                        : "Пусто"}
-                    </ListText>
                     <ListText>{getDate(createdAt)}</ListText>
+                    <InfoButton onClick={() => toggleModal(_id)}>
+                      <AiFillTool
+                        size={25}
+                        color={theme === "light" ? "black" : "white"}
+                      />
+                    </InfoButton>
                   </StatisticListItem>
-                )
-              )}
-            </StatisticList>
-          )}
-        </>
-      ) : (
-        <Loader height="200px" />
-      )}
-    </Box>
+                ))}
+              </StatisticList>
+            )}
+          </>
+        ) : (
+          <Loader height="200px" />
+        )}
+      </Box>
+      {showModal && <UserModal toggleModal={toggleModal} user={userInfo} />}
+    </>
   );
 };
 
@@ -89,6 +102,12 @@ const Box = styled.div`
   padding: ${(p) => p.theme.space[4]}px;
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
   border-radius: ${(p) => p.theme.borders.baseBorder};
+`;
+
+const InfoButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 `;
 
 export default AdminUserControllBox;
