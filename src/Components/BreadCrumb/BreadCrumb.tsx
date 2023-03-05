@@ -17,9 +17,9 @@ const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
     .filter((crumb) => crumb !== "")
     .map((crumb) => crumb.charAt(0).toUpperCase() + crumb.slice(1));
 
-  const newArr = path
-    .slice(0, 2)
-    .concat("Основи електротехніки", path.slice(3));
+  // const newArr = path
+  //   .slice(0, 2)
+  //   .concat("Основи електротехніки", path.slice(3));
 
   path.forEach((crumb: string) => {
     if (crumb === "Dashboard") {
