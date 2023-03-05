@@ -26,10 +26,6 @@ const MainBox: FC<MainBoxProps> = ({ children, showMenu }) => {
 };
 
 const Box = styled.main`
-  width: 100%;
-  max-width: 1600px;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 80px;
   padding-left: 20px;
   padding-right: 20px;
