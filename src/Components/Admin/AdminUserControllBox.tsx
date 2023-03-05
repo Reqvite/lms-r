@@ -1,5 +1,5 @@
 import { getDate } from "helpers/helpers";
-import Loader from "Components/Loader/Loader";
+import Loader from "Components/Loader";
 import { useAuth } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "redux/admin/operations";

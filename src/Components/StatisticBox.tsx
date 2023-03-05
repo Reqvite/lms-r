@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { fetchAllTests, fetchUserTests } from "redux/tests/operations";
 import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
-import Loader from "Components/Loader/Loader";
+import Loader from "Components/Loader";
 import styled from "styled-components";
 import { getDate } from "helpers/helpers";
 import {

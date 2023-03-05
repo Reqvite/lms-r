@@ -22,15 +22,18 @@ const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
       crumbs.push({ crumb, title: "Домашня Сторінка" });
     } else if (crumb === "Courses") {
       crumbs.push({ crumb, title: "Курси" });
+    } else if (crumb === "1") {
+      crumbs.push({ crumb, title: "Основи електротехніки" });
     } else if (crumb === "Guide") {
       crumbs.push({ crumb, title: "Конспект" });
     } else if (crumb === "Testing") {
       crumbs.push({ crumb, title: "Тести" });
+    } else if (crumb === "Materials") {
+      crumbs.push({ crumb, title: "Матеріали" });
     } else {
       crumbs.push({ crumb, title: "none" });
     }
   });
-
   return (
     <>
       <Box>
@@ -45,6 +48,9 @@ const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
       <List>
         <ListItem>
           <NavListItemLink to="guide">Конспект</NavListItemLink>
+        </ListItem>
+        <ListItem>
+          <NavListItemLink to="materials">Матеріали</NavListItemLink>
         </ListItem>
         <ListItem>
           <NavListItemLink to="testing">Тести</NavListItemLink>

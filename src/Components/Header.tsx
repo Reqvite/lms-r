@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { IoIosLogOut } from "react-icons/io";
 import { selectTheme } from "redux/theme/selectors";
 import styled from "styled-components";
-import ToggleThemeButton from "Components/ToggleThemeButton/ToggleThemeButton";
+import ToggleThemeButton from "Components/Buttons/ToggleThemeButton";
 import { fetchUserTests } from "redux/tests/operations";
 
 const Header: FC = () => {

@@ -1,6 +1,6 @@
 import AdminStatisticBox from "Components/Admin/AdminStatisticBox";
 import AdminUserControllBox from "Components/Admin/AdminUserControllBox";
-import Loader from "Components/Loader/Loader";
+import Loader from "Components/Loader";
 import { useAuth } from "hooks";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

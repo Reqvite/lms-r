@@ -72,8 +72,9 @@ const TopicsDropDown: FC<DropDownProps> = ({ onData, placeHolder, topics }) => {
 const DropDownContainer = styled.div`
   position: relative;
   z-index: 999;
-  width: 120px;
+  width: 250px;
   text-align: left;
+
   border: ${(p) => p.theme.borders.dropDownBorder};
   border-radius: ${(p) => p.theme.borders.baseBorder};
 `;
@@ -89,11 +90,11 @@ const DropDownInput = styled.div`
 
 const DropDownMenu = styled.div`
   position: absolute;
-  top: 35px;
+  top: 50px;
   left: 0;
   transform: translateY(4px);
   width: 100%;
-  max-height: 150px;
+  max-height: 250px;
   border: ${(p) => p.theme.borders.dropDownBorder};
   border-radius: ${(p) => p.theme.borders.baseBorder};
   background-color: ${(p) => p.theme.colors.mainBackground};
@@ -102,6 +103,9 @@ const DropDownMenu = styled.div`
 
 const DropDownItem = styled.div`
   padding: ${(p) => p.theme.space[1]}px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
   cursor: pointer;
   :hover {
     background-color: ${(p) => p.theme.colors.accentColor};

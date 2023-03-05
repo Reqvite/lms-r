@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Loader from "Components/Loader/Loader";
+import Loader from "Components/Loader";
 import { useAuth } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
@@ -114,8 +114,10 @@ const Box = styled.div`
   padding: ${(p) => p.theme.space[4]}px;
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
   border-radius: ${(p) => p.theme.borders.baseBorder};
+  margin-top: ${(p) => p.theme.space[2]}px;
 
   @media screen and (min-width: 960px) {
+    margin-top: 0;
     margin-left: ${(p) => p.theme.space[2]}px;
   }
 `;
