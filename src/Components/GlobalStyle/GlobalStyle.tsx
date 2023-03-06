@@ -11,6 +11,8 @@ export const GlobalStyle = createGlobalStyle<any>`
     font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: ${(p) =>
+    p.location.pathname.includes("guide") ? "hidden" : "visible"};
 
   transition: color 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
