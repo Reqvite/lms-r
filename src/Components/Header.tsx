@@ -1,20 +1,17 @@
 import { FC, useEffect } from "react";
 import { useAuth } from "hooks";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
-import { logOut } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
 import { motion } from "framer-motion";
-import { IoIosLogOut } from "react-icons/io";
-import { selectTheme } from "redux/theme/selectors";
 import styled from "styled-components";
 import ToggleThemeButton from "Components/Buttons/ToggleThemeButton";
 import { fetchUserTests } from "redux/tests/operations";
+import LogoutButton from "./Buttons/LogoutButton";
 
 const Header: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
-  const { theme }: any = useSelector(selectTheme);
 
   useEffect(() => {
     dispatch(fetchUserTests());
@@ -57,13 +54,7 @@ const Header: FC = () => {
         <UserName>{user.name}</UserName>
       </UserBox>
       <ToggleThemeButton />
-      <LogoutButton
-        onClick={() => dispatch(logOut())}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <IoIosLogOut size={30} color={theme === "light" ? "black" : "white"} />
-      </LogoutButton>
+      <LogoutButton />
     </HeaderBox>
   );
 };
@@ -122,11 +113,6 @@ const Img = styled.img`
 const UserName = styled.p`
   text-align: center;
   margin-top: ${(p) => p.theme.space[2]}px;
-`;
-
-const LogoutButton = styled(motion.button)`
-  ${(p) => p.theme.components.buttons.iconButton}
-  margin-left: ${(p) => p.theme.space[3]}px;
 `;
 
 export default Header;

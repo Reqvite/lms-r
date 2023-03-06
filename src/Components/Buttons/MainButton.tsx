@@ -1,12 +1,15 @@
 import { FC } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import { useAuth } from "hooks";
+import Loader from "Components/Loader";
 
 interface MainButtonProps {
   title?: string;
 }
 
 const MainButton: FC<MainButtonProps> = ({ title }) => {
+  const { isLoading } = useAuth();
   return (
     <Button
       type="submit"
@@ -15,7 +18,7 @@ const MainButton: FC<MainButtonProps> = ({ title }) => {
       }}
       whileTap={{ scale: 0.95 }}
     >
-      {title}
+      {!isLoading ? title : <Loader />}
     </Button>
   );
 };

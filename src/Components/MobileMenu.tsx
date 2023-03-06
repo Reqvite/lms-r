@@ -1,19 +1,16 @@
 import { stack as Menu } from "react-burger-menu";
 import { FC, useState } from "react";
 import { useAuth } from "hooks";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { logOut } from "redux/auth/operations";
-import { AppDispatch } from "redux/store";
 import { motion } from "framer-motion";
-import { IoIosLogOut } from "react-icons/io";
 import styled from "styled-components";
 import ToggleThemeButton from "Components/Buttons/ToggleThemeButton";
 import { selectTheme } from "redux/theme/selectors";
 import { darkMenu, lightMenu } from "theme/theme";
+import LogoutButton from "./Buttons/LogoutButton";
 
 const MobileMenu: FC = () => {
-  const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
   const { theme }: any = useSelector(selectTheme);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -47,16 +44,7 @@ const MobileMenu: FC = () => {
           </UserBox>
           <Box>
             <ToggleThemeButton />
-            <LogoutButton
-              onClick={() => dispatch(logOut())}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <IoIosLogOut
-                size={30}
-                color={theme === "light" ? "black" : "white"}
-              />
-            </LogoutButton>
+            <LogoutButton />
           </Box>
           <List>
             {navigation.map(({ id, title, path }) =>
@@ -125,11 +113,6 @@ const Img = styled.img`
 const UserName = styled.p`
   text-align: center;
   margin-top: ${(p) => p.theme.space[2]}px;
-`;
-
-const LogoutButton = styled(motion.button)`
-  ${(p) => p.theme.components.buttons.iconButton}
-  margin-left: ${(p) => p.theme.space[3]}px;
 `;
 
 export default MobileMenu;

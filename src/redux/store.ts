@@ -19,7 +19,7 @@ const authPersistConfig = {
   whitelist: ["token"],
 };
 
-const reducer = combineReducers({
+const userReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   tests: testsReducer,
   theme: persistReducer(themePersistConfig, themeReducer),
@@ -47,7 +47,7 @@ const accessMiddleware =
   };
 
 export const store = configureStore({
-  reducer: reducer,
+  reducer: userReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(accessMiddleware),
 });

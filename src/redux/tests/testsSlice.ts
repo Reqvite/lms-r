@@ -1,9 +1,4 @@
-import {
-  addTest,
-  fetchAllTests,
-  fetchAllUsersData,
-  fetchUserTests,
-} from "./operations";
+import { addTest, fetchAllTests, fetchUserTests } from "./operations";
 import { ActionReducerMapBuilder, createSlice } from "@reduxjs/toolkit";
 import { TestsState } from "types/types";
 
@@ -43,19 +38,6 @@ const testsSlice = createSlice({
         state.finishedTests = action.payload.data.finishTests;
       })
       .addCase(fetchUserTests.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isLoading = false;
-        state.error = action.payload;
-      })
-      .addCase(fetchAllUsersData.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(fetchAllUsersData.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        state.items = action.payload.data.data;
-      })
-      .addCase(fetchAllUsersData.rejected, (state, action) => {
         state.isLoading = false;
         state.isLoading = false;
         state.error = action.payload;

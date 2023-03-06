@@ -3,8 +3,7 @@ import Loader from "Components/Loader";
 import { useAuth } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
-import { fetchAllUsersData } from "redux/tests/operations";
-import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
+import { fetchAllUsersData } from "redux/admin/operations";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 import { getDate } from "helpers/helpers";
@@ -16,12 +15,13 @@ import {
   StatisticList,
   StatisticListItem,
 } from "Components/GlobalStyle/Box.styled";
+import { selectAdminTests, selectIsLoading } from "redux/admin/selectors";
 
 const AdminStatisticBox = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
   const [status, setStatus] = useState<boolean>(false);
-  const tests = useSelector(selectUserTests);
+  const tests = useSelector(selectAdminTests);
   const testLoading = useSelector(selectIsLoading);
 
   useEffect(() => {

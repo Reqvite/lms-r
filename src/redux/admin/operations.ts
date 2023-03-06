@@ -13,6 +13,26 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
+export const fetchAllUsersData = createAsyncThunk<
+  any,
+  {
+    email?: string;
+    limit?: string;
+  }
+>("admin/fetchAllUsersData", async ({ email, limit }, thunkAPI) => {
+  try {
+    const resp = await axios.get("api/admin/full-data", {
+      params: {
+        email,
+        limit,
+      },
+    });
+    return resp.data;
+  } catch (err: any) {
+    return thunkAPI.rejectWithValue(err.message);
+  }
+});
+
 export const deleteUser = createAsyncThunk<
   any,
   {

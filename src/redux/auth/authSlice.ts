@@ -19,29 +19,35 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder: ActionReducerMapBuilder<AuthState>) =>
     builder
-      .addCase(register.pending, (state) => state)
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(register.fulfilled, (state, action) => {
-        console.log(action.payload);
         const { user, token } = action.payload.data;
         state.user = user;
         state.token = token;
         state.isLoggedIn = true;
+        state.isLoading = false;
       })
       .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
         toast.error(action.payload as ToastContent<unknown>);
       })
-      .addCase(login.pending, (state) => state)
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(login.fulfilled, (state, action) => {
-        console.log(action.payload);
         const { user, token } = action.payload.data;
         state.user = user;
         state.token = token;
         state.isLoggedIn = true;
+        state.isLoading = false;
       })
       .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
         toast.error(action.payload as ToastContent<unknown>);
       })
-      .addCase(refreshUser.pending, (state, action) => {
+      .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
@@ -50,18 +56,26 @@ export const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.rejected, (state, action) => {
+      .addCase(refreshUser.rejected, (state) => {
         state.isRefreshing = false;
       })
-      .addCase(logOut.fulfilled, (state, action) => {
+      .addCase(logOut.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(logOut.fulfilled, (state) => {
         state.user = { name: null, email: null, role: null, hasAccess: false };
         state.isLoggedIn = false;
         state.token = null;
+        state.isLoading = false;
       })
-      .addCase(userAccess.pending, (state, action) => {
+      .addCase(logOut.rejected, (state) => {
+        state.isRefreshing = false;
+        state.isLoading = false;
+      })
+      .addCase(userAccess.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(userAccess.fulfilled, (state, action) => {
+      .addCase(userAccess.fulfilled, (state) => {
         state.user.hasAccess = true;
         state.isLoading = false;
       })

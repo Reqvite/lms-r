@@ -1,9 +1,10 @@
 import { createSlice, ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import { toast, ToastContent } from "react-toastify";
-import { deleteUser, fetchUsers } from "./operations";
+import { deleteUser, fetchAllUsersData, fetchUsers } from "./operations";
 
 const initialState = {
   users: null,
+  tests: null,
   isLoading: false,
 };
 
@@ -23,6 +24,19 @@ export const adminSlice = createSlice({
       .addCase(fetchUsers.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload as ToastContent<unknown>);
+      })
+      .addCase(fetchAllUsersData.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchAllUsersData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.tests = action.payload.data.data;
+      })
+      .addCase(fetchAllUsersData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isLoading = false;
+        state.error = action.payload;
       })
       .addCase(deleteUser.pending, (state) => {
         state.isLoading = true;
