@@ -37,6 +37,7 @@ export const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(login.fulfilled, (state, action) => {
+        toast.dismiss();
         const { user, token } = action.payload.data;
         state.user = user;
         state.token = token;
