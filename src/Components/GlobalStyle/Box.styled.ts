@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const Box = styled.div`
@@ -44,7 +45,7 @@ export const Input = styled.input`
   padding: 10px 24px;
 `;
 
-export const Button = styled.button`
+export const Button = styled(motion.button)`
   margin-left: ${(p) => p.theme.space[3]}px;
   ${(p) => p.theme.components.buttons.secondaryButton}
 `;
@@ -54,6 +55,7 @@ export const StatisticList = styled.ul`
 `;
 
 export const StatisticListItem = styled.li`
+  text-align: center;
   :not(:first-child) {
     border: 1px solid #9090c296;
   }

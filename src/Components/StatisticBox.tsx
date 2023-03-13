@@ -15,6 +15,7 @@ import {
   StatisticList,
   StatisticListItem,
 } from "Components/GlobalStyle/Box.styled";
+import { motion } from "framer-motion";
 
 const StatisticBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -39,7 +40,13 @@ const StatisticBox: FC = () => {
     <Box>
       <HeaderBox>
         <StatisticListHeader>Результати</StatisticListHeader>
-        <ResultsButton onClick={handleResultButton}>
+        <ResultsButton
+          onClick={handleResultButton}
+          whileHover={{
+            scale: 1.05,
+          }}
+          whileTap={{ scale: 0.95 }}
+        >
           {allList ? "Ваші" : "Усі"}
         </ResultsButton>
       </HeaderBox>
@@ -88,7 +95,7 @@ const StatisticListHeader = styled.p`
   font-weight: ${(p) => p.theme.fontWeights.bold};
 `;
 
-const ResultsButton = styled.button`
+const ResultsButton = styled(motion.button)`
   ${(p) => p.theme.components.buttons.secondaryButton}
 `;
 

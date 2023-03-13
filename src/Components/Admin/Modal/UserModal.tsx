@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { deleteUser } from "redux/admin/operations";
 import { AppDispatch } from "redux/store";
+import { motion } from "framer-motion";
 
 const modalRoot: any = document.querySelector("#user-modal-root");
 
@@ -77,7 +78,13 @@ const UserModal = ({ toggleModal, user }: any) => {
           </ListItem>
         </ul>
         <ButtonsBox>
-          <DeleteUserButton onClick={() => handleDeleteButton(_id)}>
+          <DeleteUserButton
+            onClick={() => handleDeleteButton(_id)}
+            whileHover={{
+              scale: 1.03,
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
             {!deleteStatus ? (
               <TiUserDelete
                 size={25}
@@ -134,7 +141,7 @@ const ButtonsBox = styled.div`
   justify-content: center;
   margin-top: ${(p) => p.theme.space[3]}px;
 `;
-const DeleteUserButton = styled.button`
+const DeleteUserButton = styled(motion.button)`
   ${(p) => p.theme.components.buttons.secondaryButton}
 `;
 

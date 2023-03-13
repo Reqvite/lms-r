@@ -32,12 +32,12 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload as ToastContent<unknown>);
+        action.payload = null;
       })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(login.fulfilled, (state, action) => {
-        toast.dismiss();
         const { user, token } = action.payload.data;
         state.user = user;
         state.token = token;
@@ -47,6 +47,7 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload as ToastContent<unknown>);
+        action.payload = null;
       })
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
@@ -83,6 +84,12 @@ export const authSlice = createSlice({
       .addCase(userAccess.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addDefaultCase((state, action) => {
+        if (action.error) {
+          state.error = action.payload;
+          toast.error(action.payload);
+        }
       }),
 });
 

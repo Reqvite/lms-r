@@ -5,6 +5,9 @@ import { AiOutlineRight } from "react-icons/ai";
 import TopicsDropDown from "Components/DropDown/TopicsDropDown";
 import styled from "styled-components";
 import nextId from "react-id-generator";
+import ToggleThemeButton from "Components/Buttons/ToggleThemeButton";
+import LogoutButton from "Components/Buttons/LogoutButton";
+import { useWindowSize } from "hooks";
 
 const BreadCrumbList: FC<any> = ({
   crumbs,
@@ -13,46 +16,58 @@ const BreadCrumbList: FC<any> = ({
   topics,
   path,
 }) => {
+  const windowSize = useWindowSize();
+
   const { courseID, topicID } = useParams();
+
   return (
-    <BreadCrumbsList>
-      {crumbs.map(({ crumb, title }: any, index: any) => {
-        const link = `/${path.slice(0, index + 1).join("/")}`;
-        if (topicID === crumb.toLowerCase())
+    <Box>
+      <BreadCrumbsList>
+        {crumbs.map(({ crumb, title }: any, index: any) => {
+          const link = `/${path.slice(0, index + 1).join("/")}`;
+          if (topicID === crumb.toLowerCase())
+            return (
+              <BreadCrumbsItem key={nextId()}>
+                <TopicsDropDown
+                  placeHolder={selectTopic}
+                  onData={handleData}
+                  topics={topics}
+                />
+                <AiOutlineRight />
+              </BreadCrumbsItem>
+            );
+          if (courseID === crumb.toLowerCase())
+            return (
+              <BreadCrumbsItem key={nextId()}>
+                <BreadCrumbsLink as="p">{title}</BreadCrumbsLink>
+                {index < crumbs.length - 1 && <AiOutlineRight />}
+              </BreadCrumbsItem>
+            );
           return (
-            <BreadCrumbsItem key={nextId()}>
-              <TopicsDropDown
-                placeHolder={selectTopic}
-                onData={handleData}
-                topics={topics}
-              />
-              <AiOutlineRight />
-            </BreadCrumbsItem>
-          );
-        if (courseID === crumb.toLowerCase())
-          return (
-            <BreadCrumbsItem key={nextId()}>
-              <BreadCrumbsLink as="p">{title}</BreadCrumbsLink>
+            <BreadCrumbsItem
+              key={nextId()}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <BreadCrumbsLink to={link.toLowerCase()}>{title}</BreadCrumbsLink>
               {index < crumbs.length - 1 && <AiOutlineRight />}
             </BreadCrumbsItem>
           );
-        return (
-          <BreadCrumbsItem
-            key={nextId()}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <BreadCrumbsLink to={link.toLowerCase()}>{title}</BreadCrumbsLink>
-            {index < crumbs.length - 1 && <AiOutlineRight />}
-          </BreadCrumbsItem>
-        );
-      })}
-    </BreadCrumbsList>
+        })}
+      </BreadCrumbsList>
+      {windowSize.width <= 835 ? null : (
+        <>
+          <ToggleThemeButton />
+          <LogoutButton />
+        </>
+      )}
+    </Box>
   );
 };
 
 export const Box = styled.div`
-  margin-bottom: ${(p) => p.theme.space[2]}px;
+  display: flex;
+  margin-bottom: ${(p) => p.theme.space[3]}px;
 `;
 
 export const BreadCrumbsList = styled.ul`

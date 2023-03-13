@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useEffect, useState } from "react";
 import Loader from "Components/Loader";
 import { useAuth } from "hooks";
@@ -17,21 +18,21 @@ import {
 } from "Components/GlobalStyle/Box.styled";
 import { selectAdminTests, selectIsLoading } from "redux/admin/selectors";
 
-const AdminStatisticBox = () => {
+const AdminStatisticBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
   const [status, setStatus] = useState<boolean>(false);
   const tests = useSelector(selectAdminTests);
-  const testLoading = useSelector(selectIsLoading);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    if (!testLoading && tests?.length === 0 && status) {
+    if (!isLoading && tests?.length === 0 && status) {
       toast.error("Даних за цим запитом не знайдено", {
         autoClose: 3000,
       });
       setStatus(false);
     }
-  }, [testLoading, tests, status]);
+  }, [isLoading, tests, status]);
 
   const handleParams = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,10 +71,17 @@ const AdminStatisticBox = () => {
               />
             </Label>
           </InputBox>
-          <Button>Пошук</Button>
+          <Button
+            whileHover={{
+              scale: 1.05,
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Пошук
+          </Button>
         </FormBox>
       </HeaderBox>
-      {!testLoading ? (
+      {!isLoading.tests ? (
         <>
           {status && (
             <StatisticList>
@@ -99,7 +107,7 @@ const AdminStatisticBox = () => {
           )}
         </>
       ) : (
-        <Loader height="200px" />
+        <Loader height="100px" />
       )}
     </Box>
   );

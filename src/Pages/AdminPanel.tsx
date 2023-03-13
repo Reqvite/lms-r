@@ -34,6 +34,7 @@ const Box = styled.div`
   @media screen and (min-width: 960px) {
     display: flex;
     justify-content: center;
+    align-items: start;
   }
 `;
 export default AdminPanel;

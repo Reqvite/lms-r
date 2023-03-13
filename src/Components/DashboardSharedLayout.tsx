@@ -7,27 +7,25 @@ import styled from "styled-components";
 import MainBox from "Components/MainBox";
 import Footer from "Components/Footer";
 import MobileMenu from "Components/MobileMenu";
+import { useWindowSize } from "hooks";
 
 const DashboardSharedLayout: FC = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
+  const windowSize = useWindowSize();
+
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 835) {
-        setShowMenu(true);
-      } else {
-        setShowMenu(false);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, [showMenu]);
+    if (windowSize.width <= 835) {
+      setShowMenu(true);
+    } else {
+      setShowMenu(false);
+    }
+  }, [windowSize]);
 
   return (
     <>
       <Container>
-        {showMenu ? <MobileMenu /> : <Header />}
+        {windowSize.width <= 835 ? <MobileMenu /> : <Header />}
         <MainBox showMenu={showMenu}>
           <Suspense fallback={<Loader />}>
             <Outlet />
