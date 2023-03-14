@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell } from "recharts";
 import { selectUserStatistic } from "redux/tests/selectors";
 import styled from "styled-components";
 
-const COLORS = ["#00C49F", "#a10707"];
+const COLORS = ["rgba(44, 160, 49, 0.8)", "rgba(187, 3, 49, 0.5)"];
 
 const initialData = [
   { name: "Group A", value: 0 },
@@ -13,6 +13,7 @@ const initialData = [
 
 const ChartBox = () => {
   const [data, setData] = useState(initialData);
+  // const [percentage, setPersentage] = useState<number>(0);
   const statistic = useSelector(selectUserStatistic);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const ChartBox = () => {
         { name: "Group A", value: statistic[1] },
         { name: "Group B", value: statistic[0] },
       ]);
+      // setPersentage(statistic[0] + statistic[1]);
     }
   }, [statistic]);
 
@@ -31,8 +33,8 @@ const ChartBox = () => {
         <>
           <p>Всього пройдено тестів:{statistic[0] + statistic[1]}</p>
           <PieChart
-            width={200}
-            height={200}
+            width={250}
+            height={data[0].value === 0 && data[1].value === 0 ? 0 : 250}
             style={{
               display: "flex",
               alignItems: "center",
@@ -46,6 +48,7 @@ const ChartBox = () => {
               fill="#8884d8"
               paddingAngle={5}
               dataKey="value"
+              label
             >
               {data.map((entry: any, index: any) => (
                 <Cell
@@ -68,9 +71,12 @@ export const Box = styled.div`
   padding: ${(p) => p.theme.space[4]}px;
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
   border-radius: ${(p) => p.theme.borders.baseBorder};
-  margin-top: ${(p) => p.theme.space[3]}px;
-  margin-right: auto;
-  margin-left: auto;
+  margin-top: ${(p) => p.theme.space[2]}px;
+
+  @media screen and (min-width: 960px) {
+    margin-top: 0;
+    margin-left: ${(p) => p.theme.space[2]}px;
+  }
 `;
 
 const StatisticListHeader = styled.p`

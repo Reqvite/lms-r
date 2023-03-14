@@ -10,9 +10,6 @@ export const Box = styled.div`
   padding: ${(p) => p.theme.space[4]}px;
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
   border-radius: ${(p) => p.theme.borders.baseBorder};
-  margin-top: ${(p) => p.theme.space[3]}px;
-  margin-right: auto;
-  margin-left: auto;
 `;
 
 export const HeaderBox = styled.div`

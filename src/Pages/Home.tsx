@@ -1,5 +1,5 @@
-import ChartBox from "Components/ChartBox";
-import StatisticBox from "Components/StatisticBox";
+import ChartBox from "Components/HomeBoxes/ChartBox";
+import StatisticBox from "Components/HomeBoxes/StatisticBox";
 import { useAuth } from "hooks";
 import styled from "styled-components";
 
@@ -37,9 +37,13 @@ const UserName = styled.p`
 `;
 
 const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: ${(p) => p.theme.space[3]}px;
   @media screen and (min-width: 960px) {
-    display: flex;
-    justify-content: flex-start;
+    flex-direction: row;
+    justify-content: center;
     align-items: start;
   }
 `;
