@@ -34,7 +34,7 @@ const AdminUserControllBox: FC = () => {
   const { theme }: any = useSelector(selectTheme);
 
   useEffect(() => {
-    if (!isLoading && users?.length === 0 && status) {
+    if (!isLoading.users && users?.length === 0 && status) {
       toast.error("Даних за цим запитом не знайдено", {
         autoClose: 3000,
       });

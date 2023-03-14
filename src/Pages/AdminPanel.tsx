@@ -1,5 +1,5 @@
 import AdminStatisticBox from "Components/Admin/AdminStatisticBox";
-import AdminUserControllBox from "Components/Admin/AdminUserControllBox";
+import AdminUserBox from "Components/Admin/AdminUserBox";
 import Loader from "Components/Loader";
 import { useAuth } from "hooks";
 import { useEffect } from "react";
@@ -24,7 +24,7 @@ const AdminPanel = () => {
     <p>{error}</p>
   ) : (
     <Box>
-      <AdminUserControllBox />
+      <AdminUserBox />
       <AdminStatisticBox />
     </Box>
   );

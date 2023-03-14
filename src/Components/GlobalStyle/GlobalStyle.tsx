@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 import "modern-normalize";
 import "react-toastify/dist/ReactToastify.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const GlobalStyle = createGlobalStyle<any>`
  body {

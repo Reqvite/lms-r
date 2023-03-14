@@ -7,6 +7,7 @@ import { AppDispatch } from "redux/store";
 import { fetchAllUsersData } from "redux/admin/operations";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import DatePicker from "react-datepicker";
 import { getDate } from "helpers/helpers";
 import {
   Button,
@@ -17,6 +18,7 @@ import {
   StatisticListItem,
 } from "Components/GlobalStyle/Box.styled";
 import { selectAdminTests, selectIsLoading } from "redux/admin/selectors";
+import StartCustomInput from "Components/Buttons/CalendarButton";
 
 const AdminStatisticBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -25,8 +27,11 @@ const AdminStatisticBox: FC = () => {
   const tests = useSelector(selectAdminTests);
   const isLoading = useSelector(selectIsLoading);
 
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
+
   useEffect(() => {
-    if (!isLoading && tests?.length === 0 && status) {
+    if (!isLoading.tests && tests?.length === 0 && status) {
       toast.error("Даних за цим запитом не знайдено", {
         autoClose: 3000,
       });
@@ -39,13 +44,15 @@ const AdminStatisticBox: FC = () => {
     const form = e.currentTarget as HTMLFormElement;
     const params = {
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      limit: (form.elements.namedItem("limit") as HTMLInputElement).value,
+      startDate: dateRange[0],
+      endDate: dateRange[1],
     };
     if (user.role === "admin" && user.hasAccess) {
       dispatch(fetchAllUsersData(params));
       setStatus(true);
     }
     form.reset();
+    setDateRange([null, null]);
   };
 
   return (
@@ -55,21 +62,18 @@ const AdminStatisticBox: FC = () => {
         <FormBox onSubmit={handleParams}>
           <InputBox>
             <Label htmlFor="email">
-              <Input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="Пошта або повне Ім'я"
-              />
+              <Input type="text" id="email" name="email" placeholder="Пошта" />
             </Label>
-            <Label htmlFor="limit">
-              <Input
-                type="number"
-                id="limit"
-                name="limit"
-                placeholder="Ліміт"
-              />
-            </Label>
+            <DatePicker
+              selectsRange={true}
+              startDate={startDate}
+              endDate={endDate}
+              onChange={(update: any) => {
+                setDateRange(update);
+              }}
+              withPortal
+              customInput={<StartCustomInput />}
+            />
           </InputBox>
           <Button
             whileHover={{
@@ -137,7 +141,12 @@ const FormBox = styled.form`
   align-items: center;
   justify-content: flex-end;
 `;
-const InputBox = styled.div``;
+const InputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Label = styled.label`
   :not(:first-child) {
