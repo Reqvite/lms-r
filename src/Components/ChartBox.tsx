@@ -16,7 +16,7 @@ const ChartBox = () => {
   const statistic = useSelector(selectUserStatistic);
 
   useEffect(() => {
-    if (statistic.length !== 0) {
+    if (statistic?.length !== 0) {
       setData([
         { name: "Group A", value: statistic[1] },
         { name: "Group B", value: statistic[0] },
