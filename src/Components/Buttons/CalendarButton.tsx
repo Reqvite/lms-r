@@ -18,11 +18,13 @@ const StartCustomInput: FC = forwardRef<any>(({ value, onClick }: any, ref) => (
   </Button>
 ));
 
-export default StartCustomInput;
 const Button = styled(motion.button)`
   ${(p) => p.theme.components.buttons.secondaryButton}
   margin-top: ${(p) => p.theme.space[2]}px;
+  margin-bottom: ${(p) => p.theme.space[2]}px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+
+export default StartCustomInput;

@@ -138,8 +138,9 @@ const FormBox = styled.form`
   width: 100%;
   max-width: 400px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 `;
 const InputBox = styled.div`
   display: flex;

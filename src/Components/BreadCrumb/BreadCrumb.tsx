@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
+import {
+  MdOutlineMenuBook,
+  MdOutlineVideoChat,
+  MdOutlinePsychologyAlt,
+} from "react-icons/md";
 import styled from "styled-components";
 import BreadCrumbList from "./BreadCrumbItem";
 
@@ -47,13 +52,22 @@ const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
       </Box>
       <List>
         <ListItem>
-          <NavListItemLink to="guide">Конспект</NavListItemLink>
+          <NavListItemLink to="guide">
+            Конспект
+            <MdOutlineMenuBook size={20} style={{ marginLeft: "4px" }} />
+          </NavListItemLink>
         </ListItem>
         <ListItem>
-          <NavListItemLink to="materials">Матеріали</NavListItemLink>
+          <NavListItemLink to="materials">
+            Матеріали
+            <MdOutlineVideoChat size={20} style={{ marginLeft: "4px" }} />
+          </NavListItemLink>
         </ListItem>
         <ListItem>
-          <NavListItemLink to="testing">Тести</NavListItemLink>
+          <NavListItemLink to="testing">
+            Тести
+            <MdOutlinePsychologyAlt size={20} style={{ marginLeft: "4px" }} />
+          </NavListItemLink>
         </ListItem>
       </List>
       <Outlet />
@@ -86,6 +100,7 @@ export const BreadCrumbsLink = styled(NavLink)`
 
 export const List = styled(motion.ul)`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   margin-top: ${(p) => p.theme.space[2]}px;
   margin-bottom: ${(p) => p.theme.space[3]}px;
@@ -94,7 +109,8 @@ export const List = styled(motion.ul)`
 export const ListItem = styled.li``;
 
 export const NavListItemLink = styled(NavLink)`
-  display: block;
+  display: flex;
+  align-items: center;
   font-weight: ${(p) => p.theme.fontWeights.bold};
   padding: ${(p) => p.theme.space[3]}px ${(p) => p.theme.space[3]}px;
   &.active {

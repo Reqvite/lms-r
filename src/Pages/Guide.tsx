@@ -21,7 +21,7 @@ const Wrap = styled.div`
 const Iframe = styled.iframe`
   background-color: white;
   width: 100%;
-  height: 89%;
+  height: 80vh;
   display: flex;
   border: none;
 `;
