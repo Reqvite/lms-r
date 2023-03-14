@@ -5,6 +5,7 @@ import { TestsState } from "types/types";
 const initialState = {
   items: [],
   finishedTests: [],
+  statistics: [],
   isLoading: false,
   error: null,
 };
@@ -35,7 +36,8 @@ const testsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.items = action.payload.data.userTests;
-        state.finishedTests = action.payload.data.finishTests;
+        state.finishedTests = action.payload.data.finishedTests;
+        state.statistics = action.payload.data.testStatistics;
       })
       .addCase(fetchUserTests.rejected, (state, action) => {
         state.isLoading = false;

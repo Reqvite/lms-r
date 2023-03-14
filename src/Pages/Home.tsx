@@ -1,3 +1,4 @@
+import ChartBox from "Components/ChartBox";
 import StatisticBox from "Components/StatisticBox";
 import { useAuth } from "hooks";
 import styled from "styled-components";
@@ -10,7 +11,10 @@ const Home = () => {
       <Box>
         <UserName>Привіт, {user.name}!</UserName>
       </Box>
-      <StatisticBox />
+      <Wrap>
+        <StatisticBox />
+        <ChartBox />
+      </Wrap>
     </>
   );
 };
@@ -30,6 +34,14 @@ const UserName = styled.p`
   line-height: ${(p) => p.theme.lineHeights.heading};
   font-weight: ${(p) => p.theme.fontWeights.bold};
   text-align: center;
+`;
+
+const Wrap = styled.div`
+  @media screen and (min-width: 960px) {
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+  }
 `;
 
 export default Home;

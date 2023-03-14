@@ -39,7 +39,7 @@ const StatisticBox: FC = () => {
   return (
     <Box>
       <HeaderBox>
-        <StatisticListHeader>Результати</StatisticListHeader>
+        <StatisticListHeader>Результати тестів</StatisticListHeader>
         <ResultsButton
           onClick={handleResultButton}
           whileHover={{

@@ -6,5 +6,8 @@ export const selectUserTests = ({ tests }: { tests: TestsState }) =>
 export const selectUserFinishedTests = ({ tests }: { tests: TestsState }) =>
   tests.finishedTests;
 
+export const selectUserStatistic = ({ tests }: { tests: TestsState }) =>
+  tests.statistics;
+
 export const selectIsLoading = ({ tests }: { tests: TestsState }) =>
   tests.isLoading;

@@ -29,6 +29,7 @@ export interface AuthPayload {
 export interface TestsState {
   items: any;
   finishedTests: any;
+  statistics: number[];
   isLoading: boolean;
   error: any;
 }
