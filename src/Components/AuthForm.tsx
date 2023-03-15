@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import React, { FC } from "react";
+import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { login, register } from "redux/auth/operations";

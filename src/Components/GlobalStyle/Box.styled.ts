@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Box = styled.div`
   width: 100%;
   max-width: 800px;
-  max-height: 700px;
+  max-height: 650px;
   overflow-y: auto;
   overflow-x: hidden;
   padding: ${(p) => p.theme.space[4]}px;

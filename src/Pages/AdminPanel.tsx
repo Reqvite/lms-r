@@ -1,14 +1,15 @@
-import AdminStatisticBox from "Components/Admin/AdminStatisticBox";
-import AdminUserBox from "Components/Admin/AdminUserBox";
-import Loader from "Components/Loader";
+import { FC } from "react";
 import { useAuth } from "hooks";
+import AdminStatisticBox from "Components/AdminBoxes/AdminStatisticBox";
+import AdminUserBox from "Components/AdminBoxes/AdminUserBox";
+import Loader from "Components/Loader";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userAccess } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
 import styled from "styled-components";
 
-const AdminPanel = () => {
+const AdminPanel: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user, isLoading, error } = useAuth();
 

@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AuthPayload } from "types/types";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://lms-api-eu.onrender.com";
 //localhost:3000
 //lms-api-eu.onrender.com
 

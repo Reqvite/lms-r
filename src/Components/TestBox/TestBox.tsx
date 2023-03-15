@@ -3,16 +3,16 @@ import { useAuth } from "hooks";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
-import { addTest, fetchUserTests } from "redux/tests/operations";
-import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { courses } from "data/tests";
 import styled, { useTheme } from "styled-components";
 import Timer from "Components/Timer";
-import Dropdown from "Components/DropDown/DropDown";
+import Dropdown from "Components/DropDowns/TestsDropDown";
 import Question from "./Question/Question";
 import Loader from "Components/Loader";
+import { addTest, fetchUserTests } from "redux/tests/operations";
+import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
 
 const TestBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();

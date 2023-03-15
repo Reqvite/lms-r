@@ -1,4 +1,4 @@
-import { stack as Menu } from "react-burger-menu";
+import { slide as Menu } from "react-burger-menu";
 import { FC, useState } from "react";
 import { useAuth } from "hooks";
 import { useSelector } from "react-redux";
@@ -31,6 +31,7 @@ const MobileMenu: FC = () => {
         styles={theme === "light" ? lightMenu : darkMenu}
         right
         onStateChange={isMenuOpen}
+        isOpen={isOpen}
       >
         <Nav>
           <UserBox>
@@ -54,7 +55,11 @@ const MobileMenu: FC = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <NavListItemLink to={path} end>
+                  <NavListItemLink
+                    to={path}
+                    end
+                    onClick={() => setIsOpen(false)}
+                  >
                     {title}
                   </NavListItemLink>
                 </ListItem>

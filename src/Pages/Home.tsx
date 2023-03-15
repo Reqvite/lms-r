@@ -1,6 +1,6 @@
-import ChartBox from "Components/HomeBoxes/ChartBox";
-import StatisticBox from "Components/HomeBoxes/StatisticBox";
 import { useAuth } from "hooks";
+import FinishedTestsPieBox from "Components/HomeBoxes/FinishedTestsPieBox";
+import StatisticBox from "Components/HomeBoxes/StatisticBox";
 import styled from "styled-components";
 
 const Home = () => {
@@ -13,7 +13,7 @@ const Home = () => {
       </Box>
       <Wrap>
         <StatisticBox />
-        <ChartBox />
+        <FinishedTestsPieBox />
       </Wrap>
     </>
   );

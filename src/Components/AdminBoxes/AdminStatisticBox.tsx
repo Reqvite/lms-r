@@ -1,14 +1,12 @@
-import { FC } from "react";
-import { useEffect, useState } from "react";
-import Loader from "Components/Loader";
+import { FC, useEffect, useState } from "react";
 import { useAuth } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
-import { fetchAllUsersData } from "redux/admin/operations";
-import styled from "styled-components";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
-import { getDate } from "helpers/helpers";
+import Loader from "Components/Loader";
+import StartCustomInput from "Components/Buttons/CalendarButton";
+import styled from "styled-components";
 import {
   Button,
   FirstText,
@@ -17,8 +15,9 @@ import {
   StatisticList,
   StatisticListItem,
 } from "Components/GlobalStyle/Box.styled";
+import { getDate } from "helpers/helpers";
+import { fetchAllUsersData } from "redux/admin/operations";
 import { selectAdminTests, selectIsLoading } from "redux/admin/selectors";
-import StartCustomInput from "Components/Buttons/CalendarButton";
 
 const AdminStatisticBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();

@@ -1,10 +1,13 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import Loader from "Components/Loader";
 import { useAuth } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "redux/admin/operations";
-import { selectIsLoading, selectUsers } from "redux/admin/selectors";
+import { motion } from "framer-motion";
 import { AppDispatch } from "redux/store";
+import { toast } from "react-toastify";
+import UserModal from "../Modals/UserModal";
+import { AiFillTool } from "react-icons/ai";
+import styled from "styled-components";
 import {
   Button,
   FirstText,
@@ -13,14 +16,10 @@ import {
   StatisticList,
   StatisticListItem,
 } from "Components/GlobalStyle/Box.styled";
-import styled from "styled-components";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import UserModal from "./Modal/UserModal";
-import { AiFillTool } from "react-icons/ai";
-import { selectTheme } from "redux/theme/selectors";
 import { getDate } from "helpers/helpers";
-import { motion } from "framer-motion";
+import { selectTheme } from "redux/theme/selectors";
+import { selectIsLoading, selectUsers } from "redux/admin/selectors";
+import { fetchUsers } from "redux/admin/operations";
 
 const AdminUserControllBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();

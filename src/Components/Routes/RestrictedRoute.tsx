@@ -1,5 +1,5 @@
-import { useAuth } from "hooks";
 import { FC } from "react";
+import { useAuth } from "hooks";
 import { Navigate } from "react-router-dom";
 import { RestrictedRouteProps } from "types/types";
 

@@ -1,12 +1,12 @@
-import { useState, useEffect, useMemo } from "react";
+import { FC, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { PieChart, Pie, Cell } from "recharts";
-import { selectUserStatistic } from "redux/tests/selectors";
 import styled from "styled-components";
+import { selectUserStatistic } from "redux/tests/selectors";
 
 const COLORS = ["rgba(44, 160, 49, 0.8)", "rgb(187, 3, 49)"];
 
-const ChartBox = () => {
+const ChartBox: FC = () => {
   const [data, setData] = useState<any>([{}, {}]);
   const [percentage, setPersentage] = useState<number>(0);
   const statistic = useSelector(selectUserStatistic);
@@ -17,18 +17,21 @@ const ChartBox = () => {
         { name: "Group A", value: statistic[1] },
         { name: "Group B", value: statistic[0] },
       ]);
-      setPersentage((100 * 5) / (statistic[0] + statistic[1]));
+      setPersentage((100 * statistic[1]) / (statistic[0] + statistic[1]));
     }
   }, [statistic]);
 
   return (
     <Box>
       <StatisticListHeader>Статистика завершених тестів</StatisticListHeader>
-      {statistic?.length !== 0 && (
+      {statistic?.length >= 1 && (
         <>
           <p>Всього пройдено тестів:{statistic[0] + statistic[1]}</p>
           <PieChatBox>
-            <Percentage>{percentage.toFixed(2)} %</Percentage>
+            {statistic[0] + statistic[1] !== 0 && (
+              <Percentage>{percentage.toFixed(2)} %</Percentage>
+            )}
+
             <PieChart
               key={Math.random()}
               width={230}
@@ -42,6 +45,7 @@ const ChartBox = () => {
                 paddingAngle={5}
                 dataKey="value"
                 label
+                animationBegin={200}
                 stroke="none"
               >
                 {data.map((entry: any, index: any) => (

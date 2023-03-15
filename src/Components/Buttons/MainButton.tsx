@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { useAuth } from "hooks";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { useAuth } from "hooks";
 import Loader from "Components/Loader";
 
 interface MainButtonProps {

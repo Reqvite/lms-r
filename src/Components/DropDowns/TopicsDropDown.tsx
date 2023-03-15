@@ -1,4 +1,5 @@
 import { FC, useState, useEffect } from "react";
+import { useWindowSize } from "hooks";
 import styled from "styled-components";
 import { BsChevronDown } from "react-icons/bs";
 import { selectTheme } from "redux/theme/selectors";
@@ -14,6 +15,8 @@ const TopicsDropDown: FC<DropDownProps> = ({ onData, placeHolder, topics }) => {
   const { theme: currentTheme }: any = useSelector(selectTheme);
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [selectValue, setSelectValue] = useState<string | null>(null);
+
+  const windowSize = useWindowSize();
 
   useEffect(() => {
     const handler = () => setShowMenu(false);
@@ -42,7 +45,9 @@ const TopicsDropDown: FC<DropDownProps> = ({ onData, placeHolder, topics }) => {
   };
 
   return (
-    <DropDownContainer>
+    <DropDownContainer
+      style={{ width: windowSize.width <= 835 ? "100%" : "200px" }}
+    >
       <DropDownInput onClick={handleInputClick}>
         {showMenu && (
           <DropDownMenu>
@@ -70,9 +75,7 @@ const TopicsDropDown: FC<DropDownProps> = ({ onData, placeHolder, topics }) => {
 
 const DropDownContainer = styled.div`
   position: relative;
-  width: 200px;
   text-align: left;
-
   border: ${(p) => p.theme.borders.dropDownBorder};
   border-radius: ${(p) => p.theme.borders.baseBorder};
 `;

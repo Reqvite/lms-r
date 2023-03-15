@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
 import { FC } from "react";
+import { motion } from "framer-motion";
+import { useWindowSize } from "hooks";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import {
   MdOutlineMenuBook,
@@ -7,10 +8,13 @@ import {
   MdOutlinePsychologyAlt,
 } from "react-icons/md";
 import styled from "styled-components";
-import BreadCrumbList from "./BreadCrumbItem";
+import TopicsDropDown from "Components/DropDowns/TopicsDropDown";
+import BreadCrumbList from "./BreadCrumbList";
 
 const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
   const { pathname } = useLocation();
+
+  const windowSize = useWindowSize();
 
   const handleData = (topicTitle: string, id: any): void => {
     onData(topicTitle, id);
@@ -42,13 +46,21 @@ const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
   return (
     <>
       <Box>
-        <BreadCrumbList
-          crumbs={crumbs}
-          handleData={handleData}
-          topics={topics}
-          selectTopic={selectTopic}
-          path={path}
-        />
+        {windowSize.width <= 835 ? (
+          <TopicsDropDown
+            placeHolder={selectTopic}
+            onData={handleData}
+            topics={topics}
+          />
+        ) : (
+          <BreadCrumbList
+            crumbs={crumbs}
+            handleData={handleData}
+            topics={topics}
+            selectTopic={selectTopic}
+            path={path}
+          />
+        )}
       </Box>
       <List>
         <ListItem>

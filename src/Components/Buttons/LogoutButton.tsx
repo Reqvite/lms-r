@@ -1,12 +1,13 @@
+import { FC } from "react";
 import { motion } from "framer-motion";
 import { IoIosLogOut } from "react-icons/io";
+import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
 import { selectTheme } from "redux/theme/selectors";
-import styled from "styled-components";
+import { logOut } from "redux/auth/operations";
 
-const LogoutButton = () => {
+const LogoutButton: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { theme }: any = useSelector(selectTheme);
   return (

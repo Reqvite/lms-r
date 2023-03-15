@@ -1,9 +1,8 @@
-import { FC } from "react";
-import { useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { courses } from "data/tests";
-import { motion } from "framer-motion";
 
 const Courses: FC = () => {
   const [showCourses, setShowCourses] = useState(true);
