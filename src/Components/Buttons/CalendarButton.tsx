@@ -3,20 +3,22 @@ import { motion } from "framer-motion";
 import { BiCalendar } from "react-icons/bi";
 import styled from "styled-components";
 
-const StartCustomInput: FC = forwardRef<any>(({ value, onClick }: any, ref) => (
-  <Button
-    whileHover={{
-      scale: 1.05,
-    }}
-    whileTap={{ scale: 0.95 }}
-    onClick={onClick}
-    ref={ref}
-    type="button"
-  >
-    <BiCalendar size={20} style={{ marginRight: "2px" }} />
-    {value}
-  </Button>
-));
+const StartCustomInput: FC = forwardRef<HTMLButtonElement>(
+  ({ value, onClick }: any, ref) => (
+    <Button
+      whileHover={{
+        scale: 1.05,
+      }}
+      whileTap={{ scale: 0.95 }}
+      onClick={onClick}
+      ref={ref}
+      type="button"
+    >
+      <BiCalendar size={20} style={{ marginRight: "2px" }} />
+      {value}
+    </Button>
+  )
+);
 
 const Button = styled(motion.button)`
   ${(p) => p.theme.components.buttons.secondaryButton}

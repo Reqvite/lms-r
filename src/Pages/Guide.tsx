@@ -14,15 +14,15 @@ const Guide: FC = () => {
   );
 };
 
-const Wrap = styled.div`
-  padding-bottom: 56px;
-  height: 100vh;
-`;
+const Wrap = styled.div``;
 const Iframe = styled.iframe`
-  background-color: white;
-  width: 100%;
-  height: 80vh;
   display: flex;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  max-height: 70vh;
+  background-color: white;
   border: none;
 `;
 

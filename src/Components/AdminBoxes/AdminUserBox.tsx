@@ -16,15 +16,15 @@ import {
   StatisticList,
   StatisticListItem,
 } from "Components/GlobalStyle/Box.styled";
-import { getDate } from "helpers/helpers";
 import { selectTheme } from "redux/theme/selectors";
 import { selectIsLoading, selectUsers } from "redux/admin/selectors";
 import { fetchUsers } from "redux/admin/operations";
+import { getDate } from "helpers/helpers";
 
 const AdminUserControllBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const [status, setStatus] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState(null);
   const isLoading = useSelector(selectIsLoading);
   const users = useSelector(selectUsers);

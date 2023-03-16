@@ -34,6 +34,15 @@ export interface TestsState {
   error: any;
 }
 
+export interface AdminState {
+  users: any;
+  tests: any;
+  isLoading: {
+    tests: boolean;
+    users: boolean;
+  };
+}
+
 export interface RestrictedRouteProps {
   component: ReactElement;
   redirectTo?: string;

@@ -27,6 +27,7 @@ const App = () => {
   const theme = themeMode === "light" ? lightTheme : darkTheme;
 
   const location = useLocation();
+
   const shouldRedirect = !isRefreshing && !isLoggedIn;
   const path = shouldRedirect ? "/login" : location.pathname;
 

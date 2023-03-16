@@ -61,6 +61,6 @@ a {
 *::-webkit-scrollbar-thumb {
     border-radius: 5px;
   background-color: darkgrey;
-  outline: 1px solid slategrey;
+
 }
 `;

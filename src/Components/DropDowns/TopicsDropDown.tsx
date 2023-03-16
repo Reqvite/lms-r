@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 interface DropDownProps {
   placeHolder: string;
   onData: (dataFromChild: string, id: number) => void;
-  topics: [];
+  topics: string[];
 }
 
 const TopicsDropDown: FC<DropDownProps> = ({ onData, placeHolder, topics }) => {
@@ -39,7 +39,7 @@ const TopicsDropDown: FC<DropDownProps> = ({ onData, placeHolder, topics }) => {
     return placeHolder;
   };
 
-  const onItemClick = (topicTitle: string, id: any) => {
+  const onItemClick = (topicTitle: string, id: number) => {
     setSelectValue(topicTitle);
     onData(topicTitle, id);
   };

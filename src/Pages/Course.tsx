@@ -14,7 +14,7 @@ import Materials from "./Materials";
 import { courses } from "data/tests";
 
 const Course: FC = () => {
-  const { courseID } = useParams();
+  const { courseID } = useParams<{ courseID: string }>();
 
   const [topics, setTopics] = useState<string | null>(null);
   const [selectTopic, setSelectTopic] = useState<string | null>(null);

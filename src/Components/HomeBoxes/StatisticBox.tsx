@@ -1,6 +1,4 @@
-import { FC } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { FC, useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { fetchAllTests, fetchUserTests } from "redux/tests/operations";
@@ -23,6 +21,10 @@ const StatisticBox: FC = () => {
 
   const tests = useSelector(selectUserTests);
   const isLoading = useSelector(selectIsLoading);
+
+  const memoizedTests = useMemo(() => {
+    return [...tests];
+  }, [tests]);
 
   useEffect(() => {
     if (!allList) {
@@ -52,7 +54,7 @@ const StatisticBox: FC = () => {
       </HeaderBox>
       {!isLoading ? (
         <>
-          {tests.length === 0 ? (
+          {memoizedTests.length === 0 ? (
             <Error>Ви ще не здали жодного тесту.</Error>
           ) : (
             <StatisticList>
@@ -62,7 +64,7 @@ const StatisticBox: FC = () => {
                 <ListText>Оцінка</ListText>
                 <ListText>Дата</ListText>
               </StatisticListItem>
-              {[...tests].map(
+              {[...memoizedTests].map(
                 ({ _id, mark, testTitle, createdAt, fullname }: any) => (
                   <StatisticListItem key={_id}>
                     {allList && <FirstText>{fullname}</FirstText>}

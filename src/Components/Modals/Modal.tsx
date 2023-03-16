@@ -1,10 +1,12 @@
+import { FC } from "react";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
-const modalRoot: any = document.querySelector("#image-modal-root");
+const modalRoot: Element | DocumentFragment =
+  document.querySelector("#image-modal-root")!;
 
-export const Modal = ({ toggleModal, children }: any) => {
+export const Modal: FC = ({ toggleModal, children }: any) => {
   useEffect(() => {
     window.addEventListener("keydown", closeModal);
     return () => {
@@ -12,13 +14,13 @@ export const Modal = ({ toggleModal, children }: any) => {
     };
   });
 
-  const closeModal = (e: any) => {
+  const closeModal = (e: KeyboardEvent) => {
     if (e.code === "Escape") {
       toggleModal();
     }
   };
 
-  const onBackdropClick = (e: any) => {
+  const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       toggleModal();
     }

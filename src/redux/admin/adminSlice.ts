@@ -1,5 +1,6 @@
 import { createSlice, ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import { toast, ToastContent } from "react-toastify";
+import { AdminState } from "types/types";
 import { deleteUser, fetchAllUsersData, fetchUsers } from "./operations";
 
 const initialState = {
@@ -15,7 +16,7 @@ export const adminSlice = createSlice({
   name: "admin",
   initialState,
   reducers: {},
-  extraReducers: (builder: ActionReducerMapBuilder<any>) =>
+  extraReducers: (builder: ActionReducerMapBuilder<AdminState>) =>
     builder
       .addCase(fetchUsers.pending, (state) => {
         state.isLoading.users = true;
@@ -33,12 +34,10 @@ export const adminSlice = createSlice({
       })
       .addCase(fetchAllUsersData.fulfilled, (state, action) => {
         state.isLoading.tests = false;
-        state.error = null;
         state.tests = action.payload.data.data;
       })
       .addCase(fetchAllUsersData.rejected, (state, action) => {
         state.isLoading.tests = false;
-        state.error = action.payload;
       })
       .addCase(deleteUser.pending, (state) => {})
       .addCase(deleteUser.fulfilled, (state, action) => {
@@ -46,6 +45,10 @@ export const adminSlice = createSlice({
           (user: any) => user._id === action.payload.userId
         );
         state.users.splice(idx, 1);
+        const updatedTests = state.tests?.filter(
+          ({ owner }: any) => owner !== action.payload.userId
+        );
+        state.tests = updatedTests;
         toast.success("Користувач  видалений");
       })
       .addCase(deleteUser.rejected, (state, action) => {
