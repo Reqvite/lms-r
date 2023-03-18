@@ -6,7 +6,7 @@ import { login, register } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
 import styled, { useTheme } from "styled-components";
 import { Pages } from "types/types";
-import MainButton from "Components/Buttons/MainButton";
+import MainButton from "Components/ui/Buttons/MainButton";
 
 interface AuthFormProps {
   page: number;

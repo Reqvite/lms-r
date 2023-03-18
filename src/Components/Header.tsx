@@ -5,9 +5,15 @@ import { NavLink, useLocation } from "react-router-dom";
 import { AppDispatch } from "redux/store";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import ToggleThemeButton from "Components/Buttons/ToggleThemeButton";
+import ToggleThemeButton from "Components/ui/Buttons/ToggleThemeButton";
 import { fetchUserTests } from "redux/tests/operations";
-import LogoutButton from "./Buttons/LogoutButton";
+import LogoutButton from "./ui/Buttons/LogoutButton";
+
+const navigation = [
+  { id: 1, title: "Домашня сторінка", path: "" },
+  { id: 2, title: "Курси", path: "courses" },
+  { id: 3, title: "Панель Адміністратора", path: "admin-panel" },
+];
 
 const Header: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -18,11 +24,6 @@ const Header: FC = () => {
   }, [dispatch]);
 
   const location = useLocation();
-  const navigation = [
-    { id: 1, title: "Домашня сторінка", path: "" },
-    { id: 2, title: "Курси", path: "courses" },
-    { id: 3, title: "Панель Адміністратора", path: "admin-panel" },
-  ];
 
   return location.pathname.length >= 20 &&
     location.pathname.includes("courses") ? null : (

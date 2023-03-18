@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
-import Loader from "Components/Loader";
-import StartCustomInput from "Components/Buttons/CalendarButton";
+import Loader from "Components/ui/Loader";
+import StartCustomInput from "Components/ui/Buttons/CalendarButton";
 import styled from "styled-components";
 import {
   Button,
@@ -25,7 +25,6 @@ const AdminStatisticBox: FC = () => {
   const [status, setStatus] = useState<boolean>(false);
   const tests = useSelector(selectAdminTests);
   const isLoading = useSelector(selectIsLoading);
-
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
 

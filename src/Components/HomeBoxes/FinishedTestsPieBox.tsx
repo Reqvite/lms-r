@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, memo } from "react";
 import { useSelector } from "react-redux";
 import { PieChart, Pie, Cell } from "recharts";
 import styled from "styled-components";
@@ -6,7 +6,7 @@ import { selectUserStatistic } from "redux/tests/selectors";
 
 const COLORS = ["rgba(44, 160, 49, 0.8)", "rgb(187, 3, 49)"];
 
-const ChartBox: FC = () => {
+const ChartBox: FC = memo(() => {
   const [data, setData] = useState<any>([{}, {}]);
   const [percentage, setPersentage] = useState<number>(0);
   const statistic = useSelector(selectUserStatistic);
@@ -61,7 +61,7 @@ const ChartBox: FC = () => {
       )}
     </Box>
   );
-};
+});
 
 const Box = styled.div`
   width: 100%;

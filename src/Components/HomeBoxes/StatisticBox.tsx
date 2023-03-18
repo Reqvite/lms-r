@@ -1,9 +1,9 @@
-import { FC, useState, useEffect, useMemo } from "react";
+import { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { fetchAllTests, fetchUserTests } from "redux/tests/operations";
 import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
-import Loader from "Components/Loader";
+import Loader from "Components/ui/Loader";
 import styled from "styled-components";
 import { getDate } from "helpers/helpers";
 import {
@@ -21,10 +21,6 @@ const StatisticBox: FC = () => {
 
   const tests = useSelector(selectUserTests);
   const isLoading = useSelector(selectIsLoading);
-
-  const memoizedTests = useMemo(() => {
-    return [...tests];
-  }, [tests]);
 
   useEffect(() => {
     if (!allList) {
@@ -54,7 +50,7 @@ const StatisticBox: FC = () => {
       </HeaderBox>
       {!isLoading ? (
         <>
-          {memoizedTests.length === 0 ? (
+          {tests.length === 0 ? (
             <Error>Ви ще не здали жодного тесту.</Error>
           ) : (
             <StatisticList>
@@ -64,7 +60,7 @@ const StatisticBox: FC = () => {
                 <ListText>Оцінка</ListText>
                 <ListText>Дата</ListText>
               </StatisticListItem>
-              {[...memoizedTests].map(
+              {[...tests].map(
                 ({ _id, mark, testTitle, createdAt, fullname }: any) => (
                   <StatisticListItem key={_id}>
                     {allList && <FirstText>{fullname}</FirstText>}

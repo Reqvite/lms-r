@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import ToggleThemeButton from "Components/Buttons/ToggleThemeButton";
+import ToggleThemeButton from "Components/ui/Buttons/ToggleThemeButton";
 import { selectTheme } from "redux/theme/selectors";
 import { darkMenu, lightMenu } from "theme/theme";
 import LogoutButton from "./Buttons/LogoutButton";

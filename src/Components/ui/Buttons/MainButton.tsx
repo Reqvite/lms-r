@@ -1,14 +1,14 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useAuth } from "hooks";
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import Loader from "Components/Loader";
+import Loader from "Components/ui/Loader";
 
 interface MainButtonProps {
   title?: string;
 }
 
-const MainButton: FC<MainButtonProps> = ({ title }) => {
+const MainButton: FC<MainButtonProps> = memo(({ title }) => {
   const { isLoading } = useAuth();
   return (
     <Button
@@ -21,7 +21,7 @@ const MainButton: FC<MainButtonProps> = ({ title }) => {
       {!isLoading ? title : <Loader />}
     </Button>
   );
-};
+});
 
 const Button = styled(motion.button)`
   ${(p) => p.theme.components.buttons.mainButton}

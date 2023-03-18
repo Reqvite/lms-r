@@ -7,10 +7,10 @@ import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { courses } from "data/tests";
 import styled, { useTheme } from "styled-components";
-import Timer from "Components/Timer";
+import Timer from "Components/ui/Timer";
 import Dropdown from "Components/DropDowns/TestsDropDown";
 import Question from "./Question/Question";
-import Loader from "Components/Loader";
+import Loader from "Components/ui/Loader";
 import { addTest, fetchUserTests } from "redux/tests/operations";
 import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
 

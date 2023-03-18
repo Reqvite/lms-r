@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { motion } from "framer-motion";
 import { IoIosLogOut } from "react-icons/io";
 import styled from "styled-components";
@@ -7,7 +7,7 @@ import { AppDispatch } from "redux/store";
 import { selectTheme } from "redux/theme/selectors";
 import { logOut } from "redux/auth/operations";
 
-const LogoutButton: FC = () => {
+const LogoutButton: FC = memo(() => {
   const dispatch: AppDispatch = useDispatch();
   const { theme }: any = useSelector(selectTheme);
   return (
@@ -19,7 +19,7 @@ const LogoutButton: FC = () => {
       <IoIosLogOut size={30} color={theme === "light" ? "black" : "white"} />
     </Button>
   );
-};
+});
 
 const Button = styled(motion.button)`
   ${(p) => p.theme.components.buttons.iconButton}

@@ -6,8 +6,8 @@ import { AiOutlineRight } from "react-icons/ai";
 import TopicsDropDown from "Components/DropDowns/TopicsDropDown";
 import styled from "styled-components";
 import nextId from "react-id-generator";
-import ToggleThemeButton from "Components/Buttons/ToggleThemeButton";
-import LogoutButton from "Components/Buttons/LogoutButton";
+import ToggleThemeButton from "Components/ui/Buttons/ToggleThemeButton";
+import LogoutButton from "Components/ui/Buttons/LogoutButton";
 
 const BreadCrumbList: FC<any> = ({
   crumbs,

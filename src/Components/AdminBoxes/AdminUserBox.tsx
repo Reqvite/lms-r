@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
-import Loader from "Components/Loader";
+import Loader from "Components/ui/Loader";
 import { useAuth } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { AppDispatch } from "redux/store";
 import { toast } from "react-toastify";
-import UserModal from "../Modals/UserModal";
+import UserModal from "../ui/Modals/UserModal";
 import { AiFillTool } from "react-icons/ai";
 import styled from "styled-components";
 import {

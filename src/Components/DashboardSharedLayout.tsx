@@ -2,11 +2,11 @@ import { FC, useEffect, useState } from "react";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "Components/Header";
-import Loader from "Components/Loader";
+import Loader from "Components/ui/Loader";
 import styled from "styled-components";
 import MainBox from "Components/MainBox";
 import Footer from "Components/Footer";
-import MobileMenu from "Components/MobileMenu";
+import MobileMenu from "Components/ui/MobileMenu";
 import { useWindowSize } from "hooks";
 
 const DashboardSharedLayout: FC = () => {

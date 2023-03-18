@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { toggleTheme } from "redux/theme/themeSlice";
@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { WiMoonWaningCrescent2, WiSolarEclipse } from "react-icons/wi";
 import styled from "styled-components";
 
-const ToggleThemeButton: FC = () => {
+const ToggleThemeButton: FC = memo(() => {
   const dispatch: AppDispatch = useDispatch();
 
   const { theme }: any = useSelector(selectTheme);
@@ -37,7 +37,7 @@ const ToggleThemeButton: FC = () => {
       </Button>
     </AnimatePresence>
   );
-};
+});
 
 const Button = styled(motion.button)`
   ${(p) => p.theme.components.buttons.iconButton}
