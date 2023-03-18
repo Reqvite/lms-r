@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Header from "Components/Header";
 import Loader from "Components/ui/Loader";
 import styled from "styled-components";
-import MainBox from "Components/MainBox";
+import Main from "Components/Main";
 import Footer from "Components/Footer";
 import MobileMenu from "Components/ui/MobileMenu";
 import { useWindowSize } from "hooks";
@@ -26,11 +26,11 @@ const DashboardSharedLayout: FC = () => {
     <>
       <Container>
         {windowSize.width <= 835 ? <MobileMenu /> : <Header />}
-        <MainBox showMenu={showMenu}>
+        <Main showMenu={showMenu}>
           <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
-        </MainBox>
+        </Main>
         <Footer />
       </Container>
     </>

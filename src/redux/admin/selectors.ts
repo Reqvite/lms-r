@@ -1,3 +1,7 @@
-export const selectUsers = ({ admin }: { admin: any }) => admin.users;
-export const selectIsLoading = ({ admin }: { admin: any }) => admin.isLoading;
-export const selectAdminTests = ({ admin }: { admin: any }) => admin.tests;
+import { AdminStateI } from "types/adminTypes";
+
+export const selectUsers = ({ admin }: { admin: AdminStateI }) => admin.users;
+export const selectIsLoading = ({ admin }: { admin: AdminStateI }) =>
+  admin.isLoading;
+export const selectAdminTests = ({ admin }: { admin: AdminStateI }) =>
+  admin.tests;

@@ -7,17 +7,10 @@ import DatePicker from "react-datepicker";
 import Loader from "Components/ui/Loader";
 import StartCustomInput from "Components/ui/Buttons/CalendarButton";
 import styled from "styled-components";
-import {
-  Button,
-  FirstText,
-  HeaderBox,
-  ListText,
-  StatisticList,
-  StatisticListItem,
-} from "Components/GlobalStyle/Box.styled";
 import { getDate } from "helpers/helpers";
 import { fetchAllUsersData } from "redux/admin/operations";
 import { selectAdminTests, selectIsLoading } from "redux/admin/selectors";
+import { motion } from "framer-motion";
 
 const AdminStatisticBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -115,6 +108,17 @@ const AdminStatisticBox: FC = () => {
   );
 };
 
+const HeaderBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Button = styled(motion.button)`
+  margin-left: ${(p) => p.theme.space[3]}px;
+  ${(p) => p.theme.components.buttons.secondaryButton}
+`;
+
 const Box = styled.div`
   width: 100%;
   max-width: 800px;
@@ -160,6 +164,50 @@ const Input = styled.input`
   max-width: 250px;
   border-radius: 12px;
   padding: 10px 24px;
+`;
+
+const StatisticList = styled.ul`
+  margin-top: ${(p) => p.theme.space[3]}px;
+`;
+
+const StatisticListItem = styled.li`
+  text-align: center;
+  :not(:first-child) {
+    border: 1px solid #9090c296;
+  }
+  border-radius: 5px;
+  @media screen and (min-width: 550px) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  :not(:first-child) {
+    margin-top: ${(p) => p.theme.space[2]}px;
+  }
+`;
+
+const ListText = styled.p`
+  flex: 1;
+  margin-left: ${(p) => p.theme.space[3]}px;
+  text-align: center;
+  font-size: ${(p) => p.theme.fontSizes[2]}px;
+  line-height: ${(p) => p.theme.lineHeights.body};
+`;
+
+const FirstText = styled.p`
+  flex: 1;
+  margin-left: ${(p) => p.theme.space[3]}px;
+  text-align: center;
+  font-size: ${(p) => p.theme.fontSizes[2]}px;
+  line-height: ${(p) => p.theme.lineHeights.body};
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  :hover {
+    white-space: normal;
+    overflow: visible;
+  }
 `;
 
 export default AdminStatisticBox;

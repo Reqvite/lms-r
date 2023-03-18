@@ -12,7 +12,7 @@ import PrivateRoute from "Components/Routes/PrivateRoute";
 import Loader from "Components/ui/Loader";
 import Alert from "Components/ui/Alert";
 import Home from "Pages/Home";
-import LoginForm from "Pages/LoginFiorm";
+import LoginForm from "Pages/LoginForm";
 import SignupForm from "Pages/SignupForm";
 import Courses from "Pages/Courses";
 import Course from "Pages/Course";

@@ -1,6 +1,6 @@
 import { createSlice, ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import { toast, ToastContent } from "react-toastify";
-import { AdminState } from "types/types";
+import { AdminStateI } from "types/adminTypes";
 import { deleteUser, fetchAllUsersData, fetchUsers } from "./operations";
 
 const initialState = {
@@ -16,7 +16,7 @@ export const adminSlice = createSlice({
   name: "admin",
   initialState,
   reducers: {},
-  extraReducers: (builder: ActionReducerMapBuilder<AdminState>) =>
+  extraReducers: (builder: ActionReducerMapBuilder<AdminStateI>) =>
     builder
       .addCase(fetchUsers.pending, (state) => {
         state.isLoading.users = true;

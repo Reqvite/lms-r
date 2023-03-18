@@ -1,6 +1,6 @@
 import { addTest, fetchAllTests, fetchUserTests } from "./operations";
 import { ActionReducerMapBuilder, createSlice } from "@reduxjs/toolkit";
-import { TestsState } from "types/types";
+import { TestsStateI } from "types/testTypes";
 
 const initialState = {
   items: [],
@@ -14,7 +14,7 @@ const testsSlice = createSlice({
   name: "tests",
   initialState,
   reducers: {},
-  extraReducers: (builder: ActionReducerMapBuilder<TestsState>) =>
+  extraReducers: (builder: ActionReducerMapBuilder<TestsStateI>) =>
     builder
       .addCase(fetchAllTests.pending, (state, action) => {
         state.isLoading = true;

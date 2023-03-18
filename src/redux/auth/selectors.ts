@@ -1,14 +1,14 @@
-import { AuthState } from "types/types";
+import { AuthStateI } from "types/authTypes";
 
-export const selectIsLoggedIn = ({ auth }: { auth: AuthState }) =>
+export const selectIsLoggedIn = ({ auth }: { auth: AuthStateI }) =>
   auth.isLoggedIn;
 
-export const selectUser = ({ auth }: { auth: AuthState }) => auth.user;
+export const selectUser = ({ auth }: { auth: AuthStateI }) => auth.user;
 
-export const selectRefreshing = ({ auth }: { auth: AuthState }) =>
+export const selectRefreshing = ({ auth }: { auth: AuthStateI }) =>
   auth.isRefreshing;
 
-export const selectIsLoading = ({ auth }: { auth: AuthState }) =>
+export const selectIsLoading = ({ auth }: { auth: AuthStateI }) =>
   auth.isLoading;
 
-export const selectError = ({ auth }: { auth: AuthState }) => auth.error;
+export const selectError = ({ auth }: { auth: AuthStateI }) => auth.error;

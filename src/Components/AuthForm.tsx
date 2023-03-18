@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { login, register } from "redux/auth/operations";
 import { AppDispatch } from "redux/store";
 import styled, { useTheme } from "styled-components";
-import { Pages } from "types/types";
+import { Pages } from "types/authTypes";
 import MainButton from "Components/ui/Buttons/MainButton";
 
 interface AuthFormProps {

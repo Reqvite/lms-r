@@ -1,7 +1,7 @@
 import { FC } from "react";
 import AuthForm from "Components/AuthForm";
 
-import { Pages } from "types/types";
+import { Pages } from "types/authTypes";
 
 const SignupForm: FC = () => {
   return (

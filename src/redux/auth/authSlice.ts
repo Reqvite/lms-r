@@ -1,10 +1,10 @@
 import { createSlice, ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import { toast, ToastContent } from "react-toastify";
-import { AuthState } from "types/types";
+import { AuthStateI } from "types/authTypes";
 
 import { login, logOut, refreshUser, register, userAccess } from "./operations";
 
-const initialState: AuthState = {
+const initialState: AuthStateI = {
   user: { name: null, email: null, role: null, hasAccess: false },
   token: null,
   isLoggedIn: false,
@@ -17,7 +17,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
-  extraReducers: (builder: ActionReducerMapBuilder<AuthState>) =>
+  extraReducers: (builder: ActionReducerMapBuilder<AuthStateI>) =>
     builder
       .addCase(register.pending, (state) => {
         state.isLoading = true;

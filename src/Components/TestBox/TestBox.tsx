@@ -19,11 +19,13 @@ const TestBox: FC = () => {
   const { user } = useAuth();
   const userTests = useSelector(selectUserTests);
   const isLoading = useSelector(selectIsLoading);
-
   const [test, setTest] = useState<any>(null);
   const [testCipher, setTestCipher] = useState<string | null>(null);
   const [results, setResults] = useState<number[]>([]);
-  const [userMark, setUserMark] = useState<any>(null);
+  const [userMark, setUserMark] = useState<{
+    total: string;
+    correct: string;
+  } | null>(null);
   const [finishTestStatus, setFinishTestStatus] = useState<boolean>(false);
   const [startTestStatus, setStartTestStatus] = useState<boolean>(false);
   const [answeredQuestions, setAnsweredQuestions] = useState(new Set<number>());

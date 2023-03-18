@@ -7,6 +7,7 @@ import { themeReducer } from "./theme/themeSlice";
 import { combineReducers } from "redux";
 import { adminReducer } from "./admin/adminSlice";
 import { testsReducer } from "./tests/testsSlice";
+import { accessMiddleware } from "./middleware/accesMiddleware";
 
 const themePersistConfig = {
   key: "theme",
@@ -25,26 +26,12 @@ const userReducer = combineReducers({
   theme: persistReducer(themePersistConfig, themeReducer),
 });
 
-const newAdminReducer: any = combineReducers({
+export const newAdminReducer: any = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   tests: testsReducer,
   theme: persistReducer(themePersistConfig, themeReducer),
   admin: adminReducer,
 });
-
-const accessMiddleware =
-  ({ getState }: any) =>
-  (next: any) =>
-  (action: any) => {
-    const result = next(action);
-
-    if (action.payload?.data?.user?.role === "admin") {
-      localStorage.clear();
-      store.replaceReducer(newAdminReducer);
-    }
-
-    return result;
-  };
 
 export const store = configureStore({
   reducer: userReducer,
