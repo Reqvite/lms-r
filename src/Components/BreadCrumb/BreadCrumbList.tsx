@@ -80,6 +80,10 @@ export const BreadCrumbsItem = styled(motion.li)`
   display: flex;
   align-items: center;
   margin-left: ${(p) => p.theme.space[2]}px;
+
+  :nth-child(4n) {
+    width: 210px;
+  }
 `;
 export const BreadCrumbsLink = styled(NavLink)`
   padding: ${(p) => p.theme.space[3]}px ${(p) => p.theme.space[2]}px;

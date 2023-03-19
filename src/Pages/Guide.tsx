@@ -13,7 +13,11 @@ const Guide: FC = () => {
 
   return (
     <Box isFullscreen={isFullscreen}>
-      <Button onClick={handleFullscreenButton} size={windowSize.width}>
+      <Button
+        onClick={handleFullscreenButton}
+        size={windowSize.width}
+        isFullscreen={isFullscreen}
+      >
         <BsArrowsFullscreen size={20} color="#7474a5" />
       </Button>
       <Iframe
@@ -28,26 +32,31 @@ const Guide: FC = () => {
   );
 };
 
+interface Props {
+  isFullscreen: boolean;
+  size: number;
+}
+
 const Box = styled.div<{ isFullscreen: boolean }>`
   position: ${(p) => !p.isFullscreen && "relative"};
 `;
 
-const Button = styled.button<{ size: number }>`
+const Button = styled.button<Props>`
   background-color: transparent;
   border: none;
+  ${(p) =>
+    p.isFullscreen &&
+    `
   z-index: 2001;
+    `}
+
   position: absolute;
   right: ${(p) => (p.size >= 1036 ? "80px" : "25px")};
   top: 19px;
   cursor: pointer;
 `;
 
-interface IframeProps {
-  isFullscreen: boolean;
-  size: number;
-}
-
-const Iframe = styled.iframe<IframeProps>`
+const Iframe = styled.iframe<Props>`
   height: ${(p) =>
     p.size >= 430 ? "calc(100vh - 150px)" : "calc(100vh - 250px)"};
   width: 100%;
@@ -61,7 +70,7 @@ const Iframe = styled.iframe<IframeProps>`
       height: 100%;
       z-index: 2000;
     `}
-  background-color: white;
+  background-color: #ffffff;
   border: none;
 `;
 
