@@ -1,12 +1,9 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { useAuth } from "hooks";
-import { useDispatch } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
-import { AppDispatch } from "redux/store";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import ToggleThemeButton from "Components/ui/Buttons/ToggleThemeButton";
-import { fetchUserTests } from "redux/tests/operations";
 import LogoutButton from "./ui/Buttons/LogoutButton";
 
 const navigation = [
@@ -16,13 +13,7 @@ const navigation = [
 ];
 
 const Header: FC = () => {
-  const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
-
-  useEffect(() => {
-    dispatch(fetchUserTests());
-  }, [dispatch]);
-
   const location = useLocation();
 
   return location.pathname.length >= 20 &&

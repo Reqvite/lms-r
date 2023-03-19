@@ -43,11 +43,6 @@ const Question: FC<QuestionProps> = ({
             key={answerIndex}
             onClick={() => selectAnswer(questionIndex, answerIndex + 1, answer)}
             disabled={answeredQuestions.has(questionIndex)}
-            style={{
-              backgroundColor: answeredQuestions.has(questionIndex)
-                ? theme.colors.notActive
-                : theme.colors.active,
-            }}
             animate={{
               backgroundColor: answeredQuestions.has(questionIndex)
                 ? theme.colors.notActive
@@ -76,7 +71,7 @@ const ListItem = styled.li`
     margin-top: ${(p) => p.theme.space[3]}px;
   }
 `;
-const AnswersBox = styled.div`
+const AnswersBox = styled.div<any>`
   ${(p) => p.theme.flexCentered}
 `;
 const AnswerButton = styled(motion.button)`
