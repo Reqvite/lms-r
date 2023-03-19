@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
-const modalRoot: any = document.querySelector("#image-modal-root");
+const modalRoot: any = document.querySelector("#video-modal-root");
 
 export const Modal = ({ toggleModal, children }: any) => {
   useEffect(() => {

@@ -4,7 +4,7 @@ import styled from "styled-components";
 // import { MaterialsItem } from "Components/MaterialsItem/MaterialsItem";
 import { FaYoutube } from "react-icons/fa";
 
-export const MaterialsList: FC = ({ materials }: any) => {
+export const MaterialsList: FC = ({ materials, toggleModal }: any) => {
   const [title, setTitle] = useState(null);
 
   useEffect(() => {
@@ -16,12 +16,13 @@ export const MaterialsList: FC = ({ materials }: any) => {
     <Wrap>
       {title && <h3>{title}</h3>}
       <List>
-        {materials.map(({ id }: any) => (
+        {materials.map(({ id, url }: any) => (
           <Element key={id}>
             <FaYoutube />
-            <Button type="button">{id}</Button>
+            <Button type="button" onClick={() => toggleModal(id, url)}>
+              {id}
+            </Button>
           </Element>
-          // <MaterialsItem key={id} />
         ))}
       </List>
     </Wrap>
