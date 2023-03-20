@@ -1,5 +1,6 @@
-import StatisticBox from "Components/StatisticBox";
 import { useAuth } from "hooks";
+import FinishedTestsPieBox from "Components/HomeBoxes/FinishedTestsPieBox";
+import StatisticBox from "Components/HomeBoxes/StatisticBox";
 import styled from "styled-components";
 
 const Home = () => {
@@ -10,7 +11,10 @@ const Home = () => {
       <Box>
         <UserName>Привіт, {user.name}!</UserName>
       </Box>
-      <StatisticBox />
+      <Wrap>
+        <StatisticBox />
+        <FinishedTestsPieBox />
+      </Wrap>
     </>
   );
 };
@@ -30,6 +34,18 @@ const UserName = styled.p`
   line-height: ${(p) => p.theme.lineHeights.heading};
   font-weight: ${(p) => p.theme.fontWeights.bold};
   text-align: center;
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: ${(p) => p.theme.space[3]}px;
+  @media screen and (min-width: 960px) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+  }
 `;
 
 export default Home;

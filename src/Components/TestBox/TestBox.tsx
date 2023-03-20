@@ -3,27 +3,29 @@ import { useAuth } from "hooks";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
-import { addTest, fetchUserTests } from "redux/tests/operations";
-import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { courses } from "data/tests";
 import styled, { useTheme } from "styled-components";
-import Timer from "Components/Timer";
-import Dropdown from "Components/DropDown/DropDown";
+import Timer from "Components/ui/Timer";
+import Dropdown from "Components/DropDowns/TestsDropDown";
 import Question from "./Question/Question";
-import Loader from "Components/Loader";
+import Loader from "Components/ui/Loader";
+import { addTest, fetchUserTests } from "redux/tests/operations";
+import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
 
 const TestBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useAuth();
   const userTests = useSelector(selectUserTests);
   const isLoading = useSelector(selectIsLoading);
-
   const [test, setTest] = useState<any>(null);
   const [testCipher, setTestCipher] = useState<string | null>(null);
   const [results, setResults] = useState<number[]>([]);
-  const [userMark, setUserMark] = useState<any>(null);
+  const [userMark, setUserMark] = useState<{
+    total: string;
+    correct: string;
+  } | null>(null);
   const [finishTestStatus, setFinishTestStatus] = useState<boolean>(false);
   const [startTestStatus, setStartTestStatus] = useState<boolean>(false);
   const [answeredQuestions, setAnsweredQuestions] = useState(new Set<number>());

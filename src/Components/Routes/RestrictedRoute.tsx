@@ -1,9 +1,9 @@
-import { useAuth } from "hooks";
 import { FC } from "react";
+import { useAuth } from "hooks";
 import { Navigate } from "react-router-dom";
-import { RestrictedRouteProps } from "types/types";
+import { RouteI } from "types/routeTypes";
 
-const RestrictedRoute: FC<RestrictedRouteProps> = ({
+const RestrictedRoute: FC<RouteI> = ({
   component: Component,
   redirectTo = "/",
 }) => {

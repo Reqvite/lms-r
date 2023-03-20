@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Navigate } from "react-router-dom";
-import { RestrictedRouteProps } from "types/types";
+import { RouteI } from "types/routeTypes";
 
-const PrivateRoute: FC<RestrictedRouteProps> = ({
+const PrivateRoute: FC<RouteI> = ({
   component: Component,
   redirectTo = "/",
   isAllowed,

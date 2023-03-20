@@ -1,10 +1,10 @@
 import { createSlice, ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import { toast, ToastContent } from "react-toastify";
-import { AuthState } from "types/types";
+import { AuthStateI } from "types/authTypes";
 
 import { login, logOut, refreshUser, register, userAccess } from "./operations";
 
-const initialState: AuthState = {
+const initialState: AuthStateI = {
   user: { name: null, email: null, role: null, hasAccess: false },
   token: null,
   isLoggedIn: false,
@@ -17,7 +17,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
-  extraReducers: (builder: ActionReducerMapBuilder<AuthState>) =>
+  extraReducers: (builder: ActionReducerMapBuilder<AuthStateI>) =>
     builder
       .addCase(register.pending, (state) => {
         state.isLoading = true;
@@ -32,6 +32,7 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload as ToastContent<unknown>);
+        action.payload = null;
       })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
@@ -46,6 +47,7 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload as ToastContent<unknown>);
+        action.payload = null;
       })
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
@@ -82,6 +84,12 @@ export const authSlice = createSlice({
       .addCase(userAccess.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addDefaultCase((state, action) => {
+        if (action.error) {
+          state.error = action.payload;
+          toast.error(action.payload);
+        }
       }),
 });
 

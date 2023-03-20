@@ -7,7 +7,7 @@ interface MainBoxProps {
   showMenu: boolean;
 }
 
-const MainBox: FC<MainBoxProps> = ({ children, showMenu }) => {
+const Main: FC<MainBoxProps> = ({ children, showMenu }) => {
   const location = useLocation();
 
   const dynamicStyles =
@@ -32,4 +32,4 @@ const Box = styled.main`
   padding-bottom: 32px;
 `;
 
-export default MainBox;
+export default Main;

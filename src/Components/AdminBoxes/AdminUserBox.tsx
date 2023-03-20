@@ -1,46 +1,39 @@
-import { getDate } from "helpers/helpers";
-import Loader from "Components/Loader";
+import { FC, useEffect, useState } from "react";
+import Loader from "Components/ui/Loader";
 import { useAuth } from "hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "redux/admin/operations";
-import { selectIsLoading, selectUsers } from "redux/admin/selectors";
+import { motion } from "framer-motion";
 import { AppDispatch } from "redux/store";
-import {
-  Button,
-  FirstText,
-  HeaderBox,
-  ListText,
-  StatisticList,
-  StatisticListItem,
-} from "Components/GlobalStyle/Box.styled";
-import styled from "styled-components";
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import UserModal from "./Modal/UserModal";
+import UserModal from "../ui/Modals/UserModal";
 import { AiFillTool } from "react-icons/ai";
+import styled from "styled-components";
 import { selectTheme } from "redux/theme/selectors";
+import { selectIsLoading, selectUsers } from "redux/admin/selectors";
+import { fetchUsers } from "redux/admin/operations";
+import { getDate } from "helpers/helpers";
 
-const AdminUserControllBox = () => {
+const AdminUserControllBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const [status, setStatus] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState(null);
-  const usersLoading = useSelector(selectIsLoading);
+  const isLoading = useSelector(selectIsLoading);
   const users = useSelector(selectUsers);
   const { user } = useAuth();
 
   const { theme }: any = useSelector(selectTheme);
 
   useEffect(() => {
-    if (!usersLoading && users?.length === 0 && status) {
+    if (!isLoading.users && users?.length === 0 && status) {
       toast.error("Даних за цим запитом не знайдено", {
         autoClose: 3000,
       });
       setStatus(false);
     }
-  }, [status, users, usersLoading]);
+  }, [status, users, isLoading]);
 
-  const submit = () => {
+  const handleUsers = () => {
     if (user.role === "admin" && user.hasAccess) {
       dispatch(fetchUsers());
       setStatus(true);
@@ -57,9 +50,17 @@ const AdminUserControllBox = () => {
       <Box>
         <HeaderBox>
           <p>Користувачи</p>
-          <Button onClick={submit}>Пошук</Button>
+          <Button
+            onClick={handleUsers}
+            whileHover={{
+              scale: 1.05,
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Пошук
+          </Button>
         </HeaderBox>
-        {!usersLoading ? (
+        {!isLoading.users ? (
           <>
             {status && (
               <StatisticList>
@@ -73,7 +74,13 @@ const AdminUserControllBox = () => {
                     <FirstText>{fullname}</FirstText>
                     <FirstText>{email}</FirstText>
                     <ListText>{getDate(createdAt)}</ListText>
-                    <InfoButton onClick={() => toggleModal(_id)}>
+                    <InfoButton
+                      onClick={() => toggleModal(_id)}
+                      whileHover={{
+                        scale: 1.05,
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
                       <AiFillTool
                         size={25}
                         color={theme === "light" ? "black" : "white"}
@@ -85,13 +92,19 @@ const AdminUserControllBox = () => {
             )}
           </>
         ) : (
-          <Loader height="200px" />
+          <Loader height="100px" />
         )}
       </Box>
       {showModal && <UserModal toggleModal={toggleModal} user={userInfo} />}
     </>
   );
 };
+
+const HeaderBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const Box = styled.div`
   width: 100%;
@@ -103,11 +116,58 @@ const Box = styled.div`
   background-color: ${(p) => p.theme.colors.secondaryBgColor};
   border-radius: ${(p) => p.theme.borders.baseBorder};
 `;
-
-const InfoButton = styled.button`
+const Button = styled(motion.button)`
+  margin-left: ${(p) => p.theme.space[3]}px;
+  ${(p) => p.theme.components.buttons.secondaryButton}
+`;
+const InfoButton = styled(motion.button)`
   border: none;
   background-color: transparent;
   cursor: pointer;
+`;
+
+const StatisticList = styled.ul`
+  margin-top: ${(p) => p.theme.space[3]}px;
+`;
+
+const StatisticListItem = styled.li`
+  text-align: center;
+  :not(:first-child) {
+    border: 1px solid #9090c296;
+  }
+  border-radius: 5px;
+  @media screen and (min-width: 550px) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  :not(:first-child) {
+    margin-top: ${(p) => p.theme.space[2]}px;
+  }
+`;
+
+const ListText = styled.p`
+  flex: 1;
+  margin-left: ${(p) => p.theme.space[3]}px;
+  text-align: center;
+  font-size: ${(p) => p.theme.fontSizes[2]}px;
+  line-height: ${(p) => p.theme.lineHeights.body};
+`;
+
+const FirstText = styled.p`
+  flex: 1;
+  margin-left: ${(p) => p.theme.space[3]}px;
+  text-align: center;
+  font-size: ${(p) => p.theme.fontSizes[2]}px;
+  line-height: ${(p) => p.theme.lineHeights.body};
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  :hover {
+    white-space: normal;
+    overflow: visible;
+  }
 `;
 
 export default AdminUserControllBox;

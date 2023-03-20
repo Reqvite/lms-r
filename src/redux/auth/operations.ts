@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { AuthPayload } from "types/types";
+import { AuthPayloadI } from "types/authTypes";
 
 axios.defaults.baseURL = "https://lms-api-eu.onrender.com";
 //localhost:3000
@@ -15,7 +15,7 @@ const clearAuthHeader = () => {
 };
 
 export const register = createAsyncThunk<
-  AuthPayload,
+  AuthPayloadI,
   {
     fullname: string;
     email: string;
@@ -23,7 +23,7 @@ export const register = createAsyncThunk<
   }
 >("auth/register", async (credentials, thunkAPI) => {
   try {
-    const resp = await axios.post("api/users/signup", credentials);
+    const resp: any = await axios.post("api/users/signup", credentials);
     setAuthHeader(resp.data.data.token);
     return resp.data;
   } catch (err: any) {
@@ -32,12 +32,12 @@ export const register = createAsyncThunk<
 });
 
 export const login = createAsyncThunk<
-  AuthPayload,
+  AuthPayloadI,
   {
     email: string;
     password: string;
   }
->("auth/login", async (credentials, thunkAPI: any) => {
+>("auth/login", async (credentials, thunkAPI) => {
   try {
     const resp = await axios.post("api/users/login", credentials);
     setAuthHeader(resp.data.data.token);
@@ -66,7 +66,7 @@ export const refreshUser = createAsyncThunk(
 
 export const userAccess = createAsyncThunk(
   "auth/access",
-  async (_, thunkAPI: any) => {
+  async (_, thunkAPI) => {
     try {
       await axios.get("api/users/admin");
     } catch (err: any) {

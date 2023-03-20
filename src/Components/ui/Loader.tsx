@@ -8,7 +8,7 @@ interface LoadProps {
 
 const Loader: FC<LoadProps> = ({ height }) => {
   return (
-    <Box style={{ minHeight: `${height}` }}>
+    <Box minHeight={height}>
       <RotatingLines
         strokeColor={"#9090c2"}
         strokeWidth="5"
@@ -22,7 +22,8 @@ const Loader: FC<LoadProps> = ({ height }) => {
 
 export default Loader;
 
-const Box = styled.div`
+const Box = styled.div<any>`
+  min-height: ${(p) => p.minHeight};
   display: flex;
   justify-content: center;
   align-items: center;

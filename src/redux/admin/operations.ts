@@ -17,21 +17,26 @@ export const fetchAllUsersData = createAsyncThunk<
   any,
   {
     email?: string;
-    limit?: string;
+    startDate?: Date | null;
+    endDate?: Date | null;
   }
->("admin/fetchAllUsersData", async ({ email, limit }, thunkAPI) => {
-  try {
-    const resp = await axios.get("api/admin/full-data", {
-      params: {
-        email,
-        limit,
-      },
-    });
-    return resp.data;
-  } catch (err: any) {
-    return thunkAPI.rejectWithValue(err.message);
+>(
+  "admin/fetchAllUsersData",
+  async ({ email, startDate, endDate }, thunkAPI) => {
+    try {
+      const resp = await axios.get("api/admin/full-data", {
+        params: {
+          email,
+          startDate,
+          endDate,
+        },
+      });
+      return resp.data;
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
   }
-});
+);
 
 export const deleteUser = createAsyncThunk<
   any,

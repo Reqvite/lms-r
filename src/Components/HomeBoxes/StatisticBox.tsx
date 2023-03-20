@@ -1,20 +1,12 @@
-import { FC } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "redux/store";
 import { fetchAllTests, fetchUserTests } from "redux/tests/operations";
 import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
-import Loader from "Components/Loader";
+import Loader from "Components/ui/Loader";
 import styled from "styled-components";
 import { getDate } from "helpers/helpers";
-import {
-  Box,
-  FirstText,
-  ListText,
-  StatisticList,
-  StatisticListItem,
-} from "Components/GlobalStyle/Box.styled";
+import { motion } from "framer-motion";
 
 const StatisticBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -38,8 +30,14 @@ const StatisticBox: FC = () => {
   return (
     <Box>
       <HeaderBox>
-        <StatisticListHeader>Результати</StatisticListHeader>
-        <ResultsButton onClick={handleResultButton}>
+        <StatisticListHeader>Результати тестів</StatisticListHeader>
+        <ResultsButton
+          onClick={handleResultButton}
+          whileHover={{
+            scale: 1.05,
+          }}
+          whileTap={{ scale: 0.95 }}
+        >
           {allList ? "Ваші" : "Усі"}
         </ResultsButton>
       </HeaderBox>
@@ -75,6 +73,17 @@ const StatisticBox: FC = () => {
   );
 };
 
+export const Box = styled.div`
+  width: 100%;
+  max-width: 800px;
+  max-height: 650px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: ${(p) => p.theme.space[4]}px;
+  background-color: ${(p) => p.theme.colors.secondaryBgColor};
+  border-radius: ${(p) => p.theme.borders.baseBorder};
+`;
+
 export const HeaderBox = styled.div`
   display: flex;
   align-items: center;
@@ -88,7 +97,51 @@ const StatisticListHeader = styled.p`
   font-weight: ${(p) => p.theme.fontWeights.bold};
 `;
 
-const ResultsButton = styled.button`
+export const StatisticList = styled.ul`
+  margin-top: ${(p) => p.theme.space[3]}px;
+`;
+
+export const StatisticListItem = styled.li`
+  text-align: center;
+  :not(:first-child) {
+    border: 1px solid #9090c296;
+  }
+  border-radius: 5px;
+  @media screen and (min-width: 550px) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  :not(:first-child) {
+    margin-top: ${(p) => p.theme.space[2]}px;
+  }
+`;
+
+export const ListText = styled.p`
+  flex: 1;
+  margin-left: ${(p) => p.theme.space[3]}px;
+  text-align: center;
+  font-size: ${(p) => p.theme.fontSizes[2]}px;
+  line-height: ${(p) => p.theme.lineHeights.body};
+`;
+
+export const FirstText = styled.p`
+  flex: 1;
+  margin-left: ${(p) => p.theme.space[3]}px;
+  text-align: center;
+  font-size: ${(p) => p.theme.fontSizes[2]}px;
+  line-height: ${(p) => p.theme.lineHeights.body};
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  :hover {
+    white-space: normal;
+    overflow: visible;
+  }
+`;
+
+const ResultsButton = styled(motion.button)`
   ${(p) => p.theme.components.buttons.secondaryButton}
 `;
 

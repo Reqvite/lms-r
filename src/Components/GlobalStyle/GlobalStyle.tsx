@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 import "modern-normalize";
 import "react-toastify/dist/ReactToastify.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const GlobalStyle = createGlobalStyle<any>`
  body {
@@ -48,4 +49,18 @@ a {
   color: currentColor;
 }
 
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+ 
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+*::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+  background-color: darkgrey;
+
+}
 `;

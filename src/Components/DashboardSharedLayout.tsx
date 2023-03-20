@@ -2,37 +2,35 @@ import { FC, useEffect, useState } from "react";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "Components/Header";
-import Loader from "Components/Loader";
+import Loader from "Components/ui/Loader";
 import styled from "styled-components";
-import MainBox from "Components/MainBox";
+import Main from "Components/Main";
 import Footer from "Components/Footer";
-import MobileMenu from "Components/MobileMenu";
+import MobileMenu from "Components/ui/MobileMenu";
+import { useWindowSize } from "hooks";
 
 const DashboardSharedLayout: FC = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
+  const windowSize = useWindowSize();
+
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 835) {
-        setShowMenu(true);
-      } else {
-        setShowMenu(false);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, [showMenu]);
+    if (windowSize.width <= 835) {
+      setShowMenu(true);
+    } else {
+      setShowMenu(false);
+    }
+  }, [windowSize]);
 
   return (
     <>
       <Container>
-        {showMenu ? <MobileMenu /> : <Header />}
-        <MainBox showMenu={showMenu}>
+        {windowSize.width <= 835 ? <MobileMenu /> : <Header />}
+        <Main showMenu={showMenu}>
           <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
-        </MainBox>
+        </Main>
         <Footer />
       </Container>
     </>

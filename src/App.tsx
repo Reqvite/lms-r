@@ -9,10 +9,10 @@ import { GlobalStyle } from "Components/GlobalStyle/GlobalStyle";
 import DashboardSharedLayout from "Components/DashboardSharedLayout";
 import RestrictedRoute from "Components/Routes/RestrictedRoute";
 import PrivateRoute from "Components/Routes/PrivateRoute";
-import Loader from "Components/Loader";
-import Alert from "Components/Alert";
+import Loader from "Components/ui/Loader";
+import Alert from "Components/ui/Alert";
 import Home from "Pages/Home";
-import LoginForm from "Pages/LoginFiorm";
+import LoginForm from "Pages/LoginForm";
 import SignupForm from "Pages/SignupForm";
 import Courses from "Pages/Courses";
 import Course from "Pages/Course";
@@ -27,6 +27,7 @@ const App = () => {
   const theme = themeMode === "light" ? lightTheme : darkTheme;
 
   const location = useLocation();
+
   const shouldRedirect = !isRefreshing && !isLoggedIn;
   const path = shouldRedirect ? "/login" : location.pathname;
 

@@ -1,4 +1,5 @@
-import BreadCrumb from "Components/BreadCrumb/BreadCrumb";
+import { FC, useEffect, useState } from "react";
+import BreadCrumb from "Components/BreadCrumb/BreadCrumbBox";
 import {
   Navigate,
   Route,
@@ -6,16 +7,14 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
+import styled from "styled-components";
 import Guide from "./Guide";
 import Testing from "./Testing";
-import Materials from "../Pages/Materials";
+import Materials from "./Materials";
 import { courses } from "data/tests";
-import { FC, useEffect, useState } from "react";
-
-import styled from "styled-components";
 
 const Course: FC = () => {
-  const { courseID } = useParams();
+  const { courseID } = useParams<{ courseID: string }>();
 
   const [topics, setTopics] = useState<string | null>(null);
   const [selectTopic, setSelectTopic] = useState<string | null>(null);

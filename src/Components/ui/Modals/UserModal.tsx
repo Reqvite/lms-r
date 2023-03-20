@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 import styled from "styled-components";
-import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { TiUserDelete } from "react-icons/ti";
-import { getDate } from "helpers/helpers";
 import { selectTheme } from "redux/theme/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { getDate } from "helpers/helpers";
 import { deleteUser } from "redux/admin/operations";
 import { AppDispatch } from "redux/store";
 
@@ -16,7 +16,15 @@ const UserModal = ({ toggleModal, user }: any) => {
   const dispatch: AppDispatch = useDispatch();
   const [deleteStatus, setDeleteStatus] = useState<boolean>(false);
   const { theme }: any = useSelector(selectTheme);
-  const { _id, fullname, email, testResults, createdAt, updatedAt } = user[0];
+  const {
+    _id,
+    fullname,
+    email,
+    testResults,
+    createdAt,
+    updatedAt,
+    testStatistics,
+  } = user[0];
 
   useEffect(() => {
     window.addEventListener("keydown", closeModal);
@@ -68,6 +76,12 @@ const UserModal = ({ toggleModal, user }: any) => {
             </TextInfo>
           </ListItem>
           <ListItem>
+            <p>Статистика (не склав/склав):</p>
+            <TextInfo>
+              {testResults.length !== 0 ? testStatistics.join(":") : "Пусто"}
+            </TextInfo>
+          </ListItem>
+          <ListItem>
             <p>Дата реєстрації:</p>
             <TextInfo>{getDate(createdAt)}</TextInfo>
           </ListItem>
@@ -77,7 +91,13 @@ const UserModal = ({ toggleModal, user }: any) => {
           </ListItem>
         </ul>
         <ButtonsBox>
-          <DeleteUserButton onClick={() => handleDeleteButton(_id)}>
+          <DeleteUserButton
+            onClick={() => handleDeleteButton(_id)}
+            whileHover={{
+              scale: 1.03,
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
             {!deleteStatus ? (
               <TiUserDelete
                 size={25}
@@ -96,6 +116,7 @@ const UserModal = ({ toggleModal, user }: any) => {
 const Overlay = styled.div`
   ${(p) => p.theme.flexCentered}
   position: fixed;
+  z-index: 1000;
   top: 0;
   left: 0;
   width: 100vw;
@@ -134,7 +155,7 @@ const ButtonsBox = styled.div`
   justify-content: center;
   margin-top: ${(p) => p.theme.space[3]}px;
 `;
-const DeleteUserButton = styled.button`
+const DeleteUserButton = styled(motion.button)`
   ${(p) => p.theme.components.buttons.secondaryButton}
 `;
 

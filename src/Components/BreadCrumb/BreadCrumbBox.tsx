@@ -1,11 +1,20 @@
-import { motion } from "framer-motion";
 import { FC } from "react";
+import { motion } from "framer-motion";
+import { useWindowSize } from "hooks";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
+import {
+  MdOutlineMenuBook,
+  MdOutlineVideoChat,
+  MdOutlinePsychologyAlt,
+} from "react-icons/md";
 import styled from "styled-components";
-import BreadCrumbList from "./BreadCrumbItem";
+import TopicsDropDown from "Components/DropDowns/TopicsDropDown";
+import BreadCrumbList from "./BreadCrumbList";
 
 const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
   const { pathname } = useLocation();
+
+  const windowSize = useWindowSize();
 
   const handleData = (topicTitle: string, id: any): void => {
     onData(topicTitle, id);
@@ -37,23 +46,40 @@ const BreadCrumb: FC<any> = ({ topics, selectTopic, onData }) => {
   return (
     <>
       <Box>
-        <BreadCrumbList
-          crumbs={crumbs}
-          handleData={handleData}
-          topics={topics}
-          selectTopic={selectTopic}
-          path={path}
-        />
+        {windowSize.width <= 835 ? (
+          <TopicsDropDown
+            placeHolder={selectTopic}
+            onData={handleData}
+            topics={topics}
+          />
+        ) : (
+          <BreadCrumbList
+            crumbs={crumbs}
+            handleData={handleData}
+            topics={topics}
+            selectTopic={selectTopic}
+            path={path}
+          />
+        )}
       </Box>
       <List>
         <ListItem>
-          <NavListItemLink to="guide">Конспект</NavListItemLink>
+          <NavListItemLink to="guide">
+            Конспект
+            <MdOutlineMenuBook size={20} style={{ marginLeft: "4px" }} />
+          </NavListItemLink>
         </ListItem>
         <ListItem>
-          <NavListItemLink to="materials">Матеріали</NavListItemLink>
+          <NavListItemLink to="materials">
+            Матеріали
+            <MdOutlineVideoChat size={20} style={{ marginLeft: "4px" }} />
+          </NavListItemLink>
         </ListItem>
         <ListItem>
-          <NavListItemLink to="testing">Тести</NavListItemLink>
+          <NavListItemLink to="testing">
+            Тести
+            <MdOutlinePsychologyAlt size={20} style={{ marginLeft: "4px" }} />
+          </NavListItemLink>
         </ListItem>
       </List>
       <Outlet />
@@ -86,6 +112,7 @@ export const BreadCrumbsLink = styled(NavLink)`
 
 export const List = styled(motion.ul)`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   margin-top: ${(p) => p.theme.space[2]}px;
   margin-bottom: ${(p) => p.theme.space[3]}px;
@@ -94,7 +121,8 @@ export const List = styled(motion.ul)`
 export const ListItem = styled.li``;
 
 export const NavListItemLink = styled(NavLink)`
-  display: block;
+  display: flex;
+  align-items: center;
   font-weight: ${(p) => p.theme.fontWeights.bold};
   padding: ${(p) => p.theme.space[3]}px ${(p) => p.theme.space[3]}px;
   &.active {

@@ -1,8 +1,15 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import TestBox from "Components/TestBox/TestBox";
 import styled from "styled-components";
+import { AppDispatch } from "redux/store";
+import { useDispatch } from "react-redux";
+import { fetchUserTests } from "redux/tests/operations";
 
 const Testing: FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUserTests());
+  }, [dispatch]);
   return (
     <>
       <Box>
