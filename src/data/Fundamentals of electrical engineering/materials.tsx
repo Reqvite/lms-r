@@ -238,7 +238,7 @@ export const materials = [
       {
         id: 14,
         name: "Вимірювання енергії змінного струму",
-        materials: [{ id: "", url: "" }],
+        materials: [],
       },
       {
         id: 15,
@@ -307,12 +307,12 @@ export const materials = [
       {
         id: 19,
         name: "Синхронні машини",
-        materials: [{ id: "", url: "" }],
+        materials: [],
       },
       {
         id: 110,
         name: "Випрямлячі",
-        materials: [{ id: "", url: "" }],
+        materials: [],
       },
     ],
   },
