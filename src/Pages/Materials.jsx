@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { Modal } from "../Components/Modal/Modal";
+import { Modal } from "../Components/ui/Modals/Modal";
 import { MaterialsList } from "../Components/MaterialsList/MaterialsList";
 import { materials } from "../data/Fundamentals of electrical engineering/materials";
 
