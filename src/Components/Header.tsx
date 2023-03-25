@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import ToggleThemeButton from "Components/ui/Buttons/ToggleThemeButton";
 import LogoutButton from "./ui/Buttons/LogoutButton";
+import { nanoid } from "@reduxjs/toolkit";
 
 const navigation = [
   { id: 1, title: "Домашня сторінка", path: "" },
@@ -24,7 +25,7 @@ const Header: FC = () => {
           {navigation.map(({ id, title, path }) =>
             id === 3 && user.role !== "admin" && !user.hasAccess ? null : (
               <ListItem
-                key={id}
+                key={nanoid()}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

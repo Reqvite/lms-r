@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { instance } from "redux/auth/operations";
 
 export const fetchUsers = createAsyncThunk(
   "admin/getUsers",
   async (_, thunkAPI) => {
     try {
-      const resp = await axios.get("api/admin/users");
+      const resp = await instance.get("api/admin/users");
       return resp.data.data;
     } catch (err: any) {
       return thunkAPI.rejectWithValue(err.message);
@@ -24,7 +24,7 @@ export const fetchAllUsersData = createAsyncThunk<
   "admin/fetchAllUsersData",
   async ({ email, startDate, endDate }, thunkAPI) => {
     try {
-      const resp = await axios.get("api/admin/full-data", {
+      const resp = await instance.get("api/admin/full-data", {
         params: {
           email,
           startDate,
@@ -45,7 +45,7 @@ export const deleteUser = createAsyncThunk<
   }
 >("admin/deleteUsers", async ({ id }, thunkAPI) => {
   try {
-    const resp = await axios.delete(`api/admin/${id}`);
+    const resp = await instance.delete(`api/admin/${id}`);
 
     return resp.data.data;
   } catch (err: any) {

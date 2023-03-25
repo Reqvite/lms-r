@@ -12,7 +12,7 @@ const Timer: FC<TimerProps> = ({ seconds, onData }) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setTimeLeft((prevTime: any) => prevTime - 1);
+      setTimeLeft((prevTime: number) => prevTime - 1);
       onData(timeLeft);
     }, 1000);
 

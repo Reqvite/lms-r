@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import { TiUserDelete } from "react-icons/ti";
 import { selectTheme } from "redux/theme/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { getDate } from "helpers/helpers";
+import { getDate } from "helpers/getDate";
 import { deleteUser } from "redux/admin/operations";
 import { AppDispatch } from "redux/store";
 

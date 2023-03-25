@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { selectTheme } from "redux/theme/selectors";
 import { selectIsLoading, selectUsers } from "redux/admin/selectors";
 import { fetchUsers } from "redux/admin/operations";
-import { getDate } from "helpers/helpers";
+import { getDate } from "helpers/getDate";
 
 const AdminUserControllBox: FC = () => {
   const dispatch: AppDispatch = useDispatch();

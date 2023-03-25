@@ -45,7 +45,7 @@ const ChartBox: FC = memo(() => {
                 paddingAngle={5}
                 dataKey="value"
                 label
-                animationBegin={200}
+                animationBegin={300}
                 stroke="none"
               >
                 {data.map((entry: any, index: any) => (

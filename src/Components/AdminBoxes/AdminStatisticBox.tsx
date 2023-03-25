@@ -7,7 +7,7 @@ import DatePicker from "react-datepicker";
 import Loader from "Components/ui/Loader";
 import StartCustomInput from "Components/ui/Buttons/CalendarButton";
 import styled from "styled-components";
-import { getDate } from "helpers/helpers";
+import { getDate } from "helpers/getDate";
 import { fetchAllUsersData } from "redux/admin/operations";
 import { selectAdminTests, selectIsLoading } from "redux/admin/selectors";
 import { motion } from "framer-motion";

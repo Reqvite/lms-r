@@ -5,7 +5,7 @@ import { fetchAllTests, fetchUserTests } from "redux/tests/operations";
 import { selectIsLoading, selectUserTests } from "redux/tests/selectors";
 import Loader from "Components/ui/Loader";
 import styled from "styled-components";
-import { getDate } from "helpers/helpers";
+import { getDate } from "helpers/getDate";
 import { motion } from "framer-motion";
 
 const StatisticBox: FC = () => {
